@@ -1,0 +1,39 @@
+Project outline
+
+We want to build a simple Mixed Reality Process Visualizer that takes a BPMN process and visualizes it in 3d using Unity Engine. One should be able to move around the process and inspect different parts of it. It should provide truly immersive Mixed Reality experience.
+
+The visualization should contain the following information:
+
+Precondition: The ARIS diagram should be an Enterprise BPMN process diagram (no pools or lanes, just the flow)
+
+Process flow graphic as cubes or other applicable game objects in Unity (events, tasks, gateways, with their names and shapes, and flow connections)
+
+Additional information like attributes or satellites (different ways of representation could be possible here)
+
+Collaborative features: Multiple viewers should be able to see the same process at the same time and see each other in the MR environment
+
+Voice Mode: An advanced version should have voice support that you could ask questions about the process or certain steps described in the process. It should also be possible to modify the process by just talking to the application. Upon asking questions it should be able to read the process , even attributes of all steps to answer the questions. User should be able to switch On & Off the voice Mode.
+
+TBD: How are the users visualized? As some more real avatars? some icon/pointer only?, other?
+
+TBD: How are flow objects visualized? Like in ARIS? BPMN style?
+
+Editing of the process:
+
+Users should be able to add new objects to the flow (for simplicity we can limit it to insert new tasks within a flow)
+
+Optional: How to: on the table there could be some sort of bowl which contains “empty” tasks. One can grab a task and drop it somewhere on the flow to insert it
+
+Users should be able to rename flow objects
+
+Optional: Users should be able to edit other attributes
+
+Users should be able to edit satellite information (also here we can limit it so a particular information, like who is responsible for a task)
+
+Collaborative features: Users will see the changes from other users immediately
+
+TBD: Can objects be moved around? (not really needed)
+
+TBD: Can objects be removed? 
+
+How to: A user could grab an object and throw it into the bin or from the table

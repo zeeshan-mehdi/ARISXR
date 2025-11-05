@@ -53,8 +53,8 @@ export function XRProcessController({ children }: XRProcessControllerProps) {
     const rightJoystickY = rightController?.gamepad?.axes[3] || 0;
     
     if (Math.abs(leftJoystickX) > 0.15 || Math.abs(leftJoystickY) > 0.15) {
-      state.position.x += leftJoystickX * 0.03;
-      state.position.z += leftJoystickY * 0.03;
+      state.position.x += leftJoystickX * 0.06;
+      state.position.z += leftJoystickY * 0.06;
       console.log('Moving with left joystick');
     }
     

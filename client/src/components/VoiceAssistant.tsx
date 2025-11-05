@@ -215,13 +215,14 @@ Total Elements: ${elements.length}
   if (isXR) {
     return (
       <Html
-        position={[3, 1.5, -2]}
+        position={[2, 1.2, -3]}
         transform
-        occlude
-        distanceFactor={0.5}
+        occlude={false}
+        distanceFactor={0.6}
         style={{
-          width: '400px',
-          pointerEvents: 'auto'
+          width: '350px',
+          pointerEvents: 'auto',
+          userSelect: 'none'
         }}
       >
         {panelContent}
@@ -230,7 +231,7 @@ Total Elements: ${elements.length}
   }
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div className="fixed bottom-24 right-6 z-50">
       {panelContent}
     </div>
   );

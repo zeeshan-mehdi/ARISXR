@@ -23,7 +23,7 @@ export function FlowConnection({ flow, sourceNode, targetNode }: FlowConnectionP
     const mid2 = new THREE.Vector3(midX, end.y, end.z);
     
     const direction = new THREE.Vector3().subVectors(end, start).normalize();
-    const arrowPosition = end.clone().sub(direction.clone().multiplyScalar(0.5));
+    const arrowPosition = end.clone().sub(direction.clone().multiplyScalar(0.15));
     
     return { 
       points: [start, mid1, mid2, end],
@@ -52,10 +52,10 @@ export function FlowConnection({ flow, sourceNode, targetNode }: FlowConnectionP
         args={[
           direction,
           arrowPosition,
-          0.5,
+          0.15,
           0x66CCFF,
-          0.3,
-          0.2,
+          0.1,
+          0.07,
         ]}
       />
     </>

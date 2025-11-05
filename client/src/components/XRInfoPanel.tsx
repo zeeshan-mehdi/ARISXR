@@ -1,5 +1,5 @@
 import { Text } from '@react-three/drei';
-import { useEffect } from 'react';
+import { Suspense } from 'react';
 import type { BPMNElement } from '../lib/bpmnParser';
 import * as THREE from 'three';
 
@@ -8,17 +8,13 @@ interface XRInfoPanelProps {
 }
 
 export function XRInfoPanel({ element }: XRInfoPanelProps) {
-  useEffect(() => {
-    console.log('XRInfoPanel rendered for:', element.name);
-  }, [element.name]);
-
   const getTypeLabel = (type: string) => {
     const labels: Record<string, string> = {
-      'startEvent': 'Start Event',
-      'endEvent': 'End Event',
+      'startEvent': 'Start',
+      'endEvent': 'End',
       'task': 'Task',
-      'exclusiveGateway': 'Decision Gateway',
-      'parallelGateway': 'Parallel Gateway',
+      'exclusiveGateway': 'Gateway',
+      'parallelGateway': 'Gateway',
     };
     return labels[type] || type;
   };
@@ -34,85 +30,50 @@ export function XRInfoPanel({ element }: XRInfoPanelProps) {
   };
 
   return (
-    <group position={[0, 1.8, 0]}>
-      <mesh position={[0, 0, -0.02]}>
-        <planeGeometry args={[2.5, 1.2]} />
-        <meshStandardMaterial 
-          color="#1a1a2e" 
-          opacity={0.95} 
-          transparent 
-          side={THREE.DoubleSide}
-        />
-      </mesh>
-      
-      <mesh position={[0, 0, -0.01]}>
-        <planeGeometry args={[2.48, 1.18]} />
-        <meshStandardMaterial 
-          color={getTypeColor(element.type)} 
-          opacity={0.3} 
-          transparent 
-          side={THREE.DoubleSide}
-        />
-      </mesh>
-      
-      <Text
-        position={[0, 0.35, 0]}
-        fontSize={0.15}
-        color="#ffffff"
-        anchorX="center"
-        anchorY="middle"
-        maxWidth={2.3}
-        textAlign="center"
-        font="/fonts/inter-bold.woff"
-        outlineWidth={0.01}
-        outlineColor="#000000"
-      >
-        {element.name}
-      </Text>
-      
-      <Text
-        position={[0, 0.1, 0]}
-        fontSize={0.1}
-        color={getTypeColor(element.type)}
-        anchorX="center"
-        anchorY="middle"
-        maxWidth={2.3}
-        textAlign="center"
-        outlineWidth={0.008}
-        outlineColor="#000000"
-      >
-        {getTypeLabel(element.type)}
-      </Text>
-      
-      <Text
-        position={[0, -0.15, 0]}
-        fontSize={0.08}
-        color="#888888"
-        anchorX="center"
-        anchorY="middle"
-        maxWidth={2.3}
-        textAlign="center"
-        outlineWidth={0.006}
-        outlineColor="#000000"
-      >
-        ID: {element.id}
-      </Text>
-
-      {element.incoming && element.incoming.length > 0 && (
+    <Suspense fallback={null}>
+      <group position={[0, 1.5, 0]}>
+        <mesh position={[0, 0, -0.02]}>
+          <planeGeometry args={[2, 0.8]} />
+          <meshBasicMaterial 
+            color="#000000" 
+            opacity={0.9} 
+            transparent 
+            side={THREE.DoubleSide}
+          />
+        </mesh>
+        
         <Text
-          position={[0, -0.35, 0]}
-          fontSize={0.07}
-          color="#aaaaaa"
+          position={[0, 0.2, 0]}
+          fontSize={0.12}
+          color="#ffffff"
           anchorX="center"
           anchorY="middle"
-          maxWidth={2.3}
-          textAlign="center"
-          outlineWidth={0.005}
-          outlineColor="#000000"
+          maxWidth={1.8}
         >
-          Incoming: {element.incoming.length} | Outgoing: {element.outgoing?.length || 0}
+          {element.name || 'Unnamed'}
         </Text>
-      )}
-    </group>
+        
+        <Text
+          position={[0, -0.05, 0]}
+          fontSize={0.08}
+          color={getTypeColor(element.type)}
+          anchorX="center"
+          anchorY="middle"
+        >
+          {getTypeLabel(element.type)}
+        </Text>
+        
+        <Text
+          position={[0, -0.2, 0]}
+          fontSize={0.06}
+          color="#999999"
+          anchorX="center"
+          anchorY="middle"
+          maxWidth={1.8}
+        >
+          {element.id || 'No ID'}
+        </Text>
+      </group>
+    </Suspense>
   );
 }

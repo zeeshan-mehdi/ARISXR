@@ -16,7 +16,15 @@ function App() {
   const [showLibrary, setShowLibrary] = useState(true);
   const [isInXR, setIsInXR] = useState(false);
   
-  const xrStore = useMemo(() => createXRStore(), []);
+  const xrStore = useMemo(() => createXRStore({
+    hand: {
+      left: true,
+      right: true,
+      rayPointer: {
+        rayModel: { color: 'cyan' }
+      }
+    }
+  }), []);
 
   const handleBackToLibrary = () => {
     setProcess(null);
@@ -25,7 +33,9 @@ function App() {
 
   const handleEnterXR = async () => {
     try {
-      await xrStore.enterAR();
+      console.log('Entering XR with hand tracking enabled...');
+      const session = await xrStore.enterAR();
+      console.log('XR session started:', session);
       setIsInXR(true);
     } catch (error) {
       console.error('Failed to enter XR:', error);

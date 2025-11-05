@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { Text } from "@react-three/drei";
-import { useXR, Interactive } from "@react-three/xr";
+import { useXR } from "@react-three/xr";
 import type { BPMNElement } from "../lib/bpmnParser";
 import { XRInfoPanel } from "./XRInfoPanel";
 
@@ -59,76 +59,61 @@ export function BPMNElement3D({ element, position, isSelected, onClick, onDouble
     }
   };
 
-  const MeshContent = () => (
-    <>
-      {getGeometry()}
-      <meshStandardMaterial
-        color={getColor()}
-        emissive={isSelected || hovered ? getColor() : '#000000'}
-        emissiveIntensity={isSelected || hovered ? 0.3 : 0}
-        roughness={0.3}
-        metalness={0.5}
-      />
-    </>
-  );
-
   return (
     <group position={position}>
-      {isXR ? (
-        <Interactive
-          onSelect={() => {
-            console.log('XR Select:', element.name);
+      <mesh
+        ref={meshRef}
+        onClick={(e) => {
+          e.stopPropagation();
+          console.log('Clicked element:', element.name, 'isXR:', isXR);
+          
+          if (isXR) {
             onClick();
-          }}
-          onHover={() => {
-            console.log('XR Hover start:', element.name);
-            setHovered(true);
-          }}
-          onBlur={() => {
-            console.log('XR Hover end:', element.name);
-            setHovered(false);
-          }}
-        >
-          <mesh ref={meshRef}>
-            <MeshContent />
-          </mesh>
-        </Interactive>
-      ) : (
-        <mesh
-          ref={meshRef}
-          onClick={(e) => {
-            e.stopPropagation();
+            return;
+          }
+          
+          const now = Date.now();
+          const timeSinceLastClick = now - lastClickRef.current;
+          
+          if (timeSinceLastClick < 300) {
+            const worldPos = new THREE.Vector3(...position);
+            const screenPos = worldPos.project(camera);
             
-            const now = Date.now();
-            const timeSinceLastClick = now - lastClickRef.current;
+            const x = (screenPos.x * 0.5 + 0.5) * size.width;
+            const y = ((-screenPos.y) * 0.5 + 0.5) * size.height;
             
-            if (timeSinceLastClick < 300) {
-              const worldPos = new THREE.Vector3(...position);
-              const screenPos = worldPos.project(camera);
-              
-              const x = (screenPos.x * 0.5 + 0.5) * size.width;
-              const y = ((-screenPos.y) * 0.5 + 0.5) * size.height;
-              
-              onDoubleClick({ x, y });
-            } else {
-              onClick();
-            }
-            
-            lastClickRef.current = now;
-          }}
-          onPointerOver={(e) => {
-            e.stopPropagation();
-            setHovered(true);
+            onDoubleClick({ x, y });
+          } else {
+            onClick();
+          }
+          
+          lastClickRef.current = now;
+        }}
+        onPointerOver={(e) => {
+          e.stopPropagation();
+          console.log('Pointer over:', element.name, 'isXR:', isXR);
+          setHovered(true);
+          if (!isXR) {
             document.body.style.cursor = 'pointer';
-          }}
-          onPointerOut={() => {
-            setHovered(false);
+          }
+        }}
+        onPointerOut={() => {
+          console.log('Pointer out:', element.name);
+          setHovered(false);
+          if (!isXR) {
             document.body.style.cursor = 'auto';
-          }}
-        >
-          <MeshContent />
-        </mesh>
-      )}
+          }
+        }}
+      >
+        {getGeometry()}
+        <meshStandardMaterial
+          color={getColor()}
+          emissive={isSelected || hovered ? getColor() : '#000000'}
+          emissiveIntensity={isSelected || hovered ? 0.3 : 0}
+          roughness={0.3}
+          metalness={0.5}
+        />
+      </mesh>
       
       <Text
         position={[0, -0.8, 0]}

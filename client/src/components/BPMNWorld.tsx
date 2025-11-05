@@ -2,6 +2,7 @@ import { useBPMN } from "../lib/stores/useBPMN";
 import { BPMNElement3D } from "./BPMNElement3D";
 import { FlowConnection } from "./FlowConnection";
 import { UserPresence } from "./UserPresence";
+import { XRProcessController } from "./XRProcessController";
 import { layoutBPMNElements } from "../lib/bpmnLayout";
 import { useMemo, useState } from "react";
 import { ElementEditor } from "./ElementEditor";
@@ -19,6 +20,36 @@ export function BPMNWorld({ wsRef, isXR = false }: BPMNWorldProps) {
     if (!process) return new Map();
     return layoutBPMNElements(process.elements, process.flows);
   }, [process]);
+
+  const processBounds = useMemo(() => {
+    if (layoutNodes.size === 0) return { center: [0, 0, 0], size: [0, 0, 0] };
+    
+    let minX = Infinity, maxX = -Infinity;
+    let minY = Infinity, maxY = -Infinity;
+    let minZ = Infinity, maxZ = -Infinity;
+    
+    layoutNodes.forEach((node) => {
+      const [x, y, z] = node.position;
+      minX = Math.min(minX, x);
+      maxX = Math.max(maxX, x);
+      minY = Math.min(minY, y);
+      maxY = Math.max(maxY, y);
+      minZ = Math.min(minZ, z);
+      maxZ = Math.max(maxZ, z);
+    });
+    
+    const centerX = (minX + maxX) / 2;
+    const centerY = (minY + maxY) / 2;
+    const centerZ = (minZ + maxZ) / 2;
+    const sizeX = maxX - minX;
+    const sizeY = maxY - minY;
+    const sizeZ = maxZ - minZ;
+    
+    return {
+      center: [centerX, centerY, centerZ],
+      size: [sizeX, sizeY, sizeZ]
+    };
+  }, [layoutNodes]);
 
   const handleElementDoubleClick = (element: any, screenPos: { x: number; y: number }) => {
     if (isXR) return;
@@ -41,10 +72,12 @@ export function BPMNWorld({ wsRef, isXR = false }: BPMNWorldProps) {
     return null;
   }
 
-  const processOffset = isXR ? [0, 1.2, -5] : [0, 0, 0];
+  const processOffset = isXR 
+    ? [-processBounds.center[0], 1.2 - processBounds.center[1], -8 - processBounds.center[2]] 
+    : [0, 0, 0];
 
-  return (
-    <group position={processOffset as [number, number, number]}>
+  const ProcessContent = () => (
+    <>
       <ambientLight intensity={0.5} />
       <directionalLight position={[10, 10, 5]} intensity={1} castShadow />
       <pointLight position={[-10, -10, -5]} intensity={0.3} />
@@ -91,6 +124,22 @@ export function BPMNWorld({ wsRef, isXR = false }: BPMNWorldProps) {
           position={editorPosition}
         />
       )}
+    </>
+  );
+
+  if (isXR) {
+    return (
+      <XRProcessController>
+        <group position={processOffset as [number, number, number]}>
+          <ProcessContent />
+        </group>
+      </XRProcessController>
+    );
+  }
+
+  return (
+    <group position={processOffset as [number, number, number]}>
+      <ProcessContent />
     </group>
   );
 }

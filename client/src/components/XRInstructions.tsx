@@ -11,11 +11,13 @@ export function XRInstructions() {
       </ol>
       <div className="mt-3 pt-3 border-t border-gray-700">
         <p className="text-xs text-gray-400">
-          <strong>Navigation:</strong> You can walk closer or further away to adjust your view. 
-          The process stays at the same position, so you can explore it from all angles within your guardian boundary.
+          <strong>Left Joystick:</strong> Move the process left/right/forward/back
+        </p>
+        <p className="text-xs text-gray-400 mt-1">
+          <strong>Right Joystick:</strong> Rotate left/right (horizontal) or zoom in/out (vertical)
         </p>
         <p className="text-xs text-gray-400 mt-2">
-          <strong>Interaction:</strong> Point at elements with your controllers to select and interact with them.
+          <strong>Physical Movement:</strong> You can also walk around the process within your guardian boundary!
         </p>
       </div>
     </div>

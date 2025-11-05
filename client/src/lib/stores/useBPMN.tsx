@@ -12,11 +12,14 @@ export interface User {
 interface BPMNState {
   process: BPMNProcess | null;
   selectedElement: BPMNElement | null;
+  editingElement: BPMNElement | null;
   users: User[];
   currentUserId: string;
   
   setProcess: (process: BPMNProcess) => void;
   selectElement: (element: BPMNElement | null) => void;
+  setEditingElement: (element: BPMNElement | null) => void;
+  updateElementName: (elementId: string, newName: string) => void;
   setUsers: (users: User[]) => void;
   updateUserPosition: (userId: string, position: [number, number, number]) => void;
   setCurrentUserId: (id: string) => void;
@@ -26,17 +29,45 @@ export const useBPMN = create<BPMNState>()(
   subscribeWithSelector((set) => ({
     process: null,
     selectedElement: null,
+    editingElement: null,
     users: [],
     currentUserId: '',
     
     setProcess: (process) => {
       console.log('Setting BPMN process:', process.name);
-      set({ process, selectedElement: null });
+      set({ process, selectedElement: null, editingElement: null });
     },
     
     selectElement: (element) => {
       console.log('Selected element:', element?.id);
       set({ selectedElement: element });
+    },
+    
+    setEditingElement: (element) => {
+      console.log('Editing element:', element?.id);
+      set({ editingElement: element });
+    },
+    
+    updateElementName: (elementId, newName) => {
+      console.log('Updating element name:', elementId, newName);
+      set((state) => {
+        if (!state.process) return {};
+        
+        const updatedElements = state.process.elements.map(el =>
+          el.id === elementId ? { ...el, name: newName } : el
+        );
+        
+        return {
+          process: {
+            ...state.process,
+            elements: updatedElements,
+          },
+          editingElement: null,
+          selectedElement: state.selectedElement?.id === elementId
+            ? { ...state.selectedElement, name: newName }
+            : state.selectedElement,
+        };
+      });
     },
     
     setUsers: (users) => {

@@ -5,20 +5,38 @@ import { BPMNElement3D } from "./BPMNElement3D";
 import { FlowConnection } from "./FlowConnection";
 import { UserPresence } from "./UserPresence";
 import { CameraTracker } from "./CameraTracker";
+import { ElementEditor } from "./ElementEditor";
 import { layoutBPMNElements } from "../lib/bpmnLayout";
-import { useMemo, useRef } from "react";
+import { useMemo, useState } from "react";
 
 interface BPMNSceneProps {
   wsRef: React.RefObject<WebSocket | null>;
 }
 
 export function BPMNScene({ wsRef }: BPMNSceneProps) {
-  const { process, selectedElement, selectElement, users, currentUserId } = useBPMN();
+  const { process, selectedElement, selectElement, editingElement, setEditingElement, updateElementName, users, currentUserId } = useBPMN();
+  const [editorPosition, setEditorPosition] = useState<{ x: number; y: number } | null>(null);
 
   const layoutNodes = useMemo(() => {
     if (!process) return new Map();
     return layoutBPMNElements(process.elements, process.flows);
   }, [process]);
+
+  const handleElementDoubleClick = (element: any, screenPos: { x: number; y: number }) => {
+    selectElement(element);
+    setEditingElement(element);
+    setEditorPosition(screenPos);
+  };
+
+  const handleSaveEdit = (elementId: string, newName: string) => {
+    updateElementName(elementId, newName);
+    setEditorPosition(null);
+  };
+
+  const handleCancelEdit = () => {
+    setEditingElement(null);
+    setEditorPosition(null);
+  };
 
   if (!process) {
     return (
@@ -32,8 +50,9 @@ export function BPMNScene({ wsRef }: BPMNSceneProps) {
   }
 
   return (
-    <Canvas shadows>
-      <color attach="background" args={["#1a1a2e"]} />
+    <>
+      <Canvas shadows>
+        <color attach="background" args={["#1a1a2e"]} />
       
       <PerspectiveCamera makeDefault position={[15, 10, 15]} fov={60} />
       <OrbitControls
@@ -68,40 +87,51 @@ export function BPMNScene({ wsRef }: BPMNSceneProps) {
         position={[0, -0.01, 0]}
       />
 
-      {process.elements.map((element) => {
-        const node = layoutNodes.get(element.id);
-        if (!node) return null;
+        {process.elements.map((element) => {
+          const node = layoutNodes.get(element.id);
+          if (!node) return null;
 
-        return (
-          <BPMNElement3D
-            key={element.id}
-            element={element}
-            position={node.position}
-            isSelected={selectedElement?.id === element.id}
-            onClick={() => selectElement(element)}
-          />
-        );
-      })}
+          return (
+            <BPMNElement3D
+              key={element.id}
+              element={element}
+              position={node.position}
+              isSelected={selectedElement?.id === element.id}
+              onClick={() => selectElement(element)}
+              onDoubleClick={(screenPos) => handleElementDoubleClick(element, screenPos)}
+            />
+          );
+        })}
 
-      {process.flows.map((flow) => {
-        const sourceNode = flow.sourceRef ? layoutNodes.get(flow.sourceRef) : undefined;
-        const targetNode = flow.targetRef ? layoutNodes.get(flow.targetRef) : undefined;
+        {process.flows.map((flow) => {
+          const sourceNode = flow.sourceRef ? layoutNodes.get(flow.sourceRef) : undefined;
+          const targetNode = flow.targetRef ? layoutNodes.get(flow.targetRef) : undefined;
+          
+          return (
+            <FlowConnection
+              key={flow.id}
+              flow={flow}
+              sourceNode={sourceNode}
+              targetNode={targetNode}
+            />
+          );
+        })}
+
+        {users.filter(u => u.id !== currentUserId).map((user) => (
+          <UserPresence key={user.id} user={user} />
+        ))}
         
-        return (
-          <FlowConnection
-            key={flow.id}
-            flow={flow}
-            sourceNode={sourceNode}
-            targetNode={targetNode}
-          />
-        );
-      })}
+        <CameraTracker wsRef={wsRef} />
+      </Canvas>
 
-      {users.filter(u => u.id !== currentUserId).map((user) => (
-        <UserPresence key={user.id} user={user} />
-      ))}
-      
-      <CameraTracker wsRef={wsRef} />
-    </Canvas>
+      {editingElement && editorPosition && (
+        <ElementEditor
+          element={editingElement}
+          onSave={handleSaveEdit}
+          onCancel={handleCancelEdit}
+          position={editorPosition}
+        />
+      )}
+    </>
   );
 }

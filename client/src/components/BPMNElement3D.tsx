@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { Text } from "@react-three/drei";
 import type { BPMNElement } from "../lib/bpmnParser";
@@ -9,11 +9,14 @@ interface BPMNElement3DProps {
   position: [number, number, number];
   isSelected: boolean;
   onClick: () => void;
+  onDoubleClick: (screenPosition: { x: number; y: number }) => void;
 }
 
-export function BPMNElement3D({ element, position, isSelected, onClick }: BPMNElement3DProps) {
+export function BPMNElement3D({ element, position, isSelected, onClick, onDoubleClick }: BPMNElement3DProps) {
   const meshRef = useRef<THREE.Mesh>(null);
   const [hovered, setHovered] = useState(false);
+  const { camera, size } = useThree();
+  const lastClickRef = useRef<number>(0);
 
   useFrame(() => {
     if (meshRef.current && (isSelected || hovered)) {
@@ -59,7 +62,23 @@ export function BPMNElement3D({ element, position, isSelected, onClick }: BPMNEl
         ref={meshRef}
         onClick={(e) => {
           e.stopPropagation();
-          onClick();
+          
+          const now = Date.now();
+          const timeSinceLastClick = now - lastClickRef.current;
+          
+          if (timeSinceLastClick < 300) {
+            const worldPos = new THREE.Vector3(...position);
+            const screenPos = worldPos.project(camera);
+            
+            const x = (screenPos.x * 0.5 + 0.5) * size.width;
+            const y = ((-screenPos.y) * 0.5 + 0.5) * size.height;
+            
+            onDoubleClick({ x, y });
+          } else {
+            onClick();
+          }
+          
+          lastClickRef.current = now;
         }}
         onPointerOver={(e) => {
           e.stopPropagation();

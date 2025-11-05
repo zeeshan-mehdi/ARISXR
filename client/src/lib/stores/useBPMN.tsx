@@ -16,7 +16,7 @@ interface BPMNState {
   users: User[];
   currentUserId: string;
   
-  setProcess: (process: BPMNProcess) => void;
+  setProcess: (process: BPMNProcess | null) => void;
   selectElement: (element: BPMNElement | null) => void;
   setEditingElement: (element: BPMNElement | null) => void;
   updateElementName: (elementId: string, newName: string) => void;
@@ -34,7 +34,7 @@ export const useBPMN = create<BPMNState>()(
     currentUserId: '',
     
     setProcess: (process) => {
-      console.log('Setting BPMN process:', process.name);
+      console.log('Setting BPMN process:', process?.name ?? 'null');
       set({ process, selectedElement: null, editingElement: null });
     },
     

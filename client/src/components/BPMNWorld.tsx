@@ -41,8 +41,10 @@ export function BPMNWorld({ wsRef, isXR = false }: BPMNWorldProps) {
     return null;
   }
 
+  const processOffset = isXR ? [0, 1.2, -5] : [0, 0, 0];
+
   return (
-    <group>
+    <group position={processOffset as [number, number, number]}>
       <ambientLight intensity={0.5} />
       <directionalLight position={[10, 10, 5]} intensity={1} castShadow />
       <pointLight position={[-10, -10, -5]} intensity={0.3} />

@@ -35,18 +35,27 @@ export function BPMNSceneXR({ wsRef, xrStore, isInXR }: BPMNSceneXRProps) {
           />
         )}
 
-        <Grid
-          args={[100, 100]}
-          cellSize={2}
-          cellThickness={0.5}
-          cellColor="#6366f1"
-          sectionSize={10}
-          sectionThickness={1}
-          sectionColor="#8b5cf6"
-          fadeDistance={50}
-          fadeStrength={1}
-          position={[0, -0.01, 0]}
-        />
+        {!isInXR && (
+          <Grid
+            args={[100, 100]}
+            cellSize={2}
+            cellThickness={0.5}
+            cellColor="#6366f1"
+            sectionSize={10}
+            sectionThickness={1}
+            sectionColor="#8b5cf6"
+            fadeDistance={50}
+            fadeStrength={1}
+            position={[0, -0.01, 0]}
+          />
+        )}
+
+        {isInXR && (
+          <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, -5]}>
+            <planeGeometry args={[30, 30]} />
+            <meshBasicMaterial color="#1a1a2e" opacity={0.3} transparent />
+          </mesh>
+        )}
 
         <BPMNWorld wsRef={wsRef} isXR={isInXR} />
         

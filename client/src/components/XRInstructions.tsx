@@ -7,12 +7,15 @@ export function XRInstructions() {
         <li>Select a BPMN process from the library</li>
         <li>Click <strong>"Enter Mixed Reality"</strong> button</li>
         <li>Allow browser permissions when prompted</li>
-        <li>Your BPMN process will overlay on your real environment!</li>
+        <li>The process will appear <strong>5 meters in front of you</strong> at eye level!</li>
       </ol>
       <div className="mt-3 pt-3 border-t border-gray-700">
         <p className="text-xs text-gray-400">
-          <strong>Controls:</strong> Point at elements with your controllers to select them. 
-          Walk around to view from different angles. Double-click with your controller to rename elements.
+          <strong>Navigation:</strong> You can walk closer or further away to adjust your view. 
+          The process stays at the same position, so you can explore it from all angles within your guardian boundary.
+        </p>
+        <p className="text-xs text-gray-400 mt-2">
+          <strong>Interaction:</strong> Point at elements with your controllers to select and interact with them.
         </p>
       </div>
     </div>

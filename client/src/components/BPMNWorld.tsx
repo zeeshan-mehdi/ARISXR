@@ -117,8 +117,6 @@ export function BPMNWorld({ wsRef, isXR = false }: BPMNWorldProps) {
         <UserPresence key={user.id} user={user} />
       ))}
 
-      {isXR && <VoiceAssistant isXR={true} />}
-
       {!isXR && editingElement && editorPosition && (
         <ElementEditor
           element={editingElement}
@@ -136,6 +134,7 @@ export function BPMNWorld({ wsRef, isXR = false }: BPMNWorldProps) {
         <group position={processOffset as [number, number, number]}>
           <ProcessContent />
         </group>
+        <VoiceAssistant isXR={true} />
       </XRProcessController>
     );
   }

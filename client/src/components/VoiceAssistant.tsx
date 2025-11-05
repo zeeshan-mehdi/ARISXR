@@ -231,7 +231,7 @@ Total Elements: ${elements.length}
   }
 
   return (
-    <div className="fixed bottom-24 right-6 z-50">
+    <div className="fixed bottom-24 right-6 z-[100]" style={{ pointerEvents: 'auto' }}>
       {panelContent}
     </div>
   );

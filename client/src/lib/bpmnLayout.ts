@@ -48,8 +48,8 @@ export function layoutBPMNElements(elements: BPMNElement[], flows: BPMNElement[]
     elementsByLevel.get(level)!.push(el);
   });
   
-  const horizontalSpacing = 5;
-  const verticalSpacing = 3;
+  const horizontalSpacing = 3;
+  const verticalSpacing = 2;
   
   elements.forEach(el => {
     const level = levelMap.get(el.id) || 0;

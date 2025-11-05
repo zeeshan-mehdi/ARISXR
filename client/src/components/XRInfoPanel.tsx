@@ -33,43 +33,49 @@ export function XRInfoPanel({ element }: XRInfoPanelProps) {
     <Suspense fallback={null}>
       <group position={[0, 1.5, 0]}>
         <mesh position={[0, 0, -0.02]}>
-          <planeGeometry args={[2, 0.8]} />
+          <planeGeometry args={[2.5, 1]} />
           <meshBasicMaterial 
             color="#000000" 
-            opacity={0.9} 
+            opacity={0.95} 
             transparent 
             side={THREE.DoubleSide}
           />
         </mesh>
         
         <Text
-          position={[0, 0.2, 0]}
-          fontSize={0.12}
+          position={[0, 0.28, 0]}
+          fontSize={0.18}
           color="#ffffff"
           anchorX="center"
           anchorY="middle"
-          maxWidth={1.8}
+          maxWidth={2.2}
+          outlineWidth={0.01}
+          outlineColor="#000000"
         >
           {element.name || 'Unnamed'}
         </Text>
         
         <Text
           position={[0, -0.05, 0]}
-          fontSize={0.08}
+          fontSize={0.12}
           color={getTypeColor(element.type)}
           anchorX="center"
           anchorY="middle"
+          outlineWidth={0.008}
+          outlineColor="#000000"
         >
           {getTypeLabel(element.type)}
         </Text>
         
         <Text
-          position={[0, -0.2, 0]}
-          fontSize={0.06}
-          color="#999999"
+          position={[0, -0.28, 0]}
+          fontSize={0.09}
+          color="#aaaaaa"
           anchorX="center"
           anchorY="middle"
-          maxWidth={1.8}
+          maxWidth={2.2}
+          outlineWidth={0.006}
+          outlineColor="#000000"
         >
           {element.id || 'No ID'}
         </Text>

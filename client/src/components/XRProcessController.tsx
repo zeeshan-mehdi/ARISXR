@@ -14,7 +14,7 @@ export function XRProcessController({ children }: XRProcessControllerProps) {
   
   const transformState = useRef({
     position: new THREE.Vector3(0, 0, 0),
-    scale: 1,
+    scale: 0.7,
     rotation: 0,
     
     leftGrip: false,

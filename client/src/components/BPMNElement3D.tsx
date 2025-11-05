@@ -2,7 +2,9 @@ import { useRef, useState } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { Text } from "@react-three/drei";
+import { useXR } from "@react-three/xr";
 import type { BPMNElement } from "../lib/bpmnParser";
+import { XRInfoPanel } from "./XRInfoPanel";
 
 interface BPMNElement3DProps {
   element: BPMNElement;
@@ -17,6 +19,7 @@ export function BPMNElement3D({ element, position, isSelected, onClick, onDouble
   const [hovered, setHovered] = useState(false);
   const { camera, size } = useThree();
   const lastClickRef = useRef<number>(0);
+  const isXR = useXR((state) => state !== null);
 
   useFrame(() => {
     if (meshRef.current && (isSelected || hovered)) {
@@ -113,6 +116,10 @@ export function BPMNElement3D({ element, position, isSelected, onClick, onDouble
       >
         {element.name}
       </Text>
+      
+      {isXR && (isSelected || hovered) && (
+        <XRInfoPanel element={element} />
+      )}
     </group>
   );
 }

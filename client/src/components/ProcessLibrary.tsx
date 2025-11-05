@@ -36,11 +36,58 @@ export function ProcessLibrary({ onProcessSelected }: ProcessLibraryProps) {
   };
 
   return (
-    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 p-8">
-      <div className="max-w-6xl w-full">
+    <div className="w-full h-full flex items-center justify-center relative overflow-hidden p-8">
+      <div 
+        className="absolute inset-0 bg-gradient-to-br from-blue-950 via-indigo-950 to-purple-950"
+        style={{
+          backgroundImage: `
+            radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+            radial-gradient(circle at 40% 20%, rgba(99, 102, 241, 0.1) 0%, transparent 40%),
+            linear-gradient(to bottom, #0f172a 0%, #1e1b4b 100%)
+          `,
+        }}
+      />
+      
+      <div className="absolute inset-0 opacity-20" 
+        style={{
+          backgroundImage: `repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(59, 130, 246, 0.03) 2px,
+            rgba(59, 130, 246, 0.03) 4px
+          ),
+          repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 2px,
+            rgba(59, 130, 246, 0.03) 2px,
+            rgba(59, 130, 246, 0.03) 4px
+          )`
+        }}
+      />
+      
+      <div className="max-w-6xl w-full relative z-10">
         <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold text-white mb-4">3D BPMN Visualizer</h1>
-          <p className="text-xl text-gray-300">Choose a sample process to explore in 3D</p>
+          <div className="mb-6 flex items-center justify-center gap-3">
+            <div className="text-6xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              ARIS
+            </div>
+            <div className="h-12 w-1 bg-gradient-to-b from-blue-400 to-cyan-400"></div>
+            <div className="text-2xl font-light text-blue-300">Process Intelligence</div>
+          </div>
+          <h1 className="text-4xl font-bold text-white mb-3 tracking-tight">
+            Mixed Reality Experience
+          </h1>
+          <p className="text-xl text-blue-200 mb-2">Explore BPMN Processes in Immersive 3D</p>
+          <p className="text-sm text-blue-300/60 flex items-center justify-center gap-2">
+            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
+              <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd"/>
+            </svg>
+            Compatible with Meta Quest 3
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -48,23 +95,25 @@ export function ProcessLibrary({ onProcessSelected }: ProcessLibraryProps) {
             <button
               key={process.id}
               onClick={() => handleSelectProcess(process.xml)}
-              className="bg-gray-800 hover:bg-gray-700 border border-gray-700 hover:border-gray-600 rounded-lg p-6 text-left transition-all duration-200 transform hover:scale-105 hover:shadow-xl"
+              className="relative group bg-gradient-to-br from-blue-900/40 to-indigo-900/40 hover:from-blue-800/60 hover:to-indigo-800/60 border border-blue-500/30 hover:border-blue-400/50 rounded-xl p-6 text-left transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/20 backdrop-blur-sm"
             >
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity rounded-t-xl"></div>
+              
               <div className="flex items-start justify-between mb-3">
-                <h3 className="text-xl font-semibold text-white">{process.name}</h3>
-                <div className={`${getComplexityColor(process.complexity)} w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold`}>
+                <h3 className="text-xl font-semibold text-white group-hover:text-blue-200 transition-colors">{process.name}</h3>
+                <div className={`${getComplexityColor(process.complexity)} w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-lg`}>
                   {process.complexity}
                 </div>
               </div>
               
-              <p className="text-gray-400 text-sm mb-4">{process.description}</p>
+              <p className="text-blue-200/70 text-sm mb-4 leading-relaxed">{process.description}</p>
               
               <div className="flex items-center justify-between">
-                <span className="text-xs text-gray-500 uppercase tracking-wider">
+                <span className="text-xs text-blue-300/60 uppercase tracking-wider font-medium">
                   {getComplexityLabel(process.complexity)}
                 </span>
                 <svg 
-                  className="w-5 h-5 text-gray-500"
+                  className="w-5 h-5 text-blue-400 group-hover:text-cyan-400 transition-colors group-hover:translate-x-1 transition-transform"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -81,10 +130,19 @@ export function ProcessLibrary({ onProcessSelected }: ProcessLibraryProps) {
           ))}
         </div>
 
-        <div className="text-center mt-8">
-          <p className="text-gray-500 text-sm">
-            Or upload your own BPMN file using the upload button in the top right
-          </p>
+        <div className="text-center mt-10">
+          <div className="inline-block bg-blue-950/50 border border-blue-500/30 rounded-lg px-6 py-3 backdrop-blur-sm">
+            <p className="text-blue-200/80 text-sm flex items-center gap-2">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+              </svg>
+              Or upload your own BPMN file using the upload button
+            </p>
+          </div>
+        </div>
+        
+        <div className="text-center mt-6 text-xs text-blue-300/40">
+          Powered by ARIS Process Intelligence Platform
         </div>
       </div>
     </div>

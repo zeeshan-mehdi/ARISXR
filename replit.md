@@ -6,11 +6,25 @@ This is a collaborative 3D BPMN (Business Process Model and Notation) visualizat
 
 ## Recent Changes (November 2025)
 
+**WebXR Mixed Reality Support Added:**
+- Full Meta Quest 3 support for immersive AR/MR experiences
+- WebXR integration using @react-three/xr for AR session management
+- Passthrough mode enables BPMN processes to overlay on real environment
+- Controller and hand tracking support for XR interactions
+- Dual-mode architecture: works on desktop browsers and XR headsets
+- XR button appears only on XR-capable devices
+
 **Editing Features Added:**
 - Double-click any BPMN element to rename it
 - Changes sync automatically to all connected users via WebSocket
 - ElementEditor component provides inline editing with keyboard shortcuts (Enter to save, Escape to cancel)
 - Updated Zustand store to handle element editing state and name updates
+
+**Process Library:**
+- Landing page with 7 pre-loaded sample processes of varying complexity
+- One-click process selection for immediate 3D visualization
+- Back to Library button for easy navigation
+- Includes large complex processes (E-Commerce with 29 tasks, Insurance with 32 tasks)
 
 ## User Preferences
 
@@ -31,13 +45,15 @@ Preferred communication style: Simple, everyday language.
 
 1. **3D Rendering Approach**: Uses React Three Fiber to integrate Three.js declaratively with React, allowing component-based 3D scene composition. This provides better integration with React's lifecycle and state management compared to imperative Three.js.
 
-2. **BPMN Visualization**: Different BPMN element types (start events, end events, tasks, gateways) are rendered as distinct 3D shapes (spheres, boxes, octahedrons) with color coding for quick visual identification. Flow connections are rendered as lines with intermediate waypoints for better visual clarity.
+2. **WebXR Integration**: Implements @react-three/xr v6+ for immersive AR experiences on Meta Quest 3. Uses XR store-based architecture for session management. Supports `immersive-ar` sessions with passthrough mode for true mixed reality overlay. Desktop and XR modes share the same BPMN visualization components through a unified BPMNWorld component.
 
-3. **Layout System**: Implements an automatic graph layout algorithm that assigns hierarchical levels to BPMN elements based on their position in the process flow, spacing elements appropriately in 3D space for optimal viewing.
+3. **BPMN Visualization**: Different BPMN element types (start events, end events, tasks, gateways) are rendered as distinct 3D shapes (spheres, boxes, octahedrons) with color coding for quick visual identification. Flow connections are rendered as lines with intermediate waypoints for better visual clarity.
 
-4. **State Management Pattern**: Uses Zustand stores with selector subscriptions for reactive state updates. Separates concerns into domain-specific stores (useBPMN for process data, useGame for application state, useAudio for sound control).
+4. **Layout System**: Implements an automatic graph layout algorithm that assigns hierarchical levels to BPMN elements based on their position in the process flow, spacing elements appropriately in 3D space for optimal viewing.
 
-5. **Component Structure**: Separates 3D components (BPMNElement3D, FlowConnection, UserPresence) from UI components (UploadPanel, InfoPanel), maintaining clear boundaries between rendering layers.
+5. **State Management Pattern**: Uses Zustand stores with selector subscriptions for reactive state updates. Separates concerns into domain-specific stores (useBPMN for process data, useGame for application state, useAudio for sound control).
+
+6. **Component Structure**: Separates 3D components (BPMNElement3D, FlowConnection, UserPresence) from UI components (UploadPanel, InfoPanel), maintaining clear boundaries between rendering layers. BPMNWorld component encapsulates all 3D visualization logic and works in both desktop and XR modes.
 
 ### Backend Architecture
 

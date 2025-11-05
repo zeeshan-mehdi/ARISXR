@@ -31,7 +31,7 @@ export function XRInfoPanel({ element }: XRInfoPanelProps) {
 
   return (
     <Suspense fallback={null}>
-      <group position={[0, 1.5, 0]}>
+      <group position={[0, 0.6, 0]}>
         <mesh position={[0, 0, -0.02]}>
           <planeGeometry args={[2.5, 1]} />
           <meshBasicMaterial 

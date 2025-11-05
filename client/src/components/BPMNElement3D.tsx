@@ -31,13 +31,13 @@ export function BPMNElement3D({ element, position, isSelected, onClick, onDouble
     switch (element.type) {
       case 'startEvent':
       case 'endEvent':
-        return <sphereGeometry args={[0.5, 32, 32]} />;
+        return <sphereGeometry args={[0.2, 32, 32]} />;
       case 'task':
-        return <boxGeometry args={[1.5, 1, 0.5]} />;
+        return <boxGeometry args={[0.6, 0.4, 0.2]} />;
       case 'gateway':
-        return <octahedronGeometry args={[0.6, 0]} />;
+        return <octahedronGeometry args={[0.24, 0]} />;
       default:
-        return <boxGeometry args={[1, 1, 1]} />;
+        return <boxGeometry args={[0.4, 0.4, 0.4]} />;
     }
   };
 
@@ -116,14 +116,14 @@ export function BPMNElement3D({ element, position, isSelected, onClick, onDouble
       </mesh>
       
       <Text
-        position={[0, -0.8, 0]}
-        fontSize={0.25}
+        position={[0, -0.32, 0]}
+        fontSize={0.1}
         color="#ffffff"
         anchorX="center"
         anchorY="middle"
-        maxWidth={2.5}
+        maxWidth={1.0}
         textAlign="center"
-        outlineWidth={0.05}
+        outlineWidth={0.02}
         outlineColor="#000000"
       >
         {element.name}

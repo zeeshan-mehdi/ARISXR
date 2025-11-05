@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { Html } from '@react-three/drei';
 import { useBPMN } from '../lib/stores/useBPMN';
 import { Mic, MicOff, Volume2 } from 'lucide-react';
 import type { BPMNElement } from '../lib/bpmnParser';
@@ -134,9 +135,8 @@ Total Elements: ${elements.length}
     }
   };
 
-  return (
-    <div className={`${isXR ? 'hidden' : 'fixed bottom-6 right-6 z-50'}`}>
-      <div className="bg-gradient-to-br from-blue-900/95 to-indigo-900/95 backdrop-blur-md border-2 border-blue-400/40 rounded-xl p-4 shadow-2xl max-w-md">
+  const panelContent = (
+    <div className="bg-gradient-to-br from-blue-900/95 to-indigo-900/95 backdrop-blur-md border-2 border-blue-400/40 rounded-xl p-4 shadow-2xl max-w-md">
         <div className="flex items-center gap-3 mb-4">
           <div className="flex-1">
             <h3 className="text-white font-bold text-base flex items-center gap-2">
@@ -210,6 +210,28 @@ Total Elements: ${elements.length}
           </div>
         )}
       </div>
+    );
+
+  if (isXR) {
+    return (
+      <Html
+        position={[3, 1.5, -2]}
+        transform
+        occlude
+        distanceFactor={0.5}
+        style={{
+          width: '400px',
+          pointerEvents: 'auto'
+        }}
+      >
+        {panelContent}
+      </Html>
+    );
+  }
+
+  return (
+    <div className="fixed bottom-6 right-6 z-50">
+      {panelContent}
     </div>
   );
 }

@@ -62,7 +62,7 @@ function App() {
               <InfoPanel />
               <UploadPanel />
               <XRInstructions />
-              <VoiceAssistant />
+              <VoiceAssistant isXR={false} />
               <button
                 onClick={handleBackToLibrary}
                 className="absolute top-4 left-4 z-50 bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-lg border border-gray-600 flex items-center gap-2 transition-colors"

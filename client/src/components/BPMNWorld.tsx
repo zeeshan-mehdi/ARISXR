@@ -3,6 +3,7 @@ import { BPMNElement3D } from "./BPMNElement3D";
 import { FlowConnection } from "./FlowConnection";
 import { UserPresence } from "./UserPresence";
 import { XRProcessController } from "./XRProcessController";
+import { VoiceAssistant } from "./VoiceAssistant";
 import { layoutBPMNElements } from "../lib/bpmnLayout";
 import { useMemo, useState } from "react";
 import { ElementEditor } from "./ElementEditor";
@@ -115,6 +116,8 @@ export function BPMNWorld({ wsRef, isXR = false }: BPMNWorldProps) {
       {users.filter(u => u.id !== currentUserId).map((user) => (
         <UserPresence key={user.id} user={user} />
       ))}
+
+      {isXR && <VoiceAssistant isXR={true} />}
 
       {!isXR && editingElement && editorPosition && (
         <ElementEditor

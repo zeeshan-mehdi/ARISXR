@@ -4,6 +4,7 @@ export interface BPMNElement {
   id: string;
   name: string;
   type: 'startEvent' | 'endEvent' | 'task' | 'gateway' | 'sequenceFlow';
+  description?: string;
   sourceRef?: string;
   targetRef?: string;
   incoming?: string[];

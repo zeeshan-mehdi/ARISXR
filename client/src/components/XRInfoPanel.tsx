@@ -31,9 +31,9 @@ export function XRInfoPanel({ element }: XRInfoPanelProps) {
 
   return (
     <Suspense fallback={null}>
-      <group position={[0, 0.6, 0]}>
+      <group position={[0, 0.3, 0]}>
         <mesh position={[0, 0, -0.02]}>
-          <planeGeometry args={[2.5, 1]} />
+          <planeGeometry args={[1.25, 0.5]} />
           <meshBasicMaterial 
             color="#000000" 
             opacity={0.95} 
@@ -43,41 +43,41 @@ export function XRInfoPanel({ element }: XRInfoPanelProps) {
         </mesh>
         
         <Text
-          position={[0, 0.28, 0]}
-          fontSize={0.18}
+          position={[0, 0.14, 0]}
+          fontSize={0.09}
           color="#ffffff"
           anchorX="center"
           anchorY="middle"
-          maxWidth={2.2}
-          outlineWidth={0.01}
+          maxWidth={1.1}
+          outlineWidth={0.005}
           outlineColor="#000000"
         >
           {element.name || 'Unnamed'}
         </Text>
         
         <Text
-          position={[0, -0.05, 0]}
-          fontSize={0.12}
+          position={[0, -0.025, 0]}
+          fontSize={0.06}
           color={getTypeColor(element.type)}
           anchorX="center"
           anchorY="middle"
-          outlineWidth={0.008}
+          outlineWidth={0.004}
           outlineColor="#000000"
         >
           {getTypeLabel(element.type)}
         </Text>
         
         <Text
-          position={[0, -0.28, 0]}
-          fontSize={0.09}
+          position={[0, -0.14, 0]}
+          fontSize={0.045}
           color="#aaaaaa"
           anchorX="center"
           anchorY="middle"
-          maxWidth={2.2}
-          outlineWidth={0.006}
+          maxWidth={1.1}
+          outlineWidth={0.003}
           outlineColor="#000000"
         >
-          {element.id || 'No ID'}
+          {element.description || element.id || 'No ID'}
         </Text>
       </group>
     </Suspense>

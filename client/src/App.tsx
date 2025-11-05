@@ -6,6 +6,7 @@ import { UploadPanel } from "./components/ui/UploadPanel";
 import { InfoPanel } from "./components/ui/InfoPanel";
 import { XRButton } from "./components/XRButton";
 import { XRInstructions } from "./components/XRInstructions";
+import { VoiceAssistant } from "./components/VoiceAssistant";
 import { useWebSocket } from "./hooks/useWebSocket";
 import { useBPMN } from "./lib/stores/useBPMN";
 import { createXRStore } from "@react-three/xr";
@@ -61,6 +62,7 @@ function App() {
               <InfoPanel />
               <UploadPanel />
               <XRInstructions />
+              <VoiceAssistant />
               <button
                 onClick={handleBackToLibrary}
                 className="absolute top-4 left-4 z-50 bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-lg border border-gray-600 flex items-center gap-2 transition-colors"

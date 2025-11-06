@@ -271,8 +271,10 @@ export function VoiceAssistant({ isXR = false }: VoiceAssistantProps) {
 
     recognition.onend = () => {
       console.log('[VoiceAssistant] onend - recognition ended');
+      console.log('[VoiceAssistant] 🔄 Resetting state in onend');
       isActiveRef.current = false;
       setIsListening(false);
+      console.log('[VoiceAssistant] ✅ State reset complete - ready for next activation');
     };
 
     recognitionRef.current = recognition;
@@ -401,33 +403,29 @@ Total Elements: ${elements.length}
     }
 
     if (isActiveRef.current) {
-      console.log('[VoiceAssistant] ⚠️ Already listening, ignoring start request');
+      console.warn('[VoiceAssistant] ⚠️ Already listening, ignoring start request');
+      console.warn('[VoiceAssistant] ⚠️ Waiting for onend to fire - browser is still processing previous session');
       return;
     }
 
     console.log('[VoiceAssistant] ▶️ STARTING recognition (hold-to-speak)...');
+    console.log('[VoiceAssistant] 📊 BEFORE start() - isActiveRef:', isActiveRef.current, 'isListening:', isListening);
     console.log('[VoiceAssistant] 🔄 Clearing previous transcript and response');
     setTranscript('');
     setResponse('');
 
     try {
+      const startTime = Date.now();
       recognitionRef.current.start();
-      console.log('[VoiceAssistant] ✅ Recognition start() called successfully');
+      console.log('[VoiceAssistant] ✅ Recognition start() called successfully at', startTime);
     } catch (error: any) {
       console.error('[VoiceAssistant] ❌ Start failed:', error);
 
       if (error.message?.includes('already started')) {
-        console.warn('[VoiceAssistant] ⚠️ Already started error - aborting first');
-        recognitionRef.current.abort();
-
-        setTimeout(() => {
-          console.log('[VoiceAssistant] 🔄 Retrying start after abort');
-          try {
-            recognitionRef.current.start();
-          } catch (retryError) {
-            console.error('[VoiceAssistant] ❌ Retry failed:', retryError);
-          }
-        }, 300);
+        console.error('[VoiceAssistant] ⚠️ Browser thinks recognition already started!');
+        console.error('[VoiceAssistant] ⚠️ This means onend from previous session has not fired yet');
+        console.error('[VoiceAssistant] ⚠️ Wait a moment and try again');
+        // Don't try to force start - just inform the user to wait
       }
     }
   }, []);
@@ -444,14 +442,13 @@ Total Elements: ${elements.length}
     }
 
     console.log('[VoiceAssistant] 🛑 STOPPING recognition (hold-to-speak released)');
+    console.log('[VoiceAssistant] 📊 BEFORE stop() - isActiveRef:', isActiveRef.current, 'isListening:', isListening);
     try {
+      // Use stop() to process the audio and get final transcript
+      // Note: onend will fire after this, which will reset isActiveRef
       recognitionRef.current.stop();
-      console.log('[VoiceAssistant] ✅ Recognition stop() called successfully');
-
-      // Manually update state since onend may not fire reliably with stop()
-      isActiveRef.current = false;
-      setIsListening(false);
-      console.log('[VoiceAssistant] 🔄 State manually updated after stop()');
+      console.log('[VoiceAssistant] ✅ Recognition stop() called - waiting for final results...');
+      console.log('[VoiceAssistant] ⏳ onend will fire soon and reset state');
     } catch (error) {
       console.error('[VoiceAssistant] ❌ Stop failed:', error);
       isActiveRef.current = false;

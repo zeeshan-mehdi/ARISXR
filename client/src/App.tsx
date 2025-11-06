@@ -1,5 +1,5 @@
 import "@fontsource/inter";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import { BPMNSceneXR } from "./components/BPMNSceneXR";
 import { ProcessLibrary } from "./components/ProcessLibrary";
 import { UploadPanel } from "./components/ui/UploadPanel";
@@ -16,6 +16,8 @@ function App() {
   const { process, setProcess } = useBPMN();
   const [showLibrary, setShowLibrary] = useState(true);
   const [isInXR, setIsInXR] = useState(false);
+  const [autoXRAttempted, setAutoXRAttempted] = useState(false);
+  const xrAttemptedRef = useRef(false);
   
   const xrStore = useMemo(() => createXRStore({
     hand: {
@@ -30,22 +32,87 @@ function App() {
   const handleBackToLibrary = () => {
     setProcess(null);
     setShowLibrary(true);
+    setAutoXRAttempted(false);
+    xrAttemptedRef.current = false;
   };
 
-  const handleEnterXR = async (mode: 'ar' | 'vr') => {
+  const handleEnterXR = async (mode: 'ar' | 'vr', silent = false) => {
     try {
-      console.log(`Entering XR mode: ${mode} with hand tracking enabled...`);
+      console.log(`[App] Entering XR mode: ${mode} with hand tracking enabled...`);
       const session = mode === 'ar' 
         ? await xrStore.enterAR()
         : await xrStore.enterVR();
-      console.log('XR session started:', session);
+      console.log('[App] XR session started:', session);
       setIsInXR(true);
+      return true;
     } catch (error) {
-      console.error('Failed to enter XR:', error);
-      const device = mode === 'ar' ? 'Meta Quest 3' : 'Apple Vision Pro';
-      alert(`Failed to enter ${mode === 'ar' ? 'Mixed Reality' : 'Virtual Reality'}. Make sure you are using a compatible browser on your ${device}.`);
+      console.error('[App] Failed to enter XR:', error);
+      if (!silent) {
+        const device = mode === 'ar' ? 'Meta Quest 3' : 'Apple Vision Pro';
+        alert(`Failed to enter ${mode === 'ar' ? 'Mixed Reality' : 'Virtual Reality'}. Make sure you are using a compatible browser on your ${device}.`);
+      }
+      return false;
     }
   };
+
+  // Auto-enter XR mode when a process is loaded
+  useEffect(() => {
+    const autoEnterXR = async () => {
+      if (!process || xrAttemptedRef.current) {
+        return;
+      }
+
+      console.log('[App] Process loaded, attempting auto-enter XR...');
+      xrAttemptedRef.current = true;
+
+      if ('xr' in navigator && navigator.xr) {
+        try {
+          // Check AR support first (Meta Quest 3)
+          const arSupported = await navigator.xr.isSessionSupported('immersive-ar');
+          console.log('[App] AR supported:', arSupported);
+          
+          if (arSupported) {
+            console.log('[App] Auto-entering AR mode...');
+            const success = await handleEnterXR('ar', true);
+            setAutoXRAttempted(true);
+            if (success) {
+              console.log('[App] Successfully auto-entered AR mode');
+            } else {
+              console.log('[App] Auto-enter AR failed, staying in desktop mode');
+            }
+            return;
+          }
+
+          // Check VR support (Apple Vision Pro)
+          const vrSupported = await navigator.xr.isSessionSupported('immersive-vr');
+          console.log('[App] VR supported:', vrSupported);
+          
+          if (vrSupported) {
+            console.log('[App] Auto-entering VR mode...');
+            const success = await handleEnterXR('vr', true);
+            setAutoXRAttempted(true);
+            if (success) {
+              console.log('[App] Successfully auto-entered VR mode');
+            } else {
+              console.log('[App] Auto-enter VR failed, staying in desktop mode');
+            }
+            return;
+          }
+
+          console.log('[App] No XR support detected, staying in desktop mode');
+          setAutoXRAttempted(true);
+        } catch (error) {
+          console.error('[App] Auto-enter XR failed:', error);
+          setAutoXRAttempted(true);
+        }
+      } else {
+        console.log('[App] navigator.xr not available, staying in desktop mode');
+        setAutoXRAttempted(true);
+      }
+    };
+
+    autoEnterXR();
+  }, [process]);
 
   xrStore.subscribe((state) => {
     setIsInXR(state !== null);

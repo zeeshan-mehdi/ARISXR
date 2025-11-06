@@ -11,15 +11,15 @@ interface VoiceAssistantProps {
   isXR?: boolean;
 }
 
-function VoiceAssistantVR({ 
-  isListening, 
+function VoiceAssistantVR({
+  isListening,
   isSpeaking,
   transcript,
   response,
   onToggleListening,
   onStopSpeaking
-}: { 
-  isListening: boolean; 
+}: {
+  isListening: boolean;
   isSpeaking: boolean;
   transcript: string;
   response: string;
@@ -29,25 +29,41 @@ function VoiceAssistantVR({
   const sphereRef = useRef<THREE.Mesh>(null);
   const [hovered, setHovered] = useState(false);
   const xrInput = useXRInput();
+
+  // Log state changes for debugging
+  useEffect(() => {
+    console.log('[VoiceAssistantVR] State changed:', { isListening, isSpeaking });
+  }, [isListening, isSpeaking]);
   
+  const lastTriggerTimeRef = useRef(0);
+  const DEBOUNCE_MS = 500; // Prevent double-trigger within 500ms
+
   useEffect(() => {
     console.log('[VoiceAssistantVR] Registering button handlers');
-    const leftId = xrInput.registerButtonPress('leftTrigger', () => {
-      console.log('Left trigger pressed - toggling voice assistant');
+
+    const handleTrigger = () => {
+      const now = Date.now();
+      const timeSinceLastTrigger = now - lastTriggerTimeRef.current;
+
+      if (timeSinceLastTrigger < DEBOUNCE_MS) {
+        console.log(`[VoiceAssistantVR] Trigger debounced (${timeSinceLastTrigger}ms since last press)`);
+        return;
+      }
+
+      lastTriggerTimeRef.current = now;
+      console.log('Trigger pressed - toggling voice assistant');
       onToggleListening();
-    });
-    
-    const rightId = xrInput.registerButtonPress('rightTrigger', () => {
-      console.log('Right trigger pressed - toggling voice assistant');
-      onToggleListening();
-    });
-    
+    };
+
+    const leftId = xrInput.registerButtonPress('leftTrigger', handleTrigger);
+    const rightId = xrInput.registerButtonPress('rightTrigger', handleTrigger);
+
     return () => {
       console.log('[VoiceAssistantVR] Unregistering button handlers');
       xrInput.unregisterButtonPress(leftId);
       xrInput.unregisterButtonPress(rightId);
     };
-  }, []);
+  }, [onToggleListening, xrInput]);
   
   // Animate the sphere in VR
   useFrame((state) => {
@@ -358,47 +374,49 @@ Total Elements: ${elements.length}
 
   const toggleListening = useCallback(() => {
     if (!recognitionRef.current) {
-      console.error('[VoiceAssistant] No recognition instance available');
+      console.error('[VoiceAssistant] ❌ No recognition instance available');
       alert('Voice recognition is not supported in your browser');
       return;
     }
 
-    console.log('[VoiceAssistant] toggleListening called', { 
+    console.log('[VoiceAssistant] 🎤 toggleListening called', {
       isActive: isActiveRef.current,
       isListening
     });
 
     if (isActiveRef.current) {
-      console.log('[VoiceAssistant] Stopping - calling abort()');
+      console.log('[VoiceAssistant] 🛑 STOPPING recognition (calling abort)');
       try {
         recognitionRef.current.abort();
         isActiveRef.current = false;
         setIsListening(false);
       } catch (error) {
-        console.error('[VoiceAssistant] Abort failed:', error);
+        console.error('[VoiceAssistant] ❌ Abort failed:', error);
         isActiveRef.current = false;
         setIsListening(false);
       }
     } else {
-      console.log('[VoiceAssistant] Starting recognition...');
+      console.log('[VoiceAssistant] ▶️ STARTING recognition...');
+      console.log('[VoiceAssistant] 🔄 Clearing previous transcript and response');
       setTranscript('');
       setResponse('');
-      
+
       try {
         recognitionRef.current.start();
+        console.log('[VoiceAssistant] ✅ Recognition start() called successfully');
       } catch (error: any) {
-        console.error('[VoiceAssistant] Start failed:', error);
-        
+        console.error('[VoiceAssistant] ❌ Start failed:', error);
+
         if (error.message?.includes('already started')) {
-          console.warn('[VoiceAssistant] Already started error - aborting first');
+          console.warn('[VoiceAssistant] ⚠️ Already started error - aborting first');
           recognitionRef.current.abort();
-          
+
           setTimeout(() => {
-            console.log('[VoiceAssistant] Retrying start after abort');
+            console.log('[VoiceAssistant] 🔄 Retrying start after abort');
             try {
               recognitionRef.current.start();
             } catch (retryError) {
-              console.error('[VoiceAssistant] Retry failed:', retryError);
+              console.error('[VoiceAssistant] ❌ Retry failed:', retryError);
             }
           }, 300);
         }

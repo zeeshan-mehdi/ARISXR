@@ -34,36 +34,42 @@ function VoiceAssistantVR({
   useEffect(() => {
     console.log('[VoiceAssistantVR] State changed:', { isListening, isSpeaking });
   }, [isListening, isSpeaking]);
-  
+
+  // Store the callback in a ref to avoid re-registering handlers constantly
+  const toggleListeningRef = useRef(onToggleListening);
+  useEffect(() => {
+    toggleListeningRef.current = onToggleListening;
+  }, [onToggleListening]);
+
   const lastTriggerTimeRef = useRef(0);
   const DEBOUNCE_MS = 500; // Prevent double-trigger within 500ms
 
   useEffect(() => {
-    console.log('[VoiceAssistantVR] Registering button handlers');
+    console.log('[VoiceAssistantVR] Registering button handlers ONCE');
 
     const handleTrigger = () => {
       const now = Date.now();
       const timeSinceLastTrigger = now - lastTriggerTimeRef.current;
 
       if (timeSinceLastTrigger < DEBOUNCE_MS) {
-        console.log(`[VoiceAssistantVR] Trigger debounced (${timeSinceLastTrigger}ms since last press)`);
+        console.log(`[VoiceAssistantVR] 🚫 Trigger debounced (${timeSinceLastTrigger}ms since last press)`);
         return;
       }
 
       lastTriggerTimeRef.current = now;
-      console.log('Trigger pressed - toggling voice assistant');
-      onToggleListening();
+      console.log('[VoiceAssistantVR] ✅ Trigger pressed - toggling voice assistant');
+      toggleListeningRef.current();
     };
 
     const leftId = xrInput.registerButtonPress('leftTrigger', handleTrigger);
     const rightId = xrInput.registerButtonPress('rightTrigger', handleTrigger);
 
     return () => {
-      console.log('[VoiceAssistantVR] Unregistering button handlers');
+      console.log('[VoiceAssistantVR] ⚠️ Component unmounting - unregistering button handlers');
       xrInput.unregisterButtonPress(leftId);
       xrInput.unregisterButtonPress(rightId);
     };
-  }, [onToggleListening, xrInput]);
+  }, [xrInput]); // Only depend on xrInput, not onToggleListening
   
   // Animate the sphere in VR
   useFrame((state) => {

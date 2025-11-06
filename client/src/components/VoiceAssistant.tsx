@@ -253,9 +253,10 @@ export function VoiceAssistant({ isXR = false }: VoiceAssistantProps) {
       const transcript = event.results[current][0].transcript;
       console.log('[VoiceAssistant] onresult:', { transcript, isFinal: event.results[current].isFinal });
       setTranscript(transcript);
-      
+
       if (event.results[current].isFinal) {
-        console.log('[VoiceAssistant] Final transcript, processing command');
+        console.log('[VoiceAssistant] 🗣️ Final transcript received');
+        console.log('[VoiceAssistant] 📝 User said:', transcript);
         handleVoiceCommand(transcript);
       }
     };
@@ -446,6 +447,11 @@ Total Elements: ${elements.length}
     try {
       recognitionRef.current.stop();
       console.log('[VoiceAssistant] ✅ Recognition stop() called successfully');
+
+      // Manually update state since onend may not fire reliably with stop()
+      isActiveRef.current = false;
+      setIsListening(false);
+      console.log('[VoiceAssistant] 🔄 State manually updated after stop()');
     } catch (error) {
       console.error('[VoiceAssistant] ❌ Stop failed:', error);
       isActiveRef.current = false;

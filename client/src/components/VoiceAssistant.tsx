@@ -34,6 +34,12 @@ const VoiceAssistantVR = memo(function VoiceAssistantVR({
   const [hovered, setHovered] = useState(false);
   const xrInput = useXRInput();
 
+  // Version marker for VR component
+  useEffect(() => {
+    console.log('🎮🎮🎮 VoiceAssistantVR (XR) LOADED - VERSION: 2025-11-06-FIX-v3 🎮🎮🎮');
+    console.log('✅ Using HOLD-TO-SPEAK pattern with registerButtonHold');
+  }, []);
+
   // Log state changes for debugging
   useEffect(() => {
     console.log('[VoiceAssistantVR] State changed:', { isListening, isSpeaking });
@@ -225,8 +231,15 @@ export function VoiceAssistant({ isXR = false }: VoiceAssistantProps) {
   const [response, setResponse] = useState('');
   const recognitionRef = useRef<any>(null);
   const isActiveRef = useRef(false);
+  const isStoppingRef = useRef(false); // NEW: track if we're waiting for onend
   const { process } = useBPMN();
   const elements = process?.elements || [];
+
+  // Version marker to verify code updates
+  useEffect(() => {
+    console.log('🚀🚀🚀 VoiceAssistant LOADED - VERSION: 2025-11-06-FIX-v3 🚀🚀🚀');
+    console.log('✅ isStoppingRef race condition fix is ACTIVE');
+  }, []);
 
   useEffect(() => {
     const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
@@ -270,9 +283,10 @@ export function VoiceAssistant({ isXR = false }: VoiceAssistantProps) {
     };
 
     recognition.onend = () => {
-      console.log('[VoiceAssistant] onend - recognition ended');
-      console.log('[VoiceAssistant] 🔄 Resetting state in onend');
+      console.log('[VoiceAssistant] 💚 onend - recognition ended');
+      console.log('[VoiceAssistant] 🔄 Resetting ALL state in onend');
       isActiveRef.current = false;
+      isStoppingRef.current = false; // Clear stopping flag
       setIsListening(false);
       console.log('[VoiceAssistant] ✅ State reset complete - ready for next activation');
     };
@@ -402,31 +416,28 @@ Total Elements: ${elements.length}
       return;
     }
 
-    if (isActiveRef.current) {
-      console.warn('[VoiceAssistant] ⚠️ Already listening, ignoring start request');
-      console.warn('[VoiceAssistant] ⚠️ Waiting for onend to fire - browser is still processing previous session');
+    // Check if we're still stopping from previous session
+    if (isStoppingRef.current) {
+      console.warn('[VoiceAssistant] 🔄 Still stopping from previous session - wait for onend');
       return;
     }
 
-    console.log('[VoiceAssistant] ▶️ STARTING recognition (hold-to-speak)...');
-    console.log('[VoiceAssistant] 📊 BEFORE start() - isActiveRef:', isActiveRef.current, 'isListening:', isListening);
+    if (isActiveRef.current) {
+      console.warn('[VoiceAssistant] ⚠️ Already listening, ignoring start request');
+      return;
+    }
+
+    console.log('[VoiceAssistant] 💙 STARTING recognition (hold-to-speak)...');
     console.log('[VoiceAssistant] 🔄 Clearing previous transcript and response');
     setTranscript('');
     setResponse('');
 
     try {
-      const startTime = Date.now();
       recognitionRef.current.start();
-      console.log('[VoiceAssistant] ✅ Recognition start() called successfully at', startTime);
+      console.log('[VoiceAssistant] ✅ Recognition start() called successfully');
     } catch (error: any) {
       console.error('[VoiceAssistant] ❌ Start failed:', error);
-
-      if (error.message?.includes('already started')) {
-        console.error('[VoiceAssistant] ⚠️ Browser thinks recognition already started!');
-        console.error('[VoiceAssistant] ⚠️ This means onend from previous session has not fired yet');
-        console.error('[VoiceAssistant] ⚠️ Wait a moment and try again');
-        // Don't try to force start - just inform the user to wait
-      }
+      // Just log it - don't try to recover
     }
   }, []);
 
@@ -441,17 +452,19 @@ Total Elements: ${elements.length}
       return;
     }
 
-    console.log('[VoiceAssistant] 🛑 STOPPING recognition (hold-to-speak released)');
-    console.log('[VoiceAssistant] 📊 BEFORE stop() - isActiveRef:', isActiveRef.current, 'isListening:', isListening);
+    console.log('[VoiceAssistant] 💛 STOPPING recognition (hold-to-speak released)');
     try {
-      // Use stop() to process the audio and get final transcript
-      // Note: onend will fire after this, which will reset isActiveRef
+      // Set stopping flag BEFORE calling stop()
+      isStoppingRef.current = true;
+      console.log('[VoiceAssistant] 🚫 Set isStoppingRef = true (blocks new starts until onend)');
+
+      // Use stop() to process audio - onend will fire later
       recognitionRef.current.stop();
-      console.log('[VoiceAssistant] ✅ Recognition stop() called - waiting for final results...');
-      console.log('[VoiceAssistant] ⏳ onend will fire soon and reset state');
+      console.log('[VoiceAssistant] ✅ Recognition stop() called - waiting for onend to process audio...');
     } catch (error) {
       console.error('[VoiceAssistant] ❌ Stop failed:', error);
       isActiveRef.current = false;
+      isStoppingRef.current = false;
       setIsListening(false);
     }
   }, []);

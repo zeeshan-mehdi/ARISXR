@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
-import { useXR } from '@react-three/xr';
 import * as THREE from 'three';
+import { useXRInput, updateXRInput } from '../lib/useXRInput';
 
 interface XRProcessControllerProps {
   children: React.ReactNode;
@@ -10,7 +10,7 @@ interface XRProcessControllerProps {
 export function XRProcessController({ children }: XRProcessControllerProps) {
   const groupRef = useRef<THREE.Group>(null);
   const { gl } = useThree();
-  const xrSession = gl.xr.getSession();
+  const xrInput = useXRInput();
   
   const transformState = useRef({
     position: new THREE.Vector3(0, 0, 0),
@@ -29,56 +29,42 @@ export function XRProcessController({ children }: XRProcessControllerProps) {
   });
 
   useFrame(() => {
-    if (!groupRef.current || !xrSession) return;
-
-    const inputSources = Array.from(xrSession.inputSources);
+    if (!groupRef.current) return;
+    
+    updateXRInput(gl);
+    
+    const controllerState = xrInput.getState();
     const state = transformState.current;
     
-    let leftController: XRInputSource | null = null;
-    let rightController: XRInputSource | null = null;
+    const leftGrip = controllerState.buttons.leftGrip;
+    const rightGrip = controllerState.buttons.rightGrip;
     
-    for (const source of inputSources) {
-      if (source.handedness === 'left') leftController = source;
-      if (source.handedness === 'right') rightController = source;
-    }
-    
-    const leftGrip = leftController?.gamepad?.buttons[1]?.pressed || false;
-    const rightGrip = rightController?.gamepad?.buttons[1]?.pressed || false;
-    
-    console.log('Controllers:', { leftGrip, rightGrip, inputSourcesCount: inputSources.length });
-    
-    const leftJoystickX = leftController?.gamepad?.axes[2] || 0;
-    const leftJoystickY = leftController?.gamepad?.axes[3] || 0;
-    const rightJoystickX = rightController?.gamepad?.axes[2] || 0;
-    const rightJoystickY = rightController?.gamepad?.axes[3] || 0;
+    const leftJoystickX = controllerState.axes.leftJoystickX;
+    const leftJoystickY = controllerState.axes.leftJoystickY;
+    const rightJoystickX = controllerState.axes.rightJoystickX;
+    const rightJoystickY = controllerState.axes.rightJoystickY;
     
     if (Math.abs(leftJoystickX) > 0.15 || Math.abs(leftJoystickY) > 0.15) {
       state.position.x += leftJoystickX * 0.06;
       state.position.z += leftJoystickY * 0.06;
-      console.log('Moving with left joystick');
     }
     
     if (Math.abs(rightJoystickX) > 0.15) {
       state.rotation += rightJoystickX * 0.03;
-      console.log('Rotating with right joystick');
     }
     
     if (Math.abs(rightJoystickY) > 0.15) {
       state.scale = Math.max(0.3, Math.min(5, state.scale - rightJoystickY * 0.02));
-      console.log('Scaling with right joystick:', state.scale);
     }
     
     if (leftGrip && rightGrip) {
       if (!state.bothGripping) {
         state.bothGripping = true;
-        console.log('Both grips pressed - pinch zoom enabled');
       }
     } else if (leftGrip && !state.leftGrip) {
       state.leftGrip = true;
-      console.log('Left grip pressed - drag enabled');
     } else if (rightGrip && !state.rightGrip) {
       state.rightGrip = true;
-      console.log('Right grip pressed - drag enabled');
     }
     
     if (!leftGrip) state.leftGrip = false;

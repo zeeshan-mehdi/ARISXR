@@ -71,69 +71,11 @@ function App() {
     return unsubscribe;
   }, [xrStore]);
 
-  // Auto-enter XR mode when a process is loaded
+  // Log process changes
   useEffect(() => {
-    const autoEnterXR = async () => {
-      const processId = process?.id || null;
-      console.log('[App] useEffect triggered - processId:', processId, 'lastProcessId:', lastProcessIdRef.current);
-      
-      if (!process) {
-        console.log('[App] No process loaded');
-        return;
-      }
-      
-      // Only auto-enter if this is a NEW process
-      if (processId === lastProcessIdRef.current) {
-        console.log('[App] Same process, skipping auto-enter');
-        return;
-      }
-
-      console.log('[App] NEW process loaded, attempting auto-enter XR...');
-      lastProcessIdRef.current = processId;
-
-      if ('xr' in navigator && navigator.xr) {
-        try {
-          // Check AR support first (Meta Quest 3)
-          const arSupported = await navigator.xr.isSessionSupported('immersive-ar');
-          console.log('[App] AR supported:', arSupported);
-          
-          if (arSupported) {
-            console.log('[App] Auto-entering AR mode...');
-            const success = await handleEnterXR('ar', true);
-            if (success) {
-              console.log('[App] Successfully auto-entered AR mode');
-            } else {
-              console.log('[App] Auto-enter AR failed, staying in desktop mode');
-            }
-            return;
-          }
-
-          // Check VR support (Apple Vision Pro)
-          const vrSupported = await navigator.xr.isSessionSupported('immersive-vr');
-          console.log('[App] VR supported:', vrSupported);
-          
-          if (vrSupported) {
-            console.log('[App] Auto-entering VR mode...');
-            const success = await handleEnterXR('vr', true);
-            if (success) {
-              console.log('[App] Successfully auto-entered VR mode');
-            } else {
-              console.log('[App] Auto-enter VR failed, staying in desktop mode');
-            }
-            return;
-          }
-
-          console.log('[App] No XR support detected, staying in desktop mode');
-        } catch (error) {
-          console.error('[App] Auto-enter XR failed:', error);
-        }
-      } else {
-        console.log('[App] navigator.xr not available, staying in desktop mode');
-      }
-    };
-
-    autoEnterXR();
-  }, [process, xrStore]);
+    const processId = process?.id || null;
+    console.log('[App] Process changed - processId:', processId);
+  }, [process]);
 
   return (
     <div style={{ width: '100vw', height: '100vh', position: 'relative', overflow: 'hidden' }}>
@@ -171,9 +113,11 @@ function App() {
               </button>
             </>
           )}
-          <XRButton onEnterXR={handleEnterXR} isInXR={isInXR} />
         </>
       )}
+      
+      {/* XR Button - always show when not in XR (before or after process load) */}
+      <XRButton onEnterXR={handleEnterXR} isInXR={isInXR} />
     </div>
   );
 }

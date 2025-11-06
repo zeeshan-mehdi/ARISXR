@@ -65,11 +65,19 @@ export function XRButton({ onEnterXR, isInXR }: XRButtonProps) {
 
   return (
     <button
-      onClick={() => onEnterXR(xrMode)}
-      className="absolute bottom-4 right-4 z-50 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-6 py-3 rounded-lg font-semibold shadow-lg flex items-center gap-2 transition-all transform hover:scale-105"
+      onClick={() => {
+        console.log('[XRButton] Button clicked! Mode:', xrMode);
+        onEnterXR(xrMode);
+      }}
+      className="fixed bottom-8 right-8 z-[9999] bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-10 py-6 rounded-2xl font-bold text-xl shadow-2xl flex items-center gap-4 transition-all transform hover:scale-110 animate-pulse border-4 border-white"
+      style={{ 
+        boxShadow: '0 0 40px rgba(147, 51, 234, 0.8), 0 0 80px rgba(59, 130, 246, 0.6)',
+        minWidth: '300px',
+        minHeight: '80px'
+      }}
     >
       <svg 
-        className="w-6 h-6" 
+        className="w-10 h-10" 
         fill="none" 
         stroke="currentColor" 
         viewBox="0 0 24 24"
@@ -77,11 +85,11 @@ export function XRButton({ onEnterXR, isInXR }: XRButtonProps) {
         <path 
           strokeLinecap="round" 
           strokeLinejoin="round" 
-          strokeWidth={2} 
+          strokeWidth={2.5} 
           d="M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
         />
       </svg>
-      {buttonText}
+      <span className="text-2xl">{buttonText}</span>
     </button>
   );
 }

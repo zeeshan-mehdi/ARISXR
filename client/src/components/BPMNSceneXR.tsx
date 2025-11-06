@@ -3,6 +3,7 @@ import { Grid, PerspectiveCamera, OrbitControls } from "@react-three/drei";
 import { XR, createXRStore } from "@react-three/xr";
 import { BPMNWorld } from "./BPMNWorld";
 import { CameraTracker } from "./CameraTracker";
+import { VoiceAssistant } from "./VoiceAssistant";
 
 interface BPMNSceneXRProps {
   wsRef: React.RefObject<WebSocket | null>;
@@ -18,21 +19,21 @@ export function BPMNSceneXR({ wsRef, xrStore, isInXR }: BPMNSceneXRProps) {
         alpha: true,
         antialias: true,
       }}
-      style={{ 
-        background: isInXR ? 'transparent' : undefined,
-        position: 'absolute',
+      style={{
+        background: isInXR ? "transparent" : undefined,
+        position: "absolute",
         top: 0,
         left: 0,
-        width: '100%',
-        height: '100%',
-        pointerEvents: 'auto'
+        width: "100%",
+        height: "100%",
+        pointerEvents: "auto",
       }}
     >
       <XR store={xrStore}>
         {isInXR ? null : <color attach="background" args={["#1a1a2e"]} />}
-        
+
         <PerspectiveCamera makeDefault position={[15, 10, 15]} fov={60} />
-        
+
         {!isInXR && (
           <OrbitControls
             enableDamping
@@ -66,8 +67,9 @@ export function BPMNSceneXR({ wsRef, xrStore, isInXR }: BPMNSceneXRProps) {
         )}
 
         <BPMNWorld wsRef={wsRef} isXR={isInXR} />
-        
+
         {!isInXR && <CameraTracker wsRef={wsRef} />}
+        <VoiceAssistant isXR={isInXR} />
       </XR>
     </Canvas>
   );

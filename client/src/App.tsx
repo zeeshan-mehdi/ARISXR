@@ -62,10 +62,7 @@ function App() {
               <InfoPanel />
               <UploadPanel />
               <XRInstructions />
-              {/* Move VoiceAssistant to the right side */}
-              <div style={{ position: 'absolute', top: '50%', right: 0, transform: 'translateY(-50%)', zIndex: 50 }}>
-                <VoiceAssistant isXR={false} />
-              </div>
+              <VoiceAssistant isXR={false} />
               {/* <VoiceAssistant isXR={isInXR} /> */}
               <button
                 onClick={handleBackToLibrary}

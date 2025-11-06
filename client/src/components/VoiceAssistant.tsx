@@ -63,9 +63,8 @@ function VoiceAssistantVR({
         anchorY="bottom"
         outlineWidth={0.03}
         outlineColor="#000000"
-        font="/fonts/inter-bold.woff"
       >
-        🤖 ARIS AI
+        ARIS AI
       </Text>
       
       <Text
@@ -77,7 +76,7 @@ function VoiceAssistantVR({
         outlineWidth={0.02}
         outlineColor="#000000"
       >
-        {isListening ? '🎤 Listening...' : isSpeaking ? '🔊 Speaking...' : '💬 Ready'}
+        {isListening ? 'Listening...' : isSpeaking ? 'Speaking...' : 'Ready'}
       </Text>
       
       <mesh position={[0, 0.05, 0]} rotation={[-Math.PI / 2, 0, 0]}>

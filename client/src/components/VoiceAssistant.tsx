@@ -16,6 +16,8 @@ const VoiceAssistantVR = memo(function VoiceAssistantVR({
   isSpeaking,
   transcript,
   response,
+  onStartListening,
+  onStopListening,
   onToggleListening,
   onStopSpeaking
 }: {
@@ -23,6 +25,8 @@ const VoiceAssistantVR = memo(function VoiceAssistantVR({
   isSpeaking: boolean;
   transcript: string;
   response: string;
+  onStartListening: () => void;
+  onStopListening: () => void;
   onToggleListening: () => void;
   onStopSpeaking: () => void;
 }) {
@@ -35,48 +39,59 @@ const VoiceAssistantVR = memo(function VoiceAssistantVR({
     console.log('[VoiceAssistantVR] State changed:', { isListening, isSpeaking });
   }, [isListening, isSpeaking]);
 
-  // Store the callback in a ref to avoid re-registering handlers constantly
-  const toggleListeningRef = useRef(onToggleListening);
-  useEffect(() => {
-    toggleListeningRef.current = onToggleListening;
-  }, [onToggleListening]);
-
-  const lastTriggerTimeRef = useRef(0);
-  const DEBOUNCE_MS = 500; // Prevent double-trigger within 500ms
+  // Store callbacks in refs to avoid re-registering handlers
+  const startListeningRef = useRef(onStartListening);
+  const stopListeningRef = useRef(onStopListening);
 
   useEffect(() => {
-    console.log('[VoiceAssistantVR] Registering button handlers ONCE');
+    startListeningRef.current = onStartListening;
+  }, [onStartListening]);
 
-    const handleTrigger = () => {
-      const now = Date.now();
-      const timeSinceLastTrigger = now - lastTriggerTimeRef.current;
+  useEffect(() => {
+    stopListeningRef.current = onStopListening;
+  }, [onStopListening]);
 
-      if (timeSinceLastTrigger < DEBOUNCE_MS) {
-        console.log(`[VoiceAssistantVR] 🚫 Trigger debounced (${timeSinceLastTrigger}ms since last press)`);
-        return;
-      }
+  useEffect(() => {
+    console.log('[VoiceAssistantVR] 🎯 Registering HOLD-TO-SPEAK button handlers');
 
-      lastTriggerTimeRef.current = now;
-      console.log('[VoiceAssistantVR] ✅ Trigger pressed - toggling voice assistant');
-      toggleListeningRef.current();
+    const handlePressDown = () => {
+      console.log('[VoiceAssistantVR] 🎤 Trigger PRESSED DOWN - starting listening');
+      startListeningRef.current();
     };
 
-    const leftId = xrInput.registerButtonPress('leftTrigger', handleTrigger);
-    const rightId = xrInput.registerButtonPress('rightTrigger', handleTrigger);
+    const handleRelease = () => {
+      console.log('[VoiceAssistantVR] 🛑 Trigger RELEASED - stopping listening');
+      stopListeningRef.current();
+    };
+
+    const leftId = xrInput.registerButtonHold('leftTrigger', handlePressDown, handleRelease);
+    const rightId = xrInput.registerButtonHold('rightTrigger', handlePressDown, handleRelease);
 
     return () => {
-      console.log('[VoiceAssistantVR] ⚠️ Component unmounting - unregistering button handlers');
-      xrInput.unregisterButtonPress(leftId);
-      xrInput.unregisterButtonPress(rightId);
+      console.log('[VoiceAssistantVR] ⚠️ Component unmounting - unregistering hold handlers');
+      xrInput.unregisterButtonHold(leftId);
+      xrInput.unregisterButtonHold(rightId);
     };
-  }, [xrInput]); // Only depend on xrInput, not onToggleListening
+  }, [xrInput]);
   
-  // Animate the sphere in VR
+  // Animate the sphere in VR - enhanced animation when listening
   useFrame((state) => {
     if (sphereRef.current) {
       const time = state.clock.getElapsedTime();
-      sphereRef.current.position.y = 1.5 + Math.sin(time * 2) * 0.1;
-      sphereRef.current.rotation.y = time * 0.5;
+
+      if (isListening) {
+        // More intense animation when listening
+        sphereRef.current.position.y = 1.5 + Math.sin(time * 5) * 0.15;
+        sphereRef.current.rotation.y = time * 1.5;
+        // Pulse scale
+        const scale = 1 + Math.sin(time * 4) * 0.1;
+        sphereRef.current.scale.set(scale, scale, scale);
+      } else {
+        // Normal gentle animation
+        sphereRef.current.position.y = 1.5 + Math.sin(time * 2) * 0.1;
+        sphereRef.current.rotation.y = time * 0.5;
+        sphereRef.current.scale.set(1, 1, 1);
+      }
     }
   });
   
@@ -146,10 +161,10 @@ const VoiceAssistantVR = memo(function VoiceAssistantVR({
       
       <mesh position={[0, 0.05, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         <ringGeometry args={[0.5, 0.65, 32]} />
-        <meshBasicMaterial 
+        <meshBasicMaterial
           color={assistantColor}
-          transparent 
-          opacity={0.4}
+          transparent
+          opacity={isListening ? 0.7 : 0.4}
           side={THREE.DoubleSide}
         />
       </mesh>
@@ -165,7 +180,7 @@ const VoiceAssistantVR = memo(function VoiceAssistantVR({
         outlineColor="#000000"
         maxWidth={2}
       >
-        {isListening ? 'Speak your question...' : isSpeaking ? 'AI is responding...' : 'Press trigger to ask'}
+        {isListening ? 'Keep holding... speak now!' : isSpeaking ? 'AI is responding...' : 'HOLD trigger to speak'}
       </Text>
       
       {/* Transcript display */}
@@ -378,6 +393,66 @@ Total Elements: ${elements.length}
     }
   };
 
+  const startListening = useCallback(() => {
+    if (!recognitionRef.current) {
+      console.error('[VoiceAssistant] ❌ No recognition instance available');
+      return;
+    }
+
+    if (isActiveRef.current) {
+      console.log('[VoiceAssistant] ⚠️ Already listening, ignoring start request');
+      return;
+    }
+
+    console.log('[VoiceAssistant] ▶️ STARTING recognition (hold-to-speak)...');
+    console.log('[VoiceAssistant] 🔄 Clearing previous transcript and response');
+    setTranscript('');
+    setResponse('');
+
+    try {
+      recognitionRef.current.start();
+      console.log('[VoiceAssistant] ✅ Recognition start() called successfully');
+    } catch (error: any) {
+      console.error('[VoiceAssistant] ❌ Start failed:', error);
+
+      if (error.message?.includes('already started')) {
+        console.warn('[VoiceAssistant] ⚠️ Already started error - aborting first');
+        recognitionRef.current.abort();
+
+        setTimeout(() => {
+          console.log('[VoiceAssistant] 🔄 Retrying start after abort');
+          try {
+            recognitionRef.current.start();
+          } catch (retryError) {
+            console.error('[VoiceAssistant] ❌ Retry failed:', retryError);
+          }
+        }, 300);
+      }
+    }
+  }, []);
+
+  const stopListening = useCallback(() => {
+    if (!recognitionRef.current) {
+      console.error('[VoiceAssistant] ❌ No recognition instance available');
+      return;
+    }
+
+    if (!isActiveRef.current) {
+      console.log('[VoiceAssistant] ⚠️ Not listening, ignoring stop request');
+      return;
+    }
+
+    console.log('[VoiceAssistant] 🛑 STOPPING recognition (hold-to-speak released)');
+    try {
+      recognitionRef.current.stop();
+      console.log('[VoiceAssistant] ✅ Recognition stop() called successfully');
+    } catch (error) {
+      console.error('[VoiceAssistant] ❌ Stop failed:', error);
+      isActiveRef.current = false;
+      setIsListening(false);
+    }
+  }, []);
+
   const toggleListening = useCallback(() => {
     if (!recognitionRef.current) {
       console.error('[VoiceAssistant] ❌ No recognition instance available');
@@ -391,44 +466,11 @@ Total Elements: ${elements.length}
     });
 
     if (isActiveRef.current) {
-      console.log('[VoiceAssistant] 🛑 STOPPING recognition (calling abort)');
-      try {
-        recognitionRef.current.abort();
-        isActiveRef.current = false;
-        setIsListening(false);
-      } catch (error) {
-        console.error('[VoiceAssistant] ❌ Abort failed:', error);
-        isActiveRef.current = false;
-        setIsListening(false);
-      }
+      stopListening();
     } else {
-      console.log('[VoiceAssistant] ▶️ STARTING recognition...');
-      console.log('[VoiceAssistant] 🔄 Clearing previous transcript and response');
-      setTranscript('');
-      setResponse('');
-
-      try {
-        recognitionRef.current.start();
-        console.log('[VoiceAssistant] ✅ Recognition start() called successfully');
-      } catch (error: any) {
-        console.error('[VoiceAssistant] ❌ Start failed:', error);
-
-        if (error.message?.includes('already started')) {
-          console.warn('[VoiceAssistant] ⚠️ Already started error - aborting first');
-          recognitionRef.current.abort();
-
-          setTimeout(() => {
-            console.log('[VoiceAssistant] 🔄 Retrying start after abort');
-            try {
-              recognitionRef.current.start();
-            } catch (retryError) {
-              console.error('[VoiceAssistant] ❌ Retry failed:', retryError);
-            }
-          }, 300);
-        }
-      }
+      startListening();
     }
-  }, [isListening]);
+  }, [isListening, startListening, stopListening]);
 
   const stopSpeaking = () => {
     if ('speechSynthesis' in window) {
@@ -516,11 +558,13 @@ Total Elements: ${elements.length}
 
   if (isXR) {
     return (
-      <VoiceAssistantVR 
+      <VoiceAssistantVR
         isListening={isListening}
         isSpeaking={isSpeaking}
         transcript={transcript}
         response={response}
+        onStartListening={startListening}
+        onStopListening={stopListening}
         onToggleListening={toggleListening}
         onStopSpeaking={stopSpeaking}
       />

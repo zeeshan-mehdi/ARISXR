@@ -23,6 +23,13 @@ interface ButtonPressHandler {
   onPress: () => void;
 }
 
+interface ButtonHoldHandler {
+  id: string;
+  button: 'leftTrigger' | 'rightTrigger' | 'leftGrip' | 'rightGrip';
+  onPressDown: () => void;
+  onRelease: () => void;
+}
+
 const controllerState: XRControllerState = {
   leftController: null,
   rightController: null,
@@ -48,6 +55,7 @@ const lastButtonState = {
 };
 
 const buttonPressHandlers: ButtonPressHandler[] = [];
+const buttonHoldHandlers: ButtonHoldHandler[] = [];
 
 export function updateXRInput(gl: any) {
   const xrSession = gl.xr.getSession();
@@ -85,6 +93,7 @@ export function updateXRInput(gl: any) {
     rightJoystickY: rightController?.gamepad?.axes[3] || 0,
   };
   
+  // Handle button press events (legacy)
   if (leftTrigger && !lastButtonState.leftTrigger) {
     console.log('[XRInput] LEFT TRIGGER pressed, firing', buttonPressHandlers.filter(h => h.button === 'leftTrigger').length, 'handlers');
     buttonPressHandlers.filter(h => h.button === 'leftTrigger').forEach(h => h.onPress());
@@ -101,7 +110,43 @@ export function updateXRInput(gl: any) {
     console.log('[XRInput] RIGHT GRIP pressed, firing', buttonPressHandlers.filter(h => h.button === 'rightGrip').length, 'handlers');
     buttonPressHandlers.filter(h => h.button === 'rightGrip').forEach(h => h.onPress());
   }
-  
+
+  // Handle button hold events (press down)
+  if (leftTrigger && !lastButtonState.leftTrigger) {
+    console.log('[XRInput] LEFT TRIGGER pressed down, firing', buttonHoldHandlers.filter(h => h.button === 'leftTrigger').length, 'hold handlers');
+    buttonHoldHandlers.filter(h => h.button === 'leftTrigger').forEach(h => h.onPressDown());
+  }
+  if (rightTrigger && !lastButtonState.rightTrigger) {
+    console.log('[XRInput] RIGHT TRIGGER pressed down, firing', buttonHoldHandlers.filter(h => h.button === 'rightTrigger').length, 'hold handlers');
+    buttonHoldHandlers.filter(h => h.button === 'rightTrigger').forEach(h => h.onPressDown());
+  }
+  if (leftGrip && !lastButtonState.leftGrip) {
+    console.log('[XRInput] LEFT GRIP pressed down, firing', buttonHoldHandlers.filter(h => h.button === 'leftGrip').length, 'hold handlers');
+    buttonHoldHandlers.filter(h => h.button === 'leftGrip').forEach(h => h.onPressDown());
+  }
+  if (rightGrip && !lastButtonState.rightGrip) {
+    console.log('[XRInput] RIGHT GRIP pressed down, firing', buttonHoldHandlers.filter(h => h.button === 'rightGrip').length, 'hold handlers');
+    buttonHoldHandlers.filter(h => h.button === 'rightGrip').forEach(h => h.onPressDown());
+  }
+
+  // Handle button hold events (release)
+  if (!leftTrigger && lastButtonState.leftTrigger) {
+    console.log('[XRInput] LEFT TRIGGER released, firing', buttonHoldHandlers.filter(h => h.button === 'leftTrigger').length, 'hold handlers');
+    buttonHoldHandlers.filter(h => h.button === 'leftTrigger').forEach(h => h.onRelease());
+  }
+  if (!rightTrigger && lastButtonState.rightTrigger) {
+    console.log('[XRInput] RIGHT TRIGGER released, firing', buttonHoldHandlers.filter(h => h.button === 'rightTrigger').length, 'hold handlers');
+    buttonHoldHandlers.filter(h => h.button === 'rightTrigger').forEach(h => h.onRelease());
+  }
+  if (!leftGrip && lastButtonState.leftGrip) {
+    console.log('[XRInput] LEFT GRIP released, firing', buttonHoldHandlers.filter(h => h.button === 'leftGrip').length, 'hold handlers');
+    buttonHoldHandlers.filter(h => h.button === 'leftGrip').forEach(h => h.onRelease());
+  }
+  if (!rightGrip && lastButtonState.rightGrip) {
+    console.log('[XRInput] RIGHT GRIP released, firing', buttonHoldHandlers.filter(h => h.button === 'rightGrip').length, 'hold handlers');
+    buttonHoldHandlers.filter(h => h.button === 'rightGrip').forEach(h => h.onRelease());
+  }
+
   lastButtonState.leftTrigger = leftTrigger;
   lastButtonState.rightTrigger = rightTrigger;
   lastButtonState.leftGrip = leftGrip;
@@ -110,17 +155,32 @@ export function updateXRInput(gl: any) {
 
 export function useXRInput() {
   const registerButtonPress = useCallback((button: ButtonPressHandler['button'], onPress: () => void): string => {
-    const id = `${button}-${Date.now()}-${Math.random()}`;
+    const id = `${button}-press-${Date.now()}-${Math.random()}`;
     buttonPressHandlers.push({ id, button, onPress });
-    console.log(`Registered ${button} handler:`, id);
+    console.log(`[XRInput] Registered ${button} press handler:`, id);
     return id;
   }, []);
 
   const unregisterButtonPress = useCallback((id: string) => {
     const index = buttonPressHandlers.findIndex(h => h.id === id);
     if (index !== -1) {
-      console.log('Unregistered handler:', id);
+      console.log('[XRInput] Unregistered press handler:', id);
       buttonPressHandlers.splice(index, 1);
+    }
+  }, []);
+
+  const registerButtonHold = useCallback((button: ButtonHoldHandler['button'], onPressDown: () => void, onRelease: () => void): string => {
+    const id = `${button}-hold-${Date.now()}-${Math.random()}`;
+    buttonHoldHandlers.push({ id, button, onPressDown, onRelease });
+    console.log(`[XRInput] Registered ${button} hold handler:`, id);
+    return id;
+  }, []);
+
+  const unregisterButtonHold = useCallback((id: string) => {
+    const index = buttonHoldHandlers.findIndex(h => h.id === id);
+    if (index !== -1) {
+      console.log('[XRInput] Unregistered hold handler:', id);
+      buttonHoldHandlers.splice(index, 1);
     }
   }, []);
 
@@ -128,5 +188,7 @@ export function useXRInput() {
     getState: () => controllerState,
     registerButtonPress,
     unregisterButtonPress,
-  }), [registerButtonPress, unregisterButtonPress]);
+    registerButtonHold,
+    unregisterButtonHold,
+  }), [registerButtonPress, unregisterButtonPress, registerButtonHold, unregisterButtonHold]);
 }

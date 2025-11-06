@@ -16,8 +16,7 @@ function App() {
   const { process, setProcess } = useBPMN();
   const [showLibrary, setShowLibrary] = useState(true);
   const [isInXR, setIsInXR] = useState(false);
-  const [autoXRAttempted, setAutoXRAttempted] = useState(false);
-  const xrAttemptedRef = useRef(false);
+  const lastProcessIdRef = useRef<string | null>(null);
   
   const xrStore = useMemo(() => createXRStore({
     hand: {
@@ -32,8 +31,7 @@ function App() {
   const handleBackToLibrary = () => {
     setProcess(null);
     setShowLibrary(true);
-    setAutoXRAttempted(false);
-    xrAttemptedRef.current = false;
+    lastProcessIdRef.current = null;
   };
 
   const handleEnterXR = async (mode: 'ar' | 'vr', silent = false) => {
@@ -55,15 +53,34 @@ function App() {
     }
   };
 
+  // Subscribe to XR state changes
+  useEffect(() => {
+    const unsubscribe = xrStore.subscribe((state) => {
+      console.log('[App] XR state changed:', state !== null ? 'In XR' : 'Desktop');
+      setIsInXR(state !== null);
+    });
+    return unsubscribe;
+  }, [xrStore]);
+
   // Auto-enter XR mode when a process is loaded
   useEffect(() => {
     const autoEnterXR = async () => {
-      if (!process || xrAttemptedRef.current) {
+      const processId = process?.id || null;
+      console.log('[App] useEffect triggered - processId:', processId, 'lastProcessId:', lastProcessIdRef.current);
+      
+      if (!process) {
+        console.log('[App] No process loaded');
+        return;
+      }
+      
+      // Only auto-enter if this is a NEW process
+      if (processId === lastProcessIdRef.current) {
+        console.log('[App] Same process, skipping auto-enter');
         return;
       }
 
-      console.log('[App] Process loaded, attempting auto-enter XR...');
-      xrAttemptedRef.current = true;
+      console.log('[App] NEW process loaded, attempting auto-enter XR...');
+      lastProcessIdRef.current = processId;
 
       if ('xr' in navigator && navigator.xr) {
         try {
@@ -74,7 +91,6 @@ function App() {
           if (arSupported) {
             console.log('[App] Auto-entering AR mode...');
             const success = await handleEnterXR('ar', true);
-            setAutoXRAttempted(true);
             if (success) {
               console.log('[App] Successfully auto-entered AR mode');
             } else {
@@ -90,7 +106,6 @@ function App() {
           if (vrSupported) {
             console.log('[App] Auto-entering VR mode...');
             const success = await handleEnterXR('vr', true);
-            setAutoXRAttempted(true);
             if (success) {
               console.log('[App] Successfully auto-entered VR mode');
             } else {
@@ -100,23 +115,16 @@ function App() {
           }
 
           console.log('[App] No XR support detected, staying in desktop mode');
-          setAutoXRAttempted(true);
         } catch (error) {
           console.error('[App] Auto-enter XR failed:', error);
-          setAutoXRAttempted(true);
         }
       } else {
         console.log('[App] navigator.xr not available, staying in desktop mode');
-        setAutoXRAttempted(true);
       }
     };
 
     autoEnterXR();
-  }, [process]);
-
-  xrStore.subscribe((state) => {
-    setIsInXR(state !== null);
-  });
+  }, [process, xrStore]);
 
   return (
     <div style={{ width: '100vw', height: '100vh', position: 'relative', overflow: 'hidden' }}>

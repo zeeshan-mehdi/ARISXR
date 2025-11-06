@@ -31,6 +31,7 @@ function VoiceAssistantVR({
   const xrInput = useXRInput();
   
   useEffect(() => {
+    console.log('[VoiceAssistantVR] Registering button handlers');
     const leftId = xrInput.registerButtonPress('leftTrigger', () => {
       console.log('Left trigger pressed - toggling voice assistant');
       onToggleListening();
@@ -42,10 +43,11 @@ function VoiceAssistantVR({
     });
     
     return () => {
+      console.log('[VoiceAssistantVR] Unregistering button handlers');
       xrInput.unregisterButtonPress(leftId);
       xrInput.unregisterButtonPress(rightId);
     };
-  }, [xrInput, onToggleListening]);
+  }, []);
   
   // Animate the sphere in VR
   useFrame((state) => {
@@ -241,7 +243,7 @@ export function VoiceAssistant({ isXR = false }: VoiceAssistantProps) {
   }, []);
 
   const handleVoiceCommand = async (text: string) => {
-    console.log('Processing voice command:', text);
+    console.log('[VoiceAssistant] Processing voice command:', text);
     
     // Build process context
     const processContext = `
@@ -249,6 +251,8 @@ Process: ${process?.name || 'Unnamed Process'}
 Elements: ${elements.map((el: BPMNElement) => `${el.type}: ${el.name}${el.description ? ` - ${el.description}` : ''}`).join(', ')}
 Total Elements: ${elements.length}
     `.trim();
+
+    console.log('[VoiceAssistant] Sending to API:', { processContext, question: text });
 
     try {
       const res = await fetch('/api/chat', {
@@ -260,23 +264,28 @@ Total Elements: ${elements.length}
         })
       });
 
+      console.log('[VoiceAssistant] API response status:', res.status);
       const data = await res.json();
+      console.log('[VoiceAssistant] API response data:', data);
       
       if (data.answer) {
+        console.log('[VoiceAssistant] AI Answer:', data.answer);
         setResponse(data.answer);
         speak(data.answer);
       } else if (data.error) {
+        console.error('[VoiceAssistant] API error:', data.error);
         setResponse(`Error: ${data.error}`);
         speak(`Sorry, I encountered an error: ${data.error}`);
       }
     } catch (error) {
-      console.error('Error sending voice command:', error);
+      console.error('[VoiceAssistant] Error sending voice command:', error);
       setResponse('Failed to get response from AI');
       speak('Sorry, I could not process your request.');
     }
   };
 
   const speak = (text: string) => {
+    console.log('[VoiceAssistant] Speaking:', text);
     if ('speechSynthesis' in window) {
       window.speechSynthesis.cancel();
       
@@ -285,9 +294,18 @@ Total Elements: ${elements.length}
       utterance.pitch = 1.0;
       utterance.volume = 1.0;
       
-      utterance.onstart = () => setIsSpeaking(true);
-      utterance.onend = () => setIsSpeaking(false);
-      utterance.onerror = () => setIsSpeaking(false);
+      utterance.onstart = () => {
+        console.log('[VoiceAssistant] Speech synthesis STARTED');
+        setIsSpeaking(true);
+      };
+      utterance.onend = () => {
+        console.log('[VoiceAssistant] Speech synthesis ENDED');
+        setIsSpeaking(false);
+      };
+      utterance.onerror = (e) => {
+        console.error('[VoiceAssistant] Speech synthesis ERROR:', e);
+        setIsSpeaking(false);
+      };
       
       window.speechSynthesis.speak(utterance);
     }
@@ -312,6 +330,14 @@ Total Elements: ${elements.length}
       try {
         recognitionRef.current.stop();
         console.log('[VoiceAssistant] Stop command sent');
+        
+        // Safety: force state reset if onend doesn't fire within 500ms
+        setTimeout(() => {
+          if (isListeningRef.current) {
+            console.warn('[VoiceAssistant] Force stopping - onend event never fired');
+            setIsListening(false);
+          }
+        }, 500);
       } catch (error) {
         console.error('[VoiceAssistant] Error stopping recognition:', error);
         setIsListening(false);

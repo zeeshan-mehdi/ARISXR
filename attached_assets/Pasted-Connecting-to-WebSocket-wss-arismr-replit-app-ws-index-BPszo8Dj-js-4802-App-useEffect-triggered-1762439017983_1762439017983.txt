@@ -1,0 +1,214 @@
+Connecting to WebSocket: wss://arismr.replit.app/ws
+index-BPszo8Dj.js:4802 [App] useEffect triggered - processId: null lastProcessId: null
+index-BPszo8Dj.js:4802 [App] No process loaded
+index-BPszo8Dj.js:4802 WebSocket connected
+index-BPszo8Dj.js:4802 Received welcome: user-1762438895655-0reujwwdc User 2
+index-BPszo8Dj.js:4802 Received users update: 2 users
+index-BPszo8Dj.js:4323 Setting BPMN process: Simple Approval Process
+index-BPszo8Dj.js:4802 [XRButton] Render - xrMode: null isInXR: false
+index-BPszo8Dj.js:4802 [XRButton] Not rendering button - xrMode: null isInXR: false
+index-BPszo8Dj.js:4802 [XRButton] Component mounted, checking XR support...
+index-BPszo8Dj.js:4802 [XRButton] isInXR: false
+index-BPszo8Dj.js:4802 [XRButton] navigator.xr available: true
+index-BPszo8Dj.js:4802 [XRButton] navigator.xr detected, checking session support...
+index-BPszo8Dj.js:4802 [XRButton] Testing immersive-ar support...
+index-BPszo8Dj.js:4802 Broadcasting local process update
+index-BPszo8Dj.js:4802 [App] useEffect triggered - processId: Process_1 lastProcessId: null
+index-BPszo8Dj.js:4802 [App] NEW process loaded, attempting auto-enter XR...
+index-BPszo8Dj.js:4802 [XRButton] immersive-ar supported: true
+index-BPszo8Dj.js:4802 [XRButton] ✓ AR Mode detected (Meta Quest 3)
+index-BPszo8Dj.js:4802 [App] AR supported: true
+index-BPszo8Dj.js:4802 [App] Auto-entering AR mode...
+index-BPszo8Dj.js:4802 [App] Entering XR mode: ar with hand tracking enabled...
+index-BPszo8Dj.js:3909 [App] Failed to enter XR: Error: not connected to three.js. You either might be missing the <XR> component or the canvas is not yet loaded?
+    at Gm (index-BPszo8Dj.js:4323:39300)
+    at Object.enterAR (index-BPszo8Dj.js:4323:37432)
+    at u (index-BPszo8Dj.js:4802:16098)
+    at index-BPszo8Dj.js:4802:17114
+console.error @ index-BPszo8Dj.js:3909
+u @ index-BPszo8Dj.js:4802
+await in u
+(anonymous) @ index-BPszo8Dj.js:4802
+await in (anonymous)
+(anonymous) @ index-BPszo8Dj.js:4802
+U0 @ index-BPszo8Dj.js:40
+vu @ index-BPszo8Dj.js:40
+AF @ index-BPszo8Dj.js:40
+_l @ index-BPszo8Dj.js:40
+AT @ index-BPszo8Dj.js:40
+Pa @ index-BPszo8Dj.js:38
+(anonymous) @ index-BPszo8Dj.js:40Understand this error
+index-BPszo8Dj.js:4802 [App] Auto-enter AR failed, staying in desktop mode
+index-BPszo8Dj.js:4802 [XRButton] Render - xrMode: ar isInXR: false
+index-BPszo8Dj.js:4802 [XRButton] Rendering button: Enter Mixed Reality
+index-BPszo8Dj.js:4323 Feature 'dom-overlay' is not supported for mode: immersive-ar
+zm @ index-BPszo8Dj.js:4323
+await in zm
+setWebXRManager @ index-BPszo8Dj.js:4323
+Uj @ index-BPszo8Dj.js:4323
+Qv @ index-BPszo8Dj.js:3895
+vE @ index-BPszo8Dj.js:3897
+hE @ index-BPszo8Dj.js:3897
+ek @ index-BPszo8Dj.js:3897
+xp @ index-BPszo8Dj.js:3897
+lE @ index-BPszo8Dj.js:3897
+A @ index-BPszo8Dj.js:3883
+O @ index-BPszo8Dj.js:3883Understand this warning
+index-BPszo8Dj.js:4802 [App] XR state changed: In XR
+index-BPszo8Dj.js:4802 [XRButton] Render - xrMode: ar isInXR: true
+index-BPszo8Dj.js:4802 [XRButton] Not rendering button - xrMode: ar isInXR: true
+index-BPszo8Dj.js:4802 [XRButton] Component mounted, checking XR support...
+index-BPszo8Dj.js:4802 [XRButton] isInXR: true
+index-BPszo8Dj.js:4802 [XRButton] navigator.xr available: true
+index-BPszo8Dj.js:4802 [XRButton] navigator.xr detected, checking session support...
+index-BPszo8Dj.js:4802 [XRButton] Testing immersive-ar support...
+index-BPszo8Dj.js:4802 [XRButton] immersive-ar supported: true
+index-BPszo8Dj.js:4802 [XRButton] ✓ AR Mode detected (Meta Quest 3)
+index-BPszo8Dj.js:4323 Registered leftTrigger handler: leftTrigger-1762438907850-0.39767579059443026
+index-BPszo8Dj.js:4323 Registered rightTrigger handler: rightTrigger-1762438907851-0.164579906816676
+index-BPszo8Dj.js:4802 [App] XR state changed: In XR
+index-BPszo8Dj.js:4802 [App] XR state changed: In XR
+index-BPszo8Dj.js:4802 [App] XR state changed: In XR
+index-BPszo8Dj.js:4802 [App] XR state changed: In XR
+2index-BPszo8Dj.js:4802 [App] XR state changed: In XR
+index-BPszo8Dj.js:4323 Unregistered handler: leftTrigger-1762438907850-0.39767579059443026
+index-BPszo8Dj.js:4323 Unregistered handler: rightTrigger-1762438907851-0.164579906816676
+index-BPszo8Dj.js:4323 Registered leftTrigger handler: leftTrigger-1762438912253-0.3894889180955945
+index-BPszo8Dj.js:4323 Registered rightTrigger handler: rightTrigger-1762438912253-0.2895565567647128
+index-BPszo8Dj.js:4323 Unregistered handler: leftTrigger-1762438912253-0.3894889180955945
+index-BPszo8Dj.js:4323 Unregistered handler: rightTrigger-1762438912253-0.2895565567647128
+index-BPszo8Dj.js:4323 Registered leftTrigger handler: leftTrigger-1762438912261-0.6356141023032124
+index-BPszo8Dj.js:4323 Registered rightTrigger handler: rightTrigger-1762438912261-0.6151041341381178
+index-BPszo8Dj.js:4323 Unregistered handler: leftTrigger-1762438912261-0.6356141023032124
+index-BPszo8Dj.js:4323 Unregistered handler: rightTrigger-1762438912261-0.6151041341381178
+index-BPszo8Dj.js:4323 Registered leftTrigger handler: leftTrigger-1762438913224-0.917195300130953
+index-BPszo8Dj.js:4323 Registered rightTrigger handler: rightTrigger-1762438913225-0.4014705500972334
+index-BPszo8Dj.js:4323 Unregistered handler: leftTrigger-1762438913224-0.917195300130953
+index-BPszo8Dj.js:4323 Unregistered handler: rightTrigger-1762438913225-0.4014705500972334
+index-BPszo8Dj.js:4323 Registered leftTrigger handler: leftTrigger-1762438913249-0.2225768216613132
+index-BPszo8Dj.js:4323 Registered rightTrigger handler: rightTrigger-1762438913249-0.6224392360965101
+index-BPszo8Dj.js:4323 Unregistered handler: leftTrigger-1762438913249-0.2225768216613132
+index-BPszo8Dj.js:4323 Unregistered handler: rightTrigger-1762438913249-0.6224392360965101
+index-BPszo8Dj.js:4323 Registered leftTrigger handler: leftTrigger-1762438913282-0.8431776093653552
+index-BPszo8Dj.js:4323 Registered rightTrigger handler: rightTrigger-1762438913282-0.7541690513376978
+index-BPszo8Dj.js:4323 Unregistered handler: leftTrigger-1762438913282-0.8431776093653552
+index-BPszo8Dj.js:4323 Unregistered handler: rightTrigger-1762438913282-0.7541690513376978
+index-BPszo8Dj.js:4323 Registered leftTrigger handler: leftTrigger-1762438914024-0.9302333560345583
+index-BPszo8Dj.js:4323 Registered rightTrigger handler: rightTrigger-1762438914024-0.4703715254303228
+index-BPszo8Dj.js:4323 Unregistered handler: leftTrigger-1762438914024-0.9302333560345583
+index-BPszo8Dj.js:4323 Unregistered handler: rightTrigger-1762438914024-0.4703715254303228
+index-BPszo8Dj.js:4323 Registered leftTrigger handler: leftTrigger-1762438914181-0.004871319730151535
+index-BPszo8Dj.js:4323 Registered rightTrigger handler: rightTrigger-1762438914181-0.10197357987584554
+index-BPszo8Dj.js:4323 [XRInput] RIGHT TRIGGER pressed, firing 1 handlers
+index-BPszo8Dj.js:4383 Right trigger pressed - toggling voice assistant
+index-BPszo8Dj.js:4387 [VoiceAssistant] toggleListening called, current state: {isListening: false, stateValue: false, hasRecognition: true}
+index-BPszo8Dj.js:4387 [VoiceAssistant] Starting recognition...
+index-BPszo8Dj.js:4387 [VoiceAssistant] Start command sent
+index-BPszo8Dj.js:4383 [VoiceAssistant] Speech recognition STARTED
+index-BPszo8Dj.js:4323 Unregistered handler: leftTrigger-1762438914181-0.004871319730151535
+index-BPszo8Dj.js:4323 Unregistered handler: rightTrigger-1762438914181-0.10197357987584554
+index-BPszo8Dj.js:4323 Registered leftTrigger handler: leftTrigger-1762438914883-0.9698563681108945
+index-BPszo8Dj.js:4323 Registered rightTrigger handler: rightTrigger-1762438914883-0.20355425323601906
+index-BPszo8Dj.js:4383 Voice Assistant sphere clicked in VR
+index-BPszo8Dj.js:4387 [VoiceAssistant] toggleListening called, current state: {isListening: true, stateValue: true, hasRecognition: true}
+index-BPszo8Dj.js:4387 [VoiceAssistant] Stopping recognition...
+index-BPszo8Dj.js:4387 [VoiceAssistant] Stop command sent
+index-BPszo8Dj.js:4323 Unregistered handler: leftTrigger-1762438914883-0.9698563681108945
+index-BPszo8Dj.js:4323 Unregistered handler: rightTrigger-1762438914883-0.20355425323601906
+index-BPszo8Dj.js:4323 Registered leftTrigger handler: leftTrigger-1762438915337-0.3313476557522498
+index-BPszo8Dj.js:4323 Registered rightTrigger handler: rightTrigger-1762438915337-0.6307055660195816
+index-BPszo8Dj.js:4323 Unregistered handler: leftTrigger-1762438915337-0.3313476557522498
+index-BPszo8Dj.js:4323 Unregistered handler: rightTrigger-1762438915337-0.6307055660195816
+index-BPszo8Dj.js:4323 Registered leftTrigger handler: leftTrigger-1762438915561-0.31191166979228935
+index-BPszo8Dj.js:4323 Registered rightTrigger handler: rightTrigger-1762438915561-0.2864602394285568
+index-BPszo8Dj.js:4323 Unregistered handler: leftTrigger-1762438915561-0.31191166979228935
+index-BPszo8Dj.js:4323 Unregistered handler: rightTrigger-1762438915561-0.2864602394285568
+index-BPszo8Dj.js:4323 Registered leftTrigger handler: leftTrigger-1762438915811-0.9322773107082777
+index-BPszo8Dj.js:4323 Registered rightTrigger handler: rightTrigger-1762438915811-0.9885764545466026
+index-BPszo8Dj.js:4323 Unregistered handler: leftTrigger-1762438915811-0.9322773107082777
+index-BPszo8Dj.js:4323 Unregistered handler: rightTrigger-1762438915811-0.9885764545466026
+index-BPszo8Dj.js:4323 Registered leftTrigger handler: leftTrigger-1762438916103-0.5310112928467822
+index-BPszo8Dj.js:4323 Registered rightTrigger handler: rightTrigger-1762438916103-0.17023006894860104
+index-BPszo8Dj.js:4323 Unregistered handler: leftTrigger-1762438916103-0.5310112928467822
+index-BPszo8Dj.js:4323 Unregistered handler: rightTrigger-1762438916103-0.17023006894860104
+index-BPszo8Dj.js:4323 Registered leftTrigger handler: leftTrigger-1762438917635-0.9346338823089951
+index-BPszo8Dj.js:4323 Registered rightTrigger handler: rightTrigger-1762438917635-0.07358143759166924
+index-BPszo8Dj.js:4323 Unregistered handler: leftTrigger-1762438917635-0.9346338823089951
+index-BPszo8Dj.js:4323 Unregistered handler: rightTrigger-1762438917635-0.07358143759166924
+index-BPszo8Dj.js:4323 Registered leftTrigger handler: leftTrigger-1762438917678-0.22913775184618435
+index-BPszo8Dj.js:4323 Registered rightTrigger handler: rightTrigger-1762438917678-0.8317507489472853
+index-BPszo8Dj.js:4323 Unregistered handler: leftTrigger-1762438917678-0.22913775184618435
+index-BPszo8Dj.js:4323 Unregistered handler: rightTrigger-1762438917678-0.8317507489472853
+index-BPszo8Dj.js:4323 Registered leftTrigger handler: leftTrigger-1762438917777-0.37439879105242824
+index-BPszo8Dj.js:4323 Registered rightTrigger handler: rightTrigger-1762438917777-0.5445035697518327
+index-BPszo8Dj.js:4323 Unregistered handler: leftTrigger-1762438917777-0.37439879105242824
+index-BPszo8Dj.js:4323 Unregistered handler: rightTrigger-1762438917777-0.5445035697518327
+index-BPszo8Dj.js:4323 Registered leftTrigger handler: leftTrigger-1762438918044-0.3728724176925484
+index-BPszo8Dj.js:4323 Registered rightTrigger handler: rightTrigger-1762438918044-0.834905505959249
+index-BPszo8Dj.js:4323 [XRInput] RIGHT TRIGGER pressed, firing 1 handlers
+index-BPszo8Dj.js:4383 Right trigger pressed - toggling voice assistant
+index-BPszo8Dj.js:4387 [VoiceAssistant] toggleListening called, current state: {isListening: true, stateValue: true, hasRecognition: true}
+index-BPszo8Dj.js:4387 [VoiceAssistant] Stopping recognition...
+index-BPszo8Dj.js:4387 [VoiceAssistant] Stop command sent
+index-BPszo8Dj.js:4383 Voice Assistant sphere clicked in VR
+index-BPszo8Dj.js:4387 [VoiceAssistant] toggleListening called, current state: {isListening: true, stateValue: true, hasRecognition: true}
+index-BPszo8Dj.js:4387 [VoiceAssistant] Stopping recognition...
+index-BPszo8Dj.js:4387 [VoiceAssistant] Stop command sent
+index-BPszo8Dj.js:4323 Unregistered handler: leftTrigger-1762438918044-0.3728724176925484
+index-BPszo8Dj.js:4323 Unregistered handler: rightTrigger-1762438918044-0.834905505959249
+index-BPszo8Dj.js:4323 Registered leftTrigger handler: leftTrigger-1762438918828-0.46011495544119696
+index-BPszo8Dj.js:4323 Registered rightTrigger handler: rightTrigger-1762438918828-0.05595036509631168
+index-BPszo8Dj.js:4323 [XRInput] RIGHT GRIP pressed, firing 0 handlers
+index-BPszo8Dj.js:4323 Unregistered handler: leftTrigger-1762438918828-0.46011495544119696
+index-BPszo8Dj.js:4323 Unregistered handler: rightTrigger-1762438918828-0.05595036509631168
+index-BPszo8Dj.js:4323 Registered leftTrigger handler: leftTrigger-1762438918961-0.8256405185780141
+index-BPszo8Dj.js:4323 Registered rightTrigger handler: rightTrigger-1762438918961-0.8144276204726896
+index-BPszo8Dj.js:4323 Unregistered handler: leftTrigger-1762438918961-0.8256405185780141
+index-BPszo8Dj.js:4323 Unregistered handler: rightTrigger-1762438918961-0.8144276204726896
+index-BPszo8Dj.js:4323 Registered leftTrigger handler: leftTrigger-1762438919844-0.6273208426926093
+index-BPszo8Dj.js:4323 Registered rightTrigger handler: rightTrigger-1762438919844-0.18819823898178012
+index-BPszo8Dj.js:4323 Unregistered handler: leftTrigger-1762438919844-0.6273208426926093
+index-BPszo8Dj.js:4323 Unregistered handler: rightTrigger-1762438919844-0.18819823898178012
+index-BPszo8Dj.js:4323 Registered leftTrigger handler: leftTrigger-1762438920853-0.38888704182234657
+index-BPszo8Dj.js:4323 Registered rightTrigger handler: rightTrigger-1762438920853-0.7394089619230431
+index-BPszo8Dj.js:4323 Unregistered handler: leftTrigger-1762438920853-0.38888704182234657
+index-BPszo8Dj.js:4323 Unregistered handler: rightTrigger-1762438920853-0.7394089619230431
+index-BPszo8Dj.js:4323 Registered leftTrigger handler: leftTrigger-1762438921962-0.4883565473200959
+index-BPszo8Dj.js:4323 Registered rightTrigger handler: rightTrigger-1762438921962-0.6908220576967654
+index-BPszo8Dj.js:4802 [App] XR state changed: In XR
+index-BPszo8Dj.js:3867 THREE.WebGLRenderer: Can't change size while VR device is presenting.
+setSize @ index-BPszo8Dj.js:3867
+setPixelRatio @ index-BPszo8Dj.js:3867
+(anonymous) @ index-BPszo8Dj.js:3909
+(anonymous) @ index-BPszo8Dj.js:3875
+r @ index-BPszo8Dj.js:3875
+setSize @ index-BPszo8Dj.js:3909
+configure @ index-BPszo8Dj.js:3909
+(anonymous) @ index-BPszo8Dj.js:3909
+U0 @ index-BPszo8Dj.js:40
+ET @ index-BPszo8Dj.js:40
+YC @ index-BPszo8Dj.js:40
+SF @ index-BPszo8Dj.js:40
+AF @ index-BPszo8Dj.js:40
+_l @ index-BPszo8Dj.js:40
+AT @ index-BPszo8Dj.js:40
+Pa @ index-BPszo8Dj.js:38
+(anonymous) @ index-BPszo8Dj.js:40Understand this warning
+index-BPszo8Dj.js:3867 THREE.WebGLRenderer: Can't change size while VR device is presenting.
+setSize @ index-BPszo8Dj.js:3867
+(anonymous) @ index-BPszo8Dj.js:3909
+(anonymous) @ index-BPszo8Dj.js:3875
+r @ index-BPszo8Dj.js:3875
+setSize @ index-BPszo8Dj.js:3909
+configure @ index-BPszo8Dj.js:3909
+(anonymous) @ index-BPszo8Dj.js:3909
+U0 @ index-BPszo8Dj.js:40
+ET @ index-BPszo8Dj.js:40
+YC @ index-BPszo8Dj.js:40
+SF @ index-BPszo8Dj.js:40
+AF @ index-BPszo8Dj.js:40
+_l @ index-BPszo8Dj.js:40
+AT @ index-BPszo8Dj.js:40
+Pa @ index-BPszo8Dj.js:38
+(anonymous) @ index-BPszo8Dj.js:40Understand this warning
+2index-BPszo8Dj.js:4802 [App] XR state changed: In XR

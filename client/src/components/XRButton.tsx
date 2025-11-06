@@ -9,41 +9,59 @@ export function XRButton({ onEnterXR, isInXR }: XRButtonProps) {
   const [xrMode, setXrMode] = useState<'ar' | 'vr' | null>(null);
 
   useEffect(() => {
+    console.log('[XRButton] Component mounted, checking XR support...');
+    console.log('[XRButton] isInXR:', isInXR);
+    console.log('[XRButton] navigator.xr available:', 'xr' in navigator);
+    
     const checkSupport = async () => {
       if ('xr' in navigator && navigator.xr) {
+        console.log('[XRButton] navigator.xr detected, checking session support...');
         try {
           // Check AR support first (Meta Quest 3)
+          console.log('[XRButton] Testing immersive-ar support...');
           const arSupported = await navigator.xr.isSessionSupported('immersive-ar');
+          console.log('[XRButton] immersive-ar supported:', arSupported);
+          
           if (arSupported) {
-            console.log('XR Mode: immersive-ar (Meta Quest 3)');
+            console.log('[XRButton] ✓ AR Mode detected (Meta Quest 3)');
             setXrMode('ar');
             return;
           }
           
           // Check VR support (Apple Vision Pro)
+          console.log('[XRButton] Testing immersive-vr support...');
           const vrSupported = await navigator.xr.isSessionSupported('immersive-vr');
+          console.log('[XRButton] immersive-vr supported:', vrSupported);
+          
           if (vrSupported) {
-            console.log('XR Mode: immersive-vr (Apple Vision Pro)');
+            console.log('[XRButton] ✓ VR Mode detected (Apple Vision Pro)');
             setXrMode('vr');
             return;
           }
           
-          console.log('No XR support detected');
+          console.log('[XRButton] ✗ No XR support detected (neither AR nor VR)');
           setXrMode(null);
         } catch (error) {
-          console.error('XR support check failed:', error);
+          console.error('[XRButton] ✗ XR support check failed:', error);
           setXrMode(null);
         }
+      } else {
+        console.log('[XRButton] ✗ navigator.xr not available in this browser');
+        setXrMode(null);
       }
     };
     checkSupport();
-  }, []);
+  }, [isInXR]);
 
+  console.log('[XRButton] Render - xrMode:', xrMode, 'isInXR:', isInXR);
+  
   if (!xrMode || isInXR) {
+    console.log('[XRButton] Not rendering button - xrMode:', xrMode, 'isInXR:', isInXR);
     return null;
   }
 
   const buttonText = xrMode === 'ar' ? 'Enter Mixed Reality' : 'Enter Virtual Reality';
+  console.log('[XRButton] Rendering button:', buttonText);
 
   return (
     <button

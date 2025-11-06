@@ -86,15 +86,19 @@ export function updateXRInput(gl: any) {
   };
   
   if (leftTrigger && !lastButtonState.leftTrigger) {
+    console.log('[XRInput] LEFT TRIGGER pressed, firing', buttonPressHandlers.filter(h => h.button === 'leftTrigger').length, 'handlers');
     buttonPressHandlers.filter(h => h.button === 'leftTrigger').forEach(h => h.onPress());
   }
   if (rightTrigger && !lastButtonState.rightTrigger) {
+    console.log('[XRInput] RIGHT TRIGGER pressed, firing', buttonPressHandlers.filter(h => h.button === 'rightTrigger').length, 'handlers');
     buttonPressHandlers.filter(h => h.button === 'rightTrigger').forEach(h => h.onPress());
   }
   if (leftGrip && !lastButtonState.leftGrip) {
+    console.log('[XRInput] LEFT GRIP pressed, firing', buttonPressHandlers.filter(h => h.button === 'leftGrip').length, 'handlers');
     buttonPressHandlers.filter(h => h.button === 'leftGrip').forEach(h => h.onPress());
   }
   if (rightGrip && !lastButtonState.rightGrip) {
+    console.log('[XRInput] RIGHT GRIP pressed, firing', buttonPressHandlers.filter(h => h.button === 'rightGrip').length, 'handlers');
     buttonPressHandlers.filter(h => h.button === 'rightGrip').forEach(h => h.onPress());
   }
   

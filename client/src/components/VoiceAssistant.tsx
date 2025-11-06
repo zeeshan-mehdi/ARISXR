@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { Html, Text } from '@react-three/drei';
 import { useBPMN } from '../lib/stores/useBPMN';
 import { Mic, MicOff, Volume2 } from 'lucide-react';
@@ -185,8 +185,13 @@ export function VoiceAssistant({ isXR = false }: VoiceAssistantProps) {
   const [transcript, setTranscript] = useState('');
   const [response, setResponse] = useState('');
   const recognitionRef = useRef<any>(null);
+  const isListeningRef = useRef(false);
   const { process } = useBPMN();
   const elements = process?.elements || [];
+
+  useEffect(() => {
+    isListeningRef.current = isListening;
+  }, [isListening]);
 
   useEffect(() => {
     // Check if browser supports speech recognition
@@ -199,27 +204,29 @@ export function VoiceAssistant({ isXR = false }: VoiceAssistantProps) {
       recognition.lang = 'en-US';
 
       recognition.onstart = () => {
-        console.log('Voice recognition started');
+        console.log('[VoiceAssistant] Speech recognition STARTED');
         setIsListening(true);
       };
 
       recognition.onresult = (event: any) => {
         const current = event.resultIndex;
         const transcript = event.results[current][0].transcript;
+        console.log('[VoiceAssistant] Speech result:', { transcript, isFinal: event.results[current].isFinal });
         setTranscript(transcript);
         
         if (event.results[current].isFinal) {
+          console.log('[VoiceAssistant] Final transcript received, processing command');
           handleVoiceCommand(transcript);
         }
       };
 
       recognition.onerror = (event: any) => {
-        console.error('Speech recognition error:', event.error);
+        console.error('[VoiceAssistant] Speech recognition ERROR:', event.error);
         setIsListening(false);
       };
 
       recognition.onend = () => {
-        console.log('Voice recognition ended');
+        console.log('[VoiceAssistant] Speech recognition ENDED');
         setIsListening(false);
       };
 
@@ -286,18 +293,41 @@ Total Elements: ${elements.length}
     }
   };
 
-  const toggleListening = () => {
+  const toggleListening = useCallback(() => {
+    const currentlyListening = isListeningRef.current;
+    console.log('[VoiceAssistant] toggleListening called, current state:', { 
+      isListening: currentlyListening,
+      stateValue: isListening,
+      hasRecognition: !!recognitionRef.current 
+    });
+    
     if (!recognitionRef.current) {
+      console.error('[VoiceAssistant] Voice recognition not available');
       alert('Voice recognition is not supported in your browser');
       return;
     }
 
-    if (isListening) {
-      recognitionRef.current.stop();
+    if (currentlyListening) {
+      console.log('[VoiceAssistant] Stopping recognition...');
+      try {
+        recognitionRef.current.stop();
+        console.log('[VoiceAssistant] Stop command sent');
+      } catch (error) {
+        console.error('[VoiceAssistant] Error stopping recognition:', error);
+        setIsListening(false);
+      }
     } else {
-      recognitionRef.current.start();
+      console.log('[VoiceAssistant] Starting recognition...');
+      try {
+        setTranscript('');
+        setResponse('');
+        recognitionRef.current.start();
+        console.log('[VoiceAssistant] Start command sent');
+      } catch (error) {
+        console.error('[VoiceAssistant] Error starting recognition:', error);
+      }
     }
-  };
+  }, [isListening]);
 
   const stopSpeaking = () => {
     if ('speechSynthesis' in window) {

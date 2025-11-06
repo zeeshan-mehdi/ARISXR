@@ -36,7 +36,8 @@ export function ProcessLibrary({ onProcessSelected }: ProcessLibraryProps) {
   };
 
   return (
-    <div className="w-full h-full flex items-center justify-center relative overflow-hidden p-3 sm:p-6 lg:p-8 overflow-y-auto">
+    <div className="w-full h-full min-h-screen min-w-screen flex items-center justify-center relative overflow-hidden p-2 sm:p-4 lg:p-8"
+      style={{ boxSizing: 'border-box' }}>
       <div 
         className="absolute inset-0 bg-gradient-to-br from-blue-950 via-indigo-950 to-purple-950"
         style={{
@@ -64,11 +65,14 @@ export function ProcessLibrary({ onProcessSelected }: ProcessLibraryProps) {
             transparent 2px,
             rgba(59, 130, 246, 0.03) 2px,
             rgba(59, 130, 246, 0.03) 4px
-          )`
+          )`,
+          WebkitBackdropFilter: 'blur(4px)', // fallback for Safari
+          backdropFilter: 'blur(4px)', // modern browsers
+          backgroundColor: 'rgba(30,27,75,0.1)', // fallback for browsers without blur
         }}
       />
       
-      <div className="max-w-6xl w-full relative z-10 py-4">
+      <div className="max-w-6xl w-full relative z-10 py-2 sm:py-4 lg:py-8">
         <div className="text-center mb-6 sm:mb-8 lg:mb-12">
           <div className="mb-3 sm:mb-4 lg:mb-6 flex items-center justify-center gap-2 sm:gap-3">
             <div className="text-3xl sm:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
@@ -90,7 +94,7 @@ export function ProcessLibrary({ onProcessSelected }: ProcessLibraryProps) {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 lg:gap-6">
           {sampleProcesses.map((process) => (
             <button
               key={process.id}

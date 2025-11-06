@@ -3,7 +3,6 @@ import { Grid, PerspectiveCamera, OrbitControls } from "@react-three/drei";
 import { XR, createXRStore } from "@react-three/xr";
 import { BPMNWorld } from "./BPMNWorld";
 import { CameraTracker } from "./CameraTracker";
-import { VoiceAssistant } from "./VoiceAssistant";
 
 interface BPMNSceneXRProps {
   wsRef: React.RefObject<WebSocket | null>;
@@ -69,7 +68,6 @@ export function BPMNSceneXR({ wsRef, xrStore, isInXR }: BPMNSceneXRProps) {
         <BPMNWorld wsRef={wsRef} isXR={isInXR} />
 
         {!isInXR && <CameraTracker wsRef={wsRef} />}
-        <VoiceAssistant isXR={isInXR} />
       </XR>
     </Canvas>
   );

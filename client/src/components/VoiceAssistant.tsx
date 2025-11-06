@@ -188,6 +188,8 @@ export function VoiceAssistant({ isXR = false }: VoiceAssistantProps) {
   const [response, setResponse] = useState('');
   const recognitionRef = useRef<any>(null);
   const isListeningRef = useRef(false);
+  const recognitionStateRef = useRef<'idle' | 'starting' | 'active' | 'stopping'>('idle');
+  const instanceVersionRef = useRef(0);
   const { process } = useBPMN();
   const elements = process?.elements || [];
 
@@ -195,52 +197,71 @@ export function VoiceAssistant({ isXR = false }: VoiceAssistantProps) {
     isListeningRef.current = isListening;
   }, [isListening]);
 
-  useEffect(() => {
-    // Check if browser supports speech recognition
+  const createRecognitionInstance = useCallback(() => {
     const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
     
-    if (SpeechRecognition) {
-      const recognition = new SpeechRecognition();
-      recognition.continuous = false;
-      recognition.interimResults = true;
-      recognition.lang = 'en-US';
-
-      recognition.onstart = () => {
-        console.log('[VoiceAssistant] Speech recognition STARTED');
-        setIsListening(true);
-      };
-
-      recognition.onresult = (event: any) => {
-        const current = event.resultIndex;
-        const transcript = event.results[current][0].transcript;
-        console.log('[VoiceAssistant] Speech result:', { transcript, isFinal: event.results[current].isFinal });
-        setTranscript(transcript);
-        
-        if (event.results[current].isFinal) {
-          console.log('[VoiceAssistant] Final transcript received, processing command');
-          handleVoiceCommand(transcript);
-        }
-      };
-
-      recognition.onerror = (event: any) => {
-        console.error('[VoiceAssistant] Speech recognition ERROR:', event.error);
-        setIsListening(false);
-      };
-
-      recognition.onend = () => {
-        console.log('[VoiceAssistant] Speech recognition ENDED');
-        setIsListening(false);
-      };
-
-      recognitionRef.current = recognition;
+    if (!SpeechRecognition) {
+      console.error('[VoiceAssistant] SpeechRecognition not supported');
+      return null;
     }
 
-    return () => {
-      if (recognitionRef.current) {
-        recognitionRef.current.stop();
+    instanceVersionRef.current++;
+    const version = instanceVersionRef.current;
+    console.log(`[VoiceAssistant] Creating recognition instance v${version}`);
+
+    const recognition = new SpeechRecognition();
+    recognition.continuous = false;
+    recognition.interimResults = true;
+    recognition.lang = 'en-US';
+
+    recognition.onstart = () => {
+      console.log(`[VoiceAssistant v${version}] onstart fired - state:`, recognitionStateRef.current);
+      recognitionStateRef.current = 'active';
+      setIsListening(true);
+    };
+
+    recognition.onresult = (event: any) => {
+      const current = event.resultIndex;
+      const transcript = event.results[current][0].transcript;
+      console.log(`[VoiceAssistant v${version}] onresult:`, { transcript, isFinal: event.results[current].isFinal });
+      setTranscript(transcript);
+      
+      if (event.results[current].isFinal) {
+        console.log(`[VoiceAssistant v${version}] Final transcript, processing command`);
+        handleVoiceCommand(transcript);
       }
     };
+
+    recognition.onerror = (event: any) => {
+      console.error(`[VoiceAssistant v${version}] onerror:`, event.error);
+      recognitionStateRef.current = 'idle';
+      setIsListening(false);
+    };
+
+    recognition.onend = () => {
+      console.log(`[VoiceAssistant v${version}] onend fired - state:`, recognitionStateRef.current);
+      recognitionStateRef.current = 'idle';
+      setIsListening(false);
+    };
+
+    return recognition;
   }, []);
+
+  useEffect(() => {
+    console.log('[VoiceAssistant] Initializing recognition system');
+    recognitionRef.current = createRecognitionInstance();
+
+    return () => {
+      console.log('[VoiceAssistant] Cleanup - destroying recognition');
+      if (recognitionRef.current) {
+        try {
+          recognitionRef.current.abort();
+        } catch (e) {
+          console.warn('[VoiceAssistant] Cleanup abort failed:', e);
+        }
+      }
+    };
+  }, [createRecognitionInstance]);
 
   const handleVoiceCommand = async (text: string) => {
     console.log('[VoiceAssistant] Processing voice command:', text);
@@ -311,49 +332,106 @@ Total Elements: ${elements.length}
     }
   };
 
+  const hardResetRecognition = useCallback(() => {
+    console.log('[VoiceAssistant] HARD RESET - destroying and recreating instance');
+    
+    if (recognitionRef.current) {
+      try {
+        recognitionRef.current.abort();
+        console.log('[VoiceAssistant] Aborted old instance');
+      } catch (e) {
+        console.warn('[VoiceAssistant] Abort failed during reset:', e);
+      }
+    }
+    
+    recognitionRef.current = createRecognitionInstance();
+    recognitionStateRef.current = 'idle';
+    setIsListening(false);
+    console.log('[VoiceAssistant] Hard reset complete, new instance ready');
+  }, [createRecognitionInstance]);
+
   const toggleListening = useCallback(() => {
-    const currentlyListening = isListeningRef.current;
-    console.log('[VoiceAssistant] toggleListening called, current state:', { 
-      isListening: currentlyListening,
-      stateValue: isListening,
-      hasRecognition: !!recognitionRef.current 
+    const currentState = recognitionStateRef.current;
+    console.log('[VoiceAssistant] toggleListening called', { 
+      stateRef: currentState,
+      isListening: isListeningRef.current,
+      hasRecognition: !!recognitionRef.current,
+      version: instanceVersionRef.current
     });
     
     if (!recognitionRef.current) {
-      console.error('[VoiceAssistant] Voice recognition not available');
-      alert('Voice recognition is not supported in your browser');
-      return;
+      console.error('[VoiceAssistant] No recognition instance, creating one');
+      recognitionRef.current = createRecognitionInstance();
+      if (!recognitionRef.current) {
+        alert('Voice recognition is not supported in your browser');
+        return;
+      }
     }
 
-    if (currentlyListening) {
+    if (currentState === 'active' || currentState === 'starting') {
       console.log('[VoiceAssistant] Stopping recognition...');
+      recognitionStateRef.current = 'stopping';
+      
       try {
         recognitionRef.current.stop();
-        console.log('[VoiceAssistant] Stop command sent');
+        console.log('[VoiceAssistant] stop() called');
         
-        // Safety: force state reset if onend doesn't fire within 500ms
         setTimeout(() => {
-          if (isListeningRef.current) {
-            console.warn('[VoiceAssistant] Force stopping - onend event never fired');
-            setIsListening(false);
+          if (recognitionStateRef.current !== 'idle') {
+            console.warn('[VoiceAssistant] onend never fired after stop(), using abort()');
+            try {
+              recognitionRef.current?.abort();
+              console.log('[VoiceAssistant] abort() called');
+            } catch (e) {
+              console.error('[VoiceAssistant] abort() failed:', e);
+            }
+            
+            setTimeout(() => {
+              if (recognitionStateRef.current !== 'idle') {
+                console.error('[VoiceAssistant] Still not idle after abort(), forcing hard reset');
+                hardResetRecognition();
+              }
+            }, 300);
           }
         }, 500);
       } catch (error) {
-        console.error('[VoiceAssistant] Error stopping recognition:', error);
-        setIsListening(false);
+        console.error('[VoiceAssistant] stop() failed:', error);
+        hardResetRecognition();
       }
-    } else {
+    } else if (currentState === 'idle') {
       console.log('[VoiceAssistant] Starting recognition...');
+      recognitionStateRef.current = 'starting';
+      
       try {
         setTranscript('');
         setResponse('');
         recognitionRef.current.start();
-        console.log('[VoiceAssistant] Start command sent');
-      } catch (error) {
-        console.error('[VoiceAssistant] Error starting recognition:', error);
+        console.log('[VoiceAssistant] start() called');
+      } catch (error: any) {
+        console.error('[VoiceAssistant] start() failed:', error);
+        
+        if (error.message?.includes('already started')) {
+          console.error('[VoiceAssistant] Instance stuck in started state, forcing hard reset');
+          hardResetRecognition();
+          
+          setTimeout(() => {
+            console.log('[VoiceAssistant] Retrying start after hard reset');
+            try {
+              setTranscript('');
+              setResponse('');
+              recognitionRef.current?.start();
+            } catch (retryError) {
+              console.error('[VoiceAssistant] Retry start failed:', retryError);
+            }
+          }, 100);
+        } else {
+          recognitionStateRef.current = 'idle';
+        }
       }
+    } else {
+      console.warn('[VoiceAssistant] In transition state:', currentState, '- ignoring toggle');
     }
-  }, [isListening]);
+  }, [createRecognitionInstance, hardResetRecognition]);
 
   const stopSpeaking = () => {
     if ('speechSynthesis' in window) {

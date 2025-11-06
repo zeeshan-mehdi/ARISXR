@@ -1,0 +1,1569 @@
+Connecting to WebSocket: wss://arismr.replit.app/ws
+index-4GrHBwAj.js:4802 [App] useEffect triggered - processId: null lastProcessId: null
+index-4GrHBwAj.js:4802 [App] No process loaded
+index-4GrHBwAj.js:4802 WebSocket connected
+index-4GrHBwAj.js:4802 Received welcome: user-1762439280082-z182zi4l9 User 1
+index-4GrHBwAj.js:4802 Received users update: 1 users
+index-4GrHBwAj.js:4323 Setting BPMN process: Employee Onboarding
+index-4GrHBwAj.js:4802 [XRButton] Render - xrMode: null isInXR: false
+index-4GrHBwAj.js:4802 [XRButton] Not rendering button - xrMode: null isInXR: false
+index-4GrHBwAj.js:4802 [XRButton] Component mounted, checking XR support...
+index-4GrHBwAj.js:4802 [XRButton] isInXR: false
+index-4GrHBwAj.js:4802 [XRButton] navigator.xr available: true
+index-4GrHBwAj.js:4802 [XRButton] navigator.xr detected, checking session support...
+index-4GrHBwAj.js:4802 [XRButton] Testing immersive-ar support...
+index-4GrHBwAj.js:4802 Broadcasting local process update
+index-4GrHBwAj.js:4802 [App] useEffect triggered - processId: Process_2 lastProcessId: null
+index-4GrHBwAj.js:4802 [App] NEW process loaded, attempting auto-enter XR...
+index-4GrHBwAj.js:4802 [XRButton] immersive-ar supported: true
+index-4GrHBwAj.js:4802 [XRButton] ✓ AR Mode detected (Meta Quest 3)
+index-4GrHBwAj.js:4802 [App] AR supported: true
+index-4GrHBwAj.js:4802 [App] Auto-entering AR mode...
+index-4GrHBwAj.js:4802 [App] Entering XR mode: ar with hand tracking enabled...
+index-4GrHBwAj.js:3909 [App] Failed to enter XR: Error: not connected to three.js. You either might be missing the <XR> component or the canvas is not yet loaded?
+    at Gm (index-4GrHBwAj.js:4323:39300)
+    at Object.enterAR (index-4GrHBwAj.js:4323:37432)
+    at u (index-4GrHBwAj.js:4802:16098)
+    at index-4GrHBwAj.js:4802:17114
+console.error @ index-4GrHBwAj.js:3909
+u @ index-4GrHBwAj.js:4802
+await in u
+(anonymous) @ index-4GrHBwAj.js:4802
+await in (anonymous)
+(anonymous) @ index-4GrHBwAj.js:4802
+U0 @ index-4GrHBwAj.js:40
+vu @ index-4GrHBwAj.js:40
+AF @ index-4GrHBwAj.js:40
+_l @ index-4GrHBwAj.js:40
+AT @ index-4GrHBwAj.js:40
+Pa @ index-4GrHBwAj.js:38
+(anonymous) @ index-4GrHBwAj.js:40Understand this error
+index-4GrHBwAj.js:4802 [App] Auto-enter AR failed, staying in desktop mode
+index-4GrHBwAj.js:4802 [XRButton] Render - xrMode: ar isInXR: false
+index-4GrHBwAj.js:4802 [XRButton] Rendering button: Enter Mixed Reality
+index-4GrHBwAj.js:4323 Feature 'dom-overlay' is not supported for mode: immersive-ar
+zm @ index-4GrHBwAj.js:4323
+await in zm
+setWebXRManager @ index-4GrHBwAj.js:4323
+Uj @ index-4GrHBwAj.js:4323
+Qv @ index-4GrHBwAj.js:3895
+vE @ index-4GrHBwAj.js:3897
+hE @ index-4GrHBwAj.js:3897
+ek @ index-4GrHBwAj.js:3897
+xp @ index-4GrHBwAj.js:3897
+lE @ index-4GrHBwAj.js:3897
+A @ index-4GrHBwAj.js:3883
+O @ index-4GrHBwAj.js:3883Understand this warning
+index-4GrHBwAj.js:4802 [App] XR state changed: In XR
+index-4GrHBwAj.js:4802 [XRButton] Render - xrMode: ar isInXR: true
+index-4GrHBwAj.js:4802 [XRButton] Not rendering button - xrMode: ar isInXR: true
+index-4GrHBwAj.js:4802 [XRButton] Component mounted, checking XR support...
+index-4GrHBwAj.js:4802 [XRButton] isInXR: true
+index-4GrHBwAj.js:4802 [XRButton] navigator.xr available: true
+index-4GrHBwAj.js:4802 [XRButton] navigator.xr detected, checking session support...
+index-4GrHBwAj.js:4802 [XRButton] Testing immersive-ar support...
+index-4GrHBwAj.js:4802 [XRButton] immersive-ar supported: true
+index-4GrHBwAj.js:4802 [XRButton] ✓ AR Mode detected (Meta Quest 3)
+index-4GrHBwAj.js:4383 [VoiceAssistantVR] Registering button handlers
+index-4GrHBwAj.js:4323 Registered leftTrigger handler: leftTrigger-1762439288865-0.8947644472391958
+index-4GrHBwAj.js:4323 Registered rightTrigger handler: rightTrigger-1762439288865-0.9270767816813176
+index-4GrHBwAj.js:4802 [App] XR state changed: In XR
+index-4GrHBwAj.js:4802 [App] XR state changed: In XR
+index-4GrHBwAj.js:4802 [App] XR state changed: In XR
+index-4GrHBwAj.js:4802 [App] XR state changed: In XR
+index-4GrHBwAj.js:4802 [App] XR state changed: In XR
+index-4GrHBwAj.js:4802 [App] XR state changed: In XR
+3index-4GrHBwAj.js:4802 [App] XR state changed: In XR
+index-4GrHBwAj.js:4323 [XRInput] RIGHT GRIP pressed, firing 0 handlers
+index-4GrHBwAj.js:4323 [XRInput] RIGHT TRIGGER pressed, firing 1 handlers
+index-4GrHBwAj.js:4383 Right trigger pressed - toggling voice assistant
+index-4GrHBwAj.js:4387 [VoiceAssistant] toggleListening called, current state: {isListening: false, stateValue: false, hasRecognition: true}
+index-4GrHBwAj.js:4387 [VoiceAssistant] Starting recognition...
+index-4GrHBwAj.js:4387 [VoiceAssistant] Start command sent
+index-4GrHBwAj.js:4383 [VoiceAssistant] Speech recognition STARTED
+index-4GrHBwAj.js:4383 Voice Assistant sphere clicked in VR
+index-4GrHBwAj.js:4387 [VoiceAssistant] toggleListening called, current state: {isListening: true, stateValue: true, hasRecognition: true}
+index-4GrHBwAj.js:4387 [VoiceAssistant] Stopping recognition...
+index-4GrHBwAj.js:4387 [VoiceAssistant] Stop command sent
+index-4GrHBwAj.js:4387 [VoiceAssistant] Force stopping - onend event never fired
+(anonymous) @ index-4GrHBwAj.js:4387
+setTimeout
+(anonymous) @ index-4GrHBwAj.js:4387
+onClick @ index-4GrHBwAj.js:4383
+ZI @ index-4GrHBwAj.js:4323
+ci @ index-4GrHBwAj.js:4323
+up @ index-4GrHBwAj.js:4323
+a @ index-4GrHBwAj.js:4323Understand this warning
+index-4GrHBwAj.js:4323 [XRInput] RIGHT TRIGGER pressed, firing 1 handlers
+index-4GrHBwAj.js:4383 Right trigger pressed - toggling voice assistant
+index-4GrHBwAj.js:4387 [VoiceAssistant] toggleListening called, current state: {isListening: false, stateValue: false, hasRecognition: true}
+index-4GrHBwAj.js:4387 [VoiceAssistant] Starting recognition...
+index-4GrHBwAj.js:3909 [VoiceAssistant] Error starting recognition: InvalidStateError: Failed to execute 'start' on 'SpeechRecognition': recognition has already started.
+    at index-4GrHBwAj.js:4387:1938
+    at Object.onPress (index-4GrHBwAj.js:4383:560)
+    at index-4GrHBwAj.js:4323:80200
+    at Array.forEach (<anonymous>)
+    at Zj (index-4GrHBwAj.js:4323:80187)
+    at Object.current (index-4GrHBwAj.js:4323:81302)
+    at $_ (index-4GrHBwAj.js:3909:23176)
+    at l (index-4GrHBwAj.js:3909:24059)
+    at G (index-4GrHBwAj.js:3909:27162)
+    at Z (index-4GrHBwAj.js:3867:8396)
+console.error @ index-4GrHBwAj.js:3909
+(anonymous) @ index-4GrHBwAj.js:4387
+(anonymous) @ index-4GrHBwAj.js:4383
+(anonymous) @ index-4GrHBwAj.js:4323
+Zj @ index-4GrHBwAj.js:4323
+(anonymous) @ index-4GrHBwAj.js:4323
+$_ @ index-4GrHBwAj.js:3909
+l @ index-4GrHBwAj.js:3909
+G @ index-4GrHBwAj.js:3909
+Z @ index-4GrHBwAj.js:3867
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83Understand this error
+index-4GrHBwAj.js:4323 [XRInput] RIGHT TRIGGER pressed, firing 1 handlers
+index-4GrHBwAj.js:4383 Right trigger pressed - toggling voice assistant
+index-4GrHBwAj.js:4387 [VoiceAssistant] toggleListening called, current state: {isListening: false, stateValue: false, hasRecognition: true}
+index-4GrHBwAj.js:4387 [VoiceAssistant] Starting recognition...
+index-4GrHBwAj.js:3909 [VoiceAssistant] Error starting recognition: InvalidStateError: Failed to execute 'start' on 'SpeechRecognition': recognition has already started.
+    at index-4GrHBwAj.js:4387:1938
+    at Object.onPress (index-4GrHBwAj.js:4383:560)
+    at index-4GrHBwAj.js:4323:80200
+    at Array.forEach (<anonymous>)
+    at Zj (index-4GrHBwAj.js:4323:80187)
+    at Object.current (index-4GrHBwAj.js:4323:81302)
+    at $_ (index-4GrHBwAj.js:3909:23176)
+    at l (index-4GrHBwAj.js:3909:24059)
+    at G (index-4GrHBwAj.js:3909:27162)
+    at Z (index-4GrHBwAj.js:3867:8396)
+console.error @ index-4GrHBwAj.js:3909
+(anonymous) @ index-4GrHBwAj.js:4387
+(anonymous) @ index-4GrHBwAj.js:4383
+(anonymous) @ index-4GrHBwAj.js:4323
+Zj @ index-4GrHBwAj.js:4323
+(anonymous) @ index-4GrHBwAj.js:4323
+$_ @ index-4GrHBwAj.js:3909
+l @ index-4GrHBwAj.js:3909
+G @ index-4GrHBwAj.js:3909
+Z @ index-4GrHBwAj.js:3867
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83Understand this error
+index-4GrHBwAj.js:4323 [XRInput] RIGHT TRIGGER pressed, firing 1 handlers
+index-4GrHBwAj.js:4383 Right trigger pressed - toggling voice assistant
+index-4GrHBwAj.js:4387 [VoiceAssistant] toggleListening called, current state: {isListening: false, stateValue: false, hasRecognition: true}
+index-4GrHBwAj.js:4387 [VoiceAssistant] Starting recognition...
+index-4GrHBwAj.js:3909 [VoiceAssistant] Error starting recognition: InvalidStateError: Failed to execute 'start' on 'SpeechRecognition': recognition has already started.
+    at index-4GrHBwAj.js:4387:1938
+    at Object.onPress (index-4GrHBwAj.js:4383:560)
+    at index-4GrHBwAj.js:4323:80200
+    at Array.forEach (<anonymous>)
+    at Zj (index-4GrHBwAj.js:4323:80187)
+    at Object.current (index-4GrHBwAj.js:4323:81302)
+    at $_ (index-4GrHBwAj.js:3909:23176)
+    at l (index-4GrHBwAj.js:3909:24059)
+    at G (index-4GrHBwAj.js:3909:27162)
+    at Z (index-4GrHBwAj.js:3867:8396)
+console.error @ index-4GrHBwAj.js:3909
+(anonymous) @ index-4GrHBwAj.js:4387
+(anonymous) @ index-4GrHBwAj.js:4383
+(anonymous) @ index-4GrHBwAj.js:4323
+Zj @ index-4GrHBwAj.js:4323
+(anonymous) @ index-4GrHBwAj.js:4323
+$_ @ index-4GrHBwAj.js:3909
+l @ index-4GrHBwAj.js:3909
+G @ index-4GrHBwAj.js:3909
+Z @ index-4GrHBwAj.js:3867
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83Understand this error
+index-4GrHBwAj.js:4323 [XRInput] RIGHT TRIGGER pressed, firing 1 handlers
+index-4GrHBwAj.js:4383 Right trigger pressed - toggling voice assistant
+index-4GrHBwAj.js:4387 [VoiceAssistant] toggleListening called, current state: {isListening: false, stateValue: false, hasRecognition: true}
+index-4GrHBwAj.js:4387 [VoiceAssistant] Starting recognition...
+index-4GrHBwAj.js:3909 [VoiceAssistant] Error starting recognition: InvalidStateError: Failed to execute 'start' on 'SpeechRecognition': recognition has already started.
+    at index-4GrHBwAj.js:4387:1938
+    at Object.onPress (index-4GrHBwAj.js:4383:560)
+    at index-4GrHBwAj.js:4323:80200
+    at Array.forEach (<anonymous>)
+    at Zj (index-4GrHBwAj.js:4323:80187)
+    at Object.current (index-4GrHBwAj.js:4323:81302)
+    at $_ (index-4GrHBwAj.js:3909:23176)
+    at l (index-4GrHBwAj.js:3909:24059)
+    at G (index-4GrHBwAj.js:3909:27162)
+    at Z (index-4GrHBwAj.js:3867:8396)
+console.error @ index-4GrHBwAj.js:3909
+(anonymous) @ index-4GrHBwAj.js:4387
+(anonymous) @ index-4GrHBwAj.js:4383
+(anonymous) @ index-4GrHBwAj.js:4323
+Zj @ index-4GrHBwAj.js:4323
+(anonymous) @ index-4GrHBwAj.js:4323
+$_ @ index-4GrHBwAj.js:3909
+l @ index-4GrHBwAj.js:3909
+G @ index-4GrHBwAj.js:3909
+Z @ index-4GrHBwAj.js:3867
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83Understand this error
+index-4GrHBwAj.js:4323 [XRInput] RIGHT GRIP pressed, firing 0 handlers
+index-4GrHBwAj.js:4323 [XRInput] RIGHT TRIGGER pressed, firing 1 handlers
+index-4GrHBwAj.js:4383 Right trigger pressed - toggling voice assistant
+index-4GrHBwAj.js:4387 [VoiceAssistant] toggleListening called, current state: {isListening: false, stateValue: false, hasRecognition: true}
+index-4GrHBwAj.js:4387 [VoiceAssistant] Starting recognition...
+index-4GrHBwAj.js:3909 [VoiceAssistant] Error starting recognition: InvalidStateError: Failed to execute 'start' on 'SpeechRecognition': recognition has already started.
+    at index-4GrHBwAj.js:4387:1938
+    at Object.onPress (index-4GrHBwAj.js:4383:560)
+    at index-4GrHBwAj.js:4323:80200
+    at Array.forEach (<anonymous>)
+    at Zj (index-4GrHBwAj.js:4323:80187)
+    at Object.current (index-4GrHBwAj.js:4323:81302)
+    at $_ (index-4GrHBwAj.js:3909:23176)
+    at l (index-4GrHBwAj.js:3909:24059)
+    at G (index-4GrHBwAj.js:3909:27162)
+    at Z (index-4GrHBwAj.js:3867:8396)
+console.error @ index-4GrHBwAj.js:3909
+(anonymous) @ index-4GrHBwAj.js:4387
+(anonymous) @ index-4GrHBwAj.js:4383
+(anonymous) @ index-4GrHBwAj.js:4323
+Zj @ index-4GrHBwAj.js:4323
+(anonymous) @ index-4GrHBwAj.js:4323
+$_ @ index-4GrHBwAj.js:3909
+l @ index-4GrHBwAj.js:3909
+G @ index-4GrHBwAj.js:3909
+Z @ index-4GrHBwAj.js:3867
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83Understand this error
+index-4GrHBwAj.js:4383 Voice Assistant sphere clicked in VR
+index-4GrHBwAj.js:4387 [VoiceAssistant] toggleListening called, current state: {isListening: false, stateValue: false, hasRecognition: true}
+index-4GrHBwAj.js:4387 [VoiceAssistant] Starting recognition...
+index-4GrHBwAj.js:3909 [VoiceAssistant] Error starting recognition: InvalidStateError: Failed to execute 'start' on 'SpeechRecognition': recognition has already started.
+    at index-4GrHBwAj.js:4387:1938
+    at Array.onClick (index-4GrHBwAj.js:4383:1043)
+    at ZI (index-4GrHBwAj.js:4323:7329)
+    at ci (index-4GrHBwAj.js:4323:7149)
+    at Rh.up (index-4GrHBwAj.js:4323:15047)
+    at XRSession.a (index-4GrHBwAj.js:4323:585)
+console.error @ index-4GrHBwAj.js:3909
+(anonymous) @ index-4GrHBwAj.js:4387
+onClick @ index-4GrHBwAj.js:4383
+ZI @ index-4GrHBwAj.js:4323
+ci @ index-4GrHBwAj.js:4323
+up @ index-4GrHBwAj.js:4323
+a @ index-4GrHBwAj.js:4323Understand this error
+index-4GrHBwAj.js:4323 [XRInput] RIGHT TRIGGER pressed, firing 1 handlers
+index-4GrHBwAj.js:4383 Right trigger pressed - toggling voice assistant
+index-4GrHBwAj.js:4387 [VoiceAssistant] toggleListening called, current state: {isListening: false, stateValue: false, hasRecognition: true}
+index-4GrHBwAj.js:4387 [VoiceAssistant] Starting recognition...
+index-4GrHBwAj.js:3909 [VoiceAssistant] Error starting recognition: InvalidStateError: Failed to execute 'start' on 'SpeechRecognition': recognition has already started.
+    at index-4GrHBwAj.js:4387:1938
+    at Object.onPress (index-4GrHBwAj.js:4383:560)
+    at index-4GrHBwAj.js:4323:80200
+    at Array.forEach (<anonymous>)
+    at Zj (index-4GrHBwAj.js:4323:80187)
+    at Object.current (index-4GrHBwAj.js:4323:81302)
+    at $_ (index-4GrHBwAj.js:3909:23176)
+    at l (index-4GrHBwAj.js:3909:24059)
+    at G (index-4GrHBwAj.js:3909:27162)
+    at Z (index-4GrHBwAj.js:3867:8396)
+console.error @ index-4GrHBwAj.js:3909
+(anonymous) @ index-4GrHBwAj.js:4387
+(anonymous) @ index-4GrHBwAj.js:4383
+(anonymous) @ index-4GrHBwAj.js:4323
+Zj @ index-4GrHBwAj.js:4323
+(anonymous) @ index-4GrHBwAj.js:4323
+$_ @ index-4GrHBwAj.js:3909
+l @ index-4GrHBwAj.js:3909
+G @ index-4GrHBwAj.js:3909
+Z @ index-4GrHBwAj.js:3867
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83Understand this error
+index-4GrHBwAj.js:4323 Pointer over: Onboarding Complete isXR: true
+index-4GrHBwAj.js:4323 Pointer out: Onboarding Complete
+index-4GrHBwAj.js:4323 Pointer over: Assign Workspace isXR: true
+index-4GrHBwAj.js:4323 Pointer out: Assign Workspace
+index-4GrHBwAj.js:4323 Pointer over: Assign Workspace isXR: true
+index-4GrHBwAj.js:4323 Pointer out: Assign Workspace
+index-4GrHBwAj.js:4323 [XRInput] RIGHT TRIGGER pressed, firing 1 handlers
+index-4GrHBwAj.js:4383 Right trigger pressed - toggling voice assistant
+index-4GrHBwAj.js:4387 [VoiceAssistant] toggleListening called, current state: {isListening: false, stateValue: false, hasRecognition: true}
+index-4GrHBwAj.js:4387 [VoiceAssistant] Starting recognition...
+index-4GrHBwAj.js:3909 [VoiceAssistant] Error starting recognition: InvalidStateError: Failed to execute 'start' on 'SpeechRecognition': recognition has already started.
+    at index-4GrHBwAj.js:4387:1938
+    at Object.onPress (index-4GrHBwAj.js:4383:560)
+    at index-4GrHBwAj.js:4323:80200
+    at Array.forEach (<anonymous>)
+    at Zj (index-4GrHBwAj.js:4323:80187)
+    at Object.current (index-4GrHBwAj.js:4323:81302)
+    at $_ (index-4GrHBwAj.js:3909:23176)
+    at l (index-4GrHBwAj.js:3909:24059)
+    at G (index-4GrHBwAj.js:3909:27162)
+    at Z (index-4GrHBwAj.js:3867:8396)
+console.error @ index-4GrHBwAj.js:3909
+(anonymous) @ index-4GrHBwAj.js:4387
+(anonymous) @ index-4GrHBwAj.js:4383
+(anonymous) @ index-4GrHBwAj.js:4323
+Zj @ index-4GrHBwAj.js:4323
+(anonymous) @ index-4GrHBwAj.js:4323
+$_ @ index-4GrHBwAj.js:3909
+l @ index-4GrHBwAj.js:3909
+G @ index-4GrHBwAj.js:3909
+Z @ index-4GrHBwAj.js:3867
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83Understand this error
+index-4GrHBwAj.js:4323 Pointer over: Assign Workspace isXR: true
+index-4GrHBwAj.js:4323 Pointer out: Assign Workspace
+index-4GrHBwAj.js:4323 Pointer over: Schedule Training isXR: true
+index-4GrHBwAj.js:4323 Pointer out: Schedule Training
+index-4GrHBwAj.js:4323 Pointer over: Onboarding Complete isXR: true
+index-4GrHBwAj.js:4323 Pointer out: Onboarding Complete
+index-4GrHBwAj.js:4323 [XRInput] RIGHT TRIGGER pressed, firing 1 handlers
+index-4GrHBwAj.js:4383 Right trigger pressed - toggling voice assistant
+index-4GrHBwAj.js:4387 [VoiceAssistant] toggleListening called, current state: {isListening: false, stateValue: false, hasRecognition: true}
+index-4GrHBwAj.js:4387 [VoiceAssistant] Starting recognition...
+index-4GrHBwAj.js:3909 [VoiceAssistant] Error starting recognition: InvalidStateError: Failed to execute 'start' on 'SpeechRecognition': recognition has already started.
+    at index-4GrHBwAj.js:4387:1938
+    at Object.onPress (index-4GrHBwAj.js:4383:560)
+    at index-4GrHBwAj.js:4323:80200
+    at Array.forEach (<anonymous>)
+    at Zj (index-4GrHBwAj.js:4323:80187)
+    at Object.current (index-4GrHBwAj.js:4323:81302)
+    at $_ (index-4GrHBwAj.js:3909:23176)
+    at l (index-4GrHBwAj.js:3909:24059)
+    at G (index-4GrHBwAj.js:3909:27162)
+    at Z (index-4GrHBwAj.js:3867:8396)
+console.error @ index-4GrHBwAj.js:3909
+(anonymous) @ index-4GrHBwAj.js:4387
+(anonymous) @ index-4GrHBwAj.js:4383
+(anonymous) @ index-4GrHBwAj.js:4323
+Zj @ index-4GrHBwAj.js:4323
+(anonymous) @ index-4GrHBwAj.js:4323
+$_ @ index-4GrHBwAj.js:3909
+l @ index-4GrHBwAj.js:3909
+G @ index-4GrHBwAj.js:3909
+Z @ index-4GrHBwAj.js:3867
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83Understand this error
+index-4GrHBwAj.js:4323 [XRInput] RIGHT TRIGGER pressed, firing 1 handlers
+index-4GrHBwAj.js:4383 Right trigger pressed - toggling voice assistant
+index-4GrHBwAj.js:4387 [VoiceAssistant] toggleListening called, current state: {isListening: false, stateValue: false, hasRecognition: true}
+index-4GrHBwAj.js:4387 [VoiceAssistant] Starting recognition...
+index-4GrHBwAj.js:3909 [VoiceAssistant] Error starting recognition: InvalidStateError: Failed to execute 'start' on 'SpeechRecognition': recognition has already started.
+    at index-4GrHBwAj.js:4387:1938
+    at Object.onPress (index-4GrHBwAj.js:4383:560)
+    at index-4GrHBwAj.js:4323:80200
+    at Array.forEach (<anonymous>)
+    at Zj (index-4GrHBwAj.js:4323:80187)
+    at Object.current (index-4GrHBwAj.js:4323:81302)
+    at $_ (index-4GrHBwAj.js:3909:23176)
+    at l (index-4GrHBwAj.js:3909:24059)
+    at G (index-4GrHBwAj.js:3909:27162)
+    at Z (index-4GrHBwAj.js:3867:8396)
+console.error @ index-4GrHBwAj.js:3909
+(anonymous) @ index-4GrHBwAj.js:4387
+(anonymous) @ index-4GrHBwAj.js:4383
+(anonymous) @ index-4GrHBwAj.js:4323
+Zj @ index-4GrHBwAj.js:4323
+(anonymous) @ index-4GrHBwAj.js:4323
+$_ @ index-4GrHBwAj.js:3909
+l @ index-4GrHBwAj.js:3909
+G @ index-4GrHBwAj.js:3909
+Z @ index-4GrHBwAj.js:3867
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83Understand this error
+index-4GrHBwAj.js:4383 Voice Assistant sphere clicked in VR
+index-4GrHBwAj.js:4387 [VoiceAssistant] toggleListening called, current state: {isListening: false, stateValue: false, hasRecognition: true}
+index-4GrHBwAj.js:4387 [VoiceAssistant] Starting recognition...
+index-4GrHBwAj.js:3909 [VoiceAssistant] Error starting recognition: InvalidStateError: Failed to execute 'start' on 'SpeechRecognition': recognition has already started.
+    at index-4GrHBwAj.js:4387:1938
+    at Array.onClick (index-4GrHBwAj.js:4383:1043)
+    at ZI (index-4GrHBwAj.js:4323:7329)
+    at ci (index-4GrHBwAj.js:4323:7149)
+    at Rh.up (index-4GrHBwAj.js:4323:15047)
+    at XRSession.a (index-4GrHBwAj.js:4323:585)
+console.error @ index-4GrHBwAj.js:3909
+(anonymous) @ index-4GrHBwAj.js:4387
+onClick @ index-4GrHBwAj.js:4383
+ZI @ index-4GrHBwAj.js:4323
+ci @ index-4GrHBwAj.js:4323
+up @ index-4GrHBwAj.js:4323
+a @ index-4GrHBwAj.js:4323Understand this error
+index-4GrHBwAj.js:4323 [XRInput] RIGHT TRIGGER pressed, firing 1 handlers
+index-4GrHBwAj.js:4383 Right trigger pressed - toggling voice assistant
+index-4GrHBwAj.js:4387 [VoiceAssistant] toggleListening called, current state: {isListening: false, stateValue: false, hasRecognition: true}
+index-4GrHBwAj.js:4387 [VoiceAssistant] Starting recognition...
+index-4GrHBwAj.js:3909 [VoiceAssistant] Error starting recognition: InvalidStateError: Failed to execute 'start' on 'SpeechRecognition': recognition has already started.
+    at index-4GrHBwAj.js:4387:1938
+    at Object.onPress (index-4GrHBwAj.js:4383:560)
+    at index-4GrHBwAj.js:4323:80200
+    at Array.forEach (<anonymous>)
+    at Zj (index-4GrHBwAj.js:4323:80187)
+    at Object.current (index-4GrHBwAj.js:4323:81302)
+    at $_ (index-4GrHBwAj.js:3909:23176)
+    at l (index-4GrHBwAj.js:3909:24059)
+    at G (index-4GrHBwAj.js:3909:27162)
+    at Z (index-4GrHBwAj.js:3867:8396)
+console.error @ index-4GrHBwAj.js:3909
+(anonymous) @ index-4GrHBwAj.js:4387
+(anonymous) @ index-4GrHBwAj.js:4383
+(anonymous) @ index-4GrHBwAj.js:4323
+Zj @ index-4GrHBwAj.js:4323
+(anonymous) @ index-4GrHBwAj.js:4323
+$_ @ index-4GrHBwAj.js:3909
+l @ index-4GrHBwAj.js:3909
+G @ index-4GrHBwAj.js:3909
+Z @ index-4GrHBwAj.js:3867
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83Understand this error
+index-4GrHBwAj.js:4383 Voice Assistant sphere clicked in VR
+index-4GrHBwAj.js:4387 [VoiceAssistant] toggleListening called, current state: {isListening: false, stateValue: false, hasRecognition: true}
+index-4GrHBwAj.js:4387 [VoiceAssistant] Starting recognition...
+index-4GrHBwAj.js:3909 [VoiceAssistant] Error starting recognition: InvalidStateError: Failed to execute 'start' on 'SpeechRecognition': recognition has already started.
+    at index-4GrHBwAj.js:4387:1938
+    at Array.onClick (index-4GrHBwAj.js:4383:1043)
+    at ZI (index-4GrHBwAj.js:4323:7329)
+    at ci (index-4GrHBwAj.js:4323:7149)
+    at Rh.up (index-4GrHBwAj.js:4323:15047)
+    at XRSession.a (index-4GrHBwAj.js:4323:585)
+console.error @ index-4GrHBwAj.js:3909
+(anonymous) @ index-4GrHBwAj.js:4387
+onClick @ index-4GrHBwAj.js:4383
+ZI @ index-4GrHBwAj.js:4323
+ci @ index-4GrHBwAj.js:4323
+up @ index-4GrHBwAj.js:4323
+a @ index-4GrHBwAj.js:4323Understand this error
+index-4GrHBwAj.js:4323 [XRInput] RIGHT TRIGGER pressed, firing 1 handlers
+index-4GrHBwAj.js:4383 Right trigger pressed - toggling voice assistant
+index-4GrHBwAj.js:4387 [VoiceAssistant] toggleListening called, current state: {isListening: false, stateValue: false, hasRecognition: true}
+index-4GrHBwAj.js:4387 [VoiceAssistant] Starting recognition...
+index-4GrHBwAj.js:3909 [VoiceAssistant] Error starting recognition: InvalidStateError: Failed to execute 'start' on 'SpeechRecognition': recognition has already started.
+    at index-4GrHBwAj.js:4387:1938
+    at Object.onPress (index-4GrHBwAj.js:4383:560)
+    at index-4GrHBwAj.js:4323:80200
+    at Array.forEach (<anonymous>)
+    at Zj (index-4GrHBwAj.js:4323:80187)
+    at Object.current (index-4GrHBwAj.js:4323:81302)
+    at $_ (index-4GrHBwAj.js:3909:23176)
+    at l (index-4GrHBwAj.js:3909:24059)
+    at G (index-4GrHBwAj.js:3909:27162)
+    at Z (index-4GrHBwAj.js:3867:8396)
+console.error @ index-4GrHBwAj.js:3909
+(anonymous) @ index-4GrHBwAj.js:4387
+(anonymous) @ index-4GrHBwAj.js:4383
+(anonymous) @ index-4GrHBwAj.js:4323
+Zj @ index-4GrHBwAj.js:4323
+(anonymous) @ index-4GrHBwAj.js:4323
+$_ @ index-4GrHBwAj.js:3909
+l @ index-4GrHBwAj.js:3909
+G @ index-4GrHBwAj.js:3909
+Z @ index-4GrHBwAj.js:3867
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83Understand this error
+index-4GrHBwAj.js:4323 [XRInput] RIGHT TRIGGER pressed, firing 1 handlers
+index-4GrHBwAj.js:4383 Right trigger pressed - toggling voice assistant
+index-4GrHBwAj.js:4387 [VoiceAssistant] toggleListening called, current state: {isListening: false, stateValue: false, hasRecognition: true}
+index-4GrHBwAj.js:4387 [VoiceAssistant] Starting recognition...
+index-4GrHBwAj.js:3909 [VoiceAssistant] Error starting recognition: InvalidStateError: Failed to execute 'start' on 'SpeechRecognition': recognition has already started.
+    at index-4GrHBwAj.js:4387:1938
+    at Object.onPress (index-4GrHBwAj.js:4383:560)
+    at index-4GrHBwAj.js:4323:80200
+    at Array.forEach (<anonymous>)
+    at Zj (index-4GrHBwAj.js:4323:80187)
+    at Object.current (index-4GrHBwAj.js:4323:81302)
+    at $_ (index-4GrHBwAj.js:3909:23176)
+    at l (index-4GrHBwAj.js:3909:24059)
+    at G (index-4GrHBwAj.js:3909:27162)
+    at Z (index-4GrHBwAj.js:3867:8396)
+console.error @ index-4GrHBwAj.js:3909
+(anonymous) @ index-4GrHBwAj.js:4387
+(anonymous) @ index-4GrHBwAj.js:4383
+(anonymous) @ index-4GrHBwAj.js:4323
+Zj @ index-4GrHBwAj.js:4323
+(anonymous) @ index-4GrHBwAj.js:4323
+$_ @ index-4GrHBwAj.js:3909
+l @ index-4GrHBwAj.js:3909
+G @ index-4GrHBwAj.js:3909
+Z @ index-4GrHBwAj.js:3867
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83Understand this error
+index-4GrHBwAj.js:4383 Voice Assistant sphere clicked in VR
+index-4GrHBwAj.js:4387 [VoiceAssistant] toggleListening called, current state: {isListening: false, stateValue: false, hasRecognition: true}
+index-4GrHBwAj.js:4387 [VoiceAssistant] Starting recognition...
+index-4GrHBwAj.js:3909 [VoiceAssistant] Error starting recognition: InvalidStateError: Failed to execute 'start' on 'SpeechRecognition': recognition has already started.
+    at index-4GrHBwAj.js:4387:1938
+    at Array.onClick (index-4GrHBwAj.js:4383:1043)
+    at ZI (index-4GrHBwAj.js:4323:7329)
+    at ci (index-4GrHBwAj.js:4323:7149)
+    at Rh.up (index-4GrHBwAj.js:4323:15047)
+    at XRSession.a (index-4GrHBwAj.js:4323:585)
+console.error @ index-4GrHBwAj.js:3909
+(anonymous) @ index-4GrHBwAj.js:4387
+onClick @ index-4GrHBwAj.js:4383
+ZI @ index-4GrHBwAj.js:4323
+ci @ index-4GrHBwAj.js:4323
+up @ index-4GrHBwAj.js:4323
+a @ index-4GrHBwAj.js:4323Understand this error
+index-4GrHBwAj.js:4323 [XRInput] RIGHT TRIGGER pressed, firing 1 handlers
+index-4GrHBwAj.js:4383 Right trigger pressed - toggling voice assistant
+index-4GrHBwAj.js:4387 [VoiceAssistant] toggleListening called, current state: {isListening: false, stateValue: false, hasRecognition: true}
+index-4GrHBwAj.js:4387 [VoiceAssistant] Starting recognition...
+index-4GrHBwAj.js:3909 [VoiceAssistant] Error starting recognition: InvalidStateError: Failed to execute 'start' on 'SpeechRecognition': recognition has already started.
+    at index-4GrHBwAj.js:4387:1938
+    at Object.onPress (index-4GrHBwAj.js:4383:560)
+    at index-4GrHBwAj.js:4323:80200
+    at Array.forEach (<anonymous>)
+    at Zj (index-4GrHBwAj.js:4323:80187)
+    at Object.current (index-4GrHBwAj.js:4323:81302)
+    at $_ (index-4GrHBwAj.js:3909:23176)
+    at l (index-4GrHBwAj.js:3909:24059)
+    at G (index-4GrHBwAj.js:3909:27162)
+    at Z (index-4GrHBwAj.js:3867:8396)
+console.error @ index-4GrHBwAj.js:3909
+(anonymous) @ index-4GrHBwAj.js:4387
+(anonymous) @ index-4GrHBwAj.js:4383
+(anonymous) @ index-4GrHBwAj.js:4323
+Zj @ index-4GrHBwAj.js:4323
+(anonymous) @ index-4GrHBwAj.js:4323
+$_ @ index-4GrHBwAj.js:3909
+l @ index-4GrHBwAj.js:3909
+G @ index-4GrHBwAj.js:3909
+Z @ index-4GrHBwAj.js:3867
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83Understand this error
+index-4GrHBwAj.js:4323 [XRInput] RIGHT GRIP pressed, firing 0 handlers
+index-4GrHBwAj.js:4323 Pointer over: Submit Documents isXR: true
+index-4GrHBwAj.js:4323 Pointer out: Submit Documents
+index-4GrHBwAj.js:4323 Pointer over: Setup Email Account isXR: true
+index-4GrHBwAj.js:4323 Pointer out: Setup Email Account
+index-4GrHBwAj.js:4323 [XRInput] LEFT TRIGGER pressed, firing 1 handlers
+index-4GrHBwAj.js:4383 Left trigger pressed - toggling voice assistant
+index-4GrHBwAj.js:4387 [VoiceAssistant] toggleListening called, current state: {isListening: false, stateValue: false, hasRecognition: true}
+index-4GrHBwAj.js:4387 [VoiceAssistant] Starting recognition...
+index-4GrHBwAj.js:3909 [VoiceAssistant] Error starting recognition: InvalidStateError: Failed to execute 'start' on 'SpeechRecognition': recognition has already started.
+    at index-4GrHBwAj.js:4387:1938
+    at Object.onPress (index-4GrHBwAj.js:4383:446)
+    at index-4GrHBwAj.js:4323:80000
+    at Array.forEach (<anonymous>)
+    at Zj (index-4GrHBwAj.js:4323:79987)
+    at Object.current (index-4GrHBwAj.js:4323:81302)
+    at $_ (index-4GrHBwAj.js:3909:23176)
+    at l (index-4GrHBwAj.js:3909:24059)
+    at G (index-4GrHBwAj.js:3909:27162)
+    at Z (index-4GrHBwAj.js:3867:8396)
+console.error @ index-4GrHBwAj.js:3909
+(anonymous) @ index-4GrHBwAj.js:4387
+(anonymous) @ index-4GrHBwAj.js:4383
+(anonymous) @ index-4GrHBwAj.js:4323
+Zj @ index-4GrHBwAj.js:4323
+(anonymous) @ index-4GrHBwAj.js:4323
+$_ @ index-4GrHBwAj.js:3909
+l @ index-4GrHBwAj.js:3909
+G @ index-4GrHBwAj.js:3909
+Z @ index-4GrHBwAj.js:3867
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83Understand this error
+index-4GrHBwAj.js:4323 [XRInput] LEFT TRIGGER pressed, firing 1 handlers
+index-4GrHBwAj.js:4383 Left trigger pressed - toggling voice assistant
+index-4GrHBwAj.js:4387 [VoiceAssistant] toggleListening called, current state: {isListening: false, stateValue: false, hasRecognition: true}
+index-4GrHBwAj.js:4387 [VoiceAssistant] Starting recognition...
+index-4GrHBwAj.js:3909 [VoiceAssistant] Error starting recognition: InvalidStateError: Failed to execute 'start' on 'SpeechRecognition': recognition has already started.
+    at index-4GrHBwAj.js:4387:1938
+    at Object.onPress (index-4GrHBwAj.js:4383:446)
+    at index-4GrHBwAj.js:4323:80000
+    at Array.forEach (<anonymous>)
+    at Zj (index-4GrHBwAj.js:4323:79987)
+    at Object.current (index-4GrHBwAj.js:4323:81302)
+    at $_ (index-4GrHBwAj.js:3909:23176)
+    at l (index-4GrHBwAj.js:3909:24059)
+    at G (index-4GrHBwAj.js:3909:27162)
+    at Z (index-4GrHBwAj.js:3867:8396)
+console.error @ index-4GrHBwAj.js:3909
+(anonymous) @ index-4GrHBwAj.js:4387
+(anonymous) @ index-4GrHBwAj.js:4383
+(anonymous) @ index-4GrHBwAj.js:4323
+Zj @ index-4GrHBwAj.js:4323
+(anonymous) @ index-4GrHBwAj.js:4323
+$_ @ index-4GrHBwAj.js:3909
+l @ index-4GrHBwAj.js:3909
+G @ index-4GrHBwAj.js:3909
+Z @ index-4GrHBwAj.js:3867
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83
+XRRequestFrame
+i @ index-4GrHBwAj.js:83Understand this error
+2index-4GrHBwAj.js:4802 [App] XR state changed: In XR
+index-4GrHBwAj.js:3867 THREE.WebGLRenderer: Can't change size while VR device is presenting.
+setSize @ index-4GrHBwAj.js:3867
+setPixelRatio @ index-4GrHBwAj.js:3867
+(anonymous) @ index-4GrHBwAj.js:3909
+(anonymous) @ index-4GrHBwAj.js:3875
+r @ index-4GrHBwAj.js:3875
+setSize @ index-4GrHBwAj.js:3909
+configure @ index-4GrHBwAj.js:3909
+(anonymous) @ index-4GrHBwAj.js:3909
+U0 @ index-4GrHBwAj.js:40
+ET @ index-4GrHBwAj.js:40
+YC @ index-4GrHBwAj.js:40
+SF @ index-4GrHBwAj.js:40
+AF @ index-4GrHBwAj.js:40
+_l @ index-4GrHBwAj.js:40
+AT @ index-4GrHBwAj.js:40
+Pa @ index-4GrHBwAj.js:38
+(anonymous) @ index-4GrHBwAj.js:40Understand this warning
+index-4GrHBwAj.js:3867 THREE.WebGLRenderer: Can't change size while VR device is presenting.
+setSize @ index-4GrHBwAj.js:3867
+(anonymous) @ index-4GrHBwAj.js:3909
+(anonymous) @ index-4GrHBwAj.js:3875
+r @ index-4GrHBwAj.js:3875
+setSize @ index-4GrHBwAj.js:3909
+configure @ index-4GrHBwAj.js:3909
+(anonymous) @ index-4GrHBwAj.js:3909
+U0 @ index-4GrHBwAj.js:40
+ET @ index-4GrHBwAj.js:40
+YC @ index-4GrHBwAj.js:40
+SF @ index-4GrHBwAj.js:40
+AF @ index-4GrHBwAj.js:40
+_l @ index-4GrHBwAj.js:40
+AT @ index-4GrHBwAj.js:40
+Pa @ index-4GrHBwAj.js:38
+(anonymous) @ index-4GrHBwAj.js:40Understand this warning
+2index-4GrHBwAj.js:4802 [App] XR state changed: In XR

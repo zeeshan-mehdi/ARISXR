@@ -32,15 +32,18 @@ function App() {
     setShowLibrary(true);
   };
 
-  const handleEnterXR = async () => {
+  const handleEnterXR = async (mode: 'ar' | 'vr') => {
     try {
-      console.log('Entering XR with hand tracking enabled...');
-      const session = await xrStore.enterAR();
+      console.log(`Entering XR mode: ${mode} with hand tracking enabled...`);
+      const session = mode === 'ar' 
+        ? await xrStore.enterAR()
+        : await xrStore.enterVR();
       console.log('XR session started:', session);
       setIsInXR(true);
     } catch (error) {
       console.error('Failed to enter XR:', error);
-      alert('Failed to enter Mixed Reality. Make sure you are using a compatible browser on your Meta Quest 3.');
+      const device = mode === 'ar' ? 'Meta Quest 3' : 'Apple Vision Pro';
+      alert(`Failed to enter ${mode === 'ar' ? 'Mixed Reality' : 'Virtual Reality'}. Make sure you are using a compatible browser on your ${device}.`);
     }
   };
 

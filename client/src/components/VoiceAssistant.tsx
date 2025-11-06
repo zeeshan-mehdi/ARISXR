@@ -36,8 +36,8 @@ const VoiceAssistantVR = memo(function VoiceAssistantVR({
 
   // Version marker for VR component
   useEffect(() => {
-    console.log('🎮🎮🎮 VoiceAssistantVR (XR) LOADED - VERSION: 2025-11-06-FIX-v5-PROCESS 🎮🎮🎮');
-    console.log('✅ HOLD-TO-SPEAK + timeout will PROCESS transcript and send to AI');
+    console.log('🎮🎮🎮 VoiceAssistantVR (XR) LOADED - VERSION: 2025-11-06-FIX-v6-ABORT 🎮🎮🎮');
+    console.log('✅ resetRecognitionState now ABORTS browser recognition instance');
   }, []);
 
   // Log state changes for debugging
@@ -238,8 +238,8 @@ export function VoiceAssistant({ isXR = false }: VoiceAssistantProps) {
 
   // Version marker to verify code updates
   useEffect(() => {
-    console.log('🚀🚀🚀 VoiceAssistant LOADED - VERSION: 2025-11-06-FIX-v5-PROCESS 🚀🚀🚀');
-    console.log('✅ Timeout will PROCESS transcript if available, not just reset!');
+    console.log('🚀🚀🚀 VoiceAssistant LOADED - VERSION: 2025-11-06-FIX-v6-ABORT 🚀🚀🚀');
+    console.log('✅ resetRecognitionState ABORTS browser recognition to fix "already started" error');
   }, []);
 
   // Helper function to reset all recognition state
@@ -251,6 +251,16 @@ export function VoiceAssistant({ isXR = false }: VoiceAssistantProps) {
       clearTimeout(onendTimeoutRef.current);
       onendTimeoutRef.current = null;
       console.log('[VoiceAssistantVR] ⏰ Cleared onend timeout');
+    }
+
+    // CRITICAL: Abort the recognition instance to truly stop the browser's speech recognition
+    if (recognitionRef.current && (isActiveRef.current || isStoppingRef.current)) {
+      try {
+        console.log('[VoiceAssistantVR] 🛑 Aborting recognition instance in browser');
+        recognitionRef.current.abort();
+      } catch (e) {
+        console.warn('[VoiceAssistantVR] ⚠️ Abort failed (may already be stopped):', e);
+      }
     }
 
     isActiveRef.current = false;

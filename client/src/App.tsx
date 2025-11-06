@@ -37,9 +37,18 @@ function App() {
   const handleEnterXR = async (mode: 'ar' | 'vr', silent = false) => {
     try {
       console.log(`[App] Entering XR mode: ${mode} with hand tracking enabled...`);
+      
+      const sessionInit = {
+        optionalFeatures: ['hand-tracking', 'local-floor', 'bounded-floor'],
+        requiredFeatures: [] as string[]
+      };
+      
+      console.log('[App] Session init options:', sessionInit);
+      
       const session = mode === 'ar' 
-        ? await xrStore.enterAR()
-        : await xrStore.enterVR();
+        ? await (xrStore.enterAR as any)(sessionInit)
+        : await (xrStore.enterVR as any)(sessionInit);
+      
       console.log('[App] XR session started:', session);
       setIsInXR(true);
       return true;

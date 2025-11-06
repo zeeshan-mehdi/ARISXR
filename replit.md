@@ -16,6 +16,14 @@ This is a collaborative 3D BPMN (Business Process Model and Notation) visualizat
 - Handles Quest browser quirks where onend event doesn't fire reliably
 - Comprehensive logging for debugging voice recognition lifecycle
 
+**Apple Vision Pro WebXR Session Features (VR MODE FIX):**
+- Added proper WebXR session initialization with hand-tracking feature requests
+- Explicitly requests `hand-tracking`, `local-floor`, and `bounded-floor` as optional features
+- Matches three.js WebXR examples pattern for Vision Pro compatibility
+- This triggers dual permission prompts on Vision Pro (VR session + hand tracking)
+- Session options passed to xrStore.enterVR() and xrStore.enterAR()
+- Ensures hand tracking is properly requested from the browser/device
+
 **WebXR Mixed Reality Support Added:**
 - Full Meta Quest 3 support for immersive AR/MR experiences (immersive-ar mode)
 - Full Apple Vision Pro support for immersive VR experiences (immersive-vr mode)

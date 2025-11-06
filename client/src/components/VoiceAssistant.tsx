@@ -1,11 +1,110 @@
 import { useState, useEffect, useRef } from 'react';
-import { Html } from '@react-three/drei';
+import { Html, Text } from '@react-three/drei';
 import { useBPMN } from '../lib/stores/useBPMN';
 import { Mic, MicOff, Volume2 } from 'lucide-react';
 import type { BPMNElement } from '../lib/bpmnParser';
+import { useFrame } from '@react-three/fiber';
+import * as THREE from 'three';
 
 interface VoiceAssistantProps {
   isXR?: boolean;
+}
+
+function VoiceAssistantVR({ 
+  isListening, 
+  isSpeaking, 
+  panelContent 
+}: { 
+  isListening: boolean; 
+  isSpeaking: boolean; 
+  panelContent: React.ReactNode;
+}) {
+  const sphereRef = useRef<THREE.Mesh>(null);
+  
+  // Animate the sphere in VR
+  useFrame((state) => {
+    if (sphereRef.current) {
+      const time = state.clock.getElapsedTime();
+      sphereRef.current.position.y = 1.5 + Math.sin(time * 2) * 0.1;
+      sphereRef.current.rotation.y = time * 0.5;
+    }
+  });
+  
+  const assistantColor = isListening ? '#ef4444' : isSpeaking ? '#fb923c' : '#06b6d4';
+  
+  return (
+    <group position={[3, 0, -2]}>
+      <mesh ref={sphereRef} position={[0, 1.5, 0]}>
+        <sphereGeometry args={[0.15, 32, 32]} />
+        <meshStandardMaterial 
+          color={assistantColor}
+          emissive={assistantColor}
+          emissiveIntensity={isListening || isSpeaking ? 1.5 : 0.8}
+          metalness={0.3}
+          roughness={0.2}
+        />
+      </mesh>
+      
+      <mesh position={[0, 1.5, 0]} scale={isListening || isSpeaking ? 1.3 : 1.0}>
+        <sphereGeometry args={[0.18, 32, 32]} />
+        <meshBasicMaterial 
+          color={assistantColor}
+          transparent
+          opacity={0.2}
+          side={THREE.BackSide}
+        />
+      </mesh>
+      
+      <Text
+        position={[0, 2.0, 0]}
+        fontSize={0.2}
+        color="#00d9ff"
+        anchorX="center"
+        anchorY="bottom"
+        outlineWidth={0.03}
+        outlineColor="#000000"
+        font="/fonts/inter-bold.woff"
+      >
+        🤖 ARIS AI
+      </Text>
+      
+      <Text
+        position={[0, 1.75, 0]}
+        fontSize={0.12}
+        color={assistantColor}
+        anchorX="center"
+        anchorY="bottom"
+        outlineWidth={0.02}
+        outlineColor="#000000"
+      >
+        {isListening ? '🎤 Listening...' : isSpeaking ? '🔊 Speaking...' : '💬 Ready'}
+      </Text>
+      
+      <mesh position={[0, 0.05, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+        <ringGeometry args={[0.5, 0.65, 32]} />
+        <meshBasicMaterial 
+          color={assistantColor}
+          transparent 
+          opacity={0.4}
+          side={THREE.DoubleSide}
+        />
+      </mesh>
+      
+      <Html
+        position={[0, 1.0, 0]}
+        transform
+        occlude={false}
+        distanceFactor={0.5}
+        style={{
+          width: '320px',
+          pointerEvents: 'auto',
+          userSelect: 'none'
+        }}
+      >
+        {panelContent}
+      </Html>
+    </group>
+  );
 }
 
 export function VoiceAssistant({ isXR = false }: VoiceAssistantProps) {
@@ -214,19 +313,11 @@ Total Elements: ${elements.length}
 
   if (isXR) {
     return (
-      <Html
-        position={[2, 1.2, -3]}
-        transform
-        occlude={false}
-        distanceFactor={0.6}
-        style={{
-          width: '350px',
-          pointerEvents: 'auto',
-          userSelect: 'none'
-        }}
-      >
-        {panelContent}
-      </Html>
+      <VoiceAssistantVR 
+        isListening={isListening}
+        isSpeaking={isSpeaking}
+        panelContent={panelContent}
+      />
     );
   }
 

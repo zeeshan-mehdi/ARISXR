@@ -12,14 +12,21 @@ interface VoiceAssistantProps {
 
 function VoiceAssistantVR({ 
   isListening, 
-  isSpeaking, 
-  panelContent 
+  isSpeaking,
+  transcript,
+  response,
+  onToggleListening,
+  onStopSpeaking
 }: { 
   isListening: boolean; 
-  isSpeaking: boolean; 
-  panelContent: React.ReactNode;
+  isSpeaking: boolean;
+  transcript: string;
+  response: string;
+  onToggleListening: () => void;
+  onStopSpeaking: () => void;
 }) {
   const sphereRef = useRef<THREE.Mesh>(null);
+  const [hovered, setHovered] = useState(false);
   
   // Animate the sphere in VR
   useFrame((state) => {
@@ -34,12 +41,27 @@ function VoiceAssistantVR({
   
   return (
     <group position={[3, 0, -2]}>
-      <mesh ref={sphereRef} position={[0, 1.5, 0]}>
+      <mesh 
+        ref={sphereRef} 
+        position={[0, 1.5, 0]}
+        onClick={(e) => {
+          e.stopPropagation();
+          console.log('Voice Assistant sphere clicked in VR');
+          onToggleListening();
+        }}
+        onPointerOver={(e) => {
+          e.stopPropagation();
+          setHovered(true);
+        }}
+        onPointerOut={() => {
+          setHovered(false);
+        }}
+      >
         <sphereGeometry args={[0.15, 32, 32]} />
         <meshStandardMaterial 
           color={assistantColor}
           emissive={assistantColor}
-          emissiveIntensity={isListening || isSpeaking ? 1.5 : 0.8}
+          emissiveIntensity={isListening || isSpeaking ? 1.5 : (hovered ? 1.2 : 0.8)}
           metalness={0.3}
           roughness={0.2}
         />
@@ -89,19 +111,51 @@ function VoiceAssistantVR({
         />
       </mesh>
       
-      <Html
-        position={[0, 1.0, 0]}
-        transform
-        occlude={false}
-        distanceFactor={0.5}
-        style={{
-          width: '320px',
-          pointerEvents: 'auto',
-          userSelect: 'none'
-        }}
+      {/* Instruction text */}
+      <Text
+        position={[0, 1.2, 0]}
+        fontSize={0.08}
+        color="#ffffff"
+        anchorX="center"
+        anchorY="middle"
+        outlineWidth={0.015}
+        outlineColor="#000000"
+        maxWidth={2}
       >
-        {panelContent}
-      </Html>
+        {isListening ? 'Speak your question...' : isSpeaking ? 'AI is responding...' : 'Click to ask a question'}
+      </Text>
+      
+      {/* Transcript display */}
+      {transcript && (
+        <Text
+          position={[0, 0.8, 0]}
+          fontSize={0.09}
+          color="#ffeb3b"
+          anchorX="center"
+          anchorY="middle"
+          outlineWidth={0.015}
+          outlineColor="#000000"
+          maxWidth={2.5}
+        >
+          You: {transcript}
+        </Text>
+      )}
+      
+      {/* Response display */}
+      {response && (
+        <Text
+          position={[0, 0.5, 0]}
+          fontSize={0.09}
+          color="#4caf50"
+          anchorX="center"
+          anchorY="top"
+          outlineWidth={0.015}
+          outlineColor="#000000"
+          maxWidth={2.5}
+        >
+          AI: {response}
+        </Text>
+      )}
     </group>
   );
 }
@@ -315,7 +369,10 @@ Total Elements: ${elements.length}
       <VoiceAssistantVR 
         isListening={isListening}
         isSpeaking={isSpeaking}
-        panelContent={panelContent}
+        transcript={transcript}
+        response={response}
+        onToggleListening={toggleListening}
+        onStopSpeaking={stopSpeaking}
       />
     );
   }

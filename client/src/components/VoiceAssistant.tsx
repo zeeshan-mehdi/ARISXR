@@ -27,13 +27,40 @@ function VoiceAssistantVR({
 }) {
   const sphereRef = useRef<THREE.Mesh>(null);
   const [hovered, setHovered] = useState(false);
+  const lastTriggerState = useRef({ left: false, right: false });
   
-  // Animate the sphere in VR
+  // Animate the sphere and check controller buttons in VR
   useFrame((state) => {
     if (sphereRef.current) {
       const time = state.clock.getElapsedTime();
       sphereRef.current.position.y = 1.5 + Math.sin(time * 2) * 0.1;
       sphereRef.current.rotation.y = time * 0.5;
+    }
+    
+    // Check for controller trigger button presses
+    const xrSession = state.gl.xr.getSession();
+    if (xrSession) {
+      const inputSources = Array.from(xrSession.inputSources);
+      
+      for (const source of inputSources) {
+        // Button 0 is the trigger button (A button on Quest)
+        const triggerPressed = source.gamepad?.buttons[0]?.pressed || false;
+        const isLeft = source.handedness === 'left';
+        const lastState = isLeft ? lastTriggerState.current.left : lastTriggerState.current.right;
+        
+        // Detect trigger button press (on button down, not held)
+        if (triggerPressed && !lastState) {
+          console.log(`${source.handedness} trigger pressed - toggling voice assistant`);
+          onToggleListening();
+        }
+        
+        // Update last state
+        if (isLeft) {
+          lastTriggerState.current.left = triggerPressed;
+        } else {
+          lastTriggerState.current.right = triggerPressed;
+        }
+      }
     }
   });
   
@@ -122,7 +149,7 @@ function VoiceAssistantVR({
         outlineColor="#000000"
         maxWidth={2}
       >
-        {isListening ? 'Speak your question...' : isSpeaking ? 'AI is responding...' : 'Click to ask a question'}
+        {isListening ? 'Speak your question...' : isSpeaking ? 'AI is responding...' : 'Press trigger to ask'}
       </Text>
       
       {/* Transcript display */}

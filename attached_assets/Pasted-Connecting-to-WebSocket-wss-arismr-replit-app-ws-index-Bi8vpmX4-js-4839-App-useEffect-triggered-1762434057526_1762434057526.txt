@@ -1,0 +1,132 @@
+Connecting to WebSocket: wss://arismr.replit.app/ws
+index-Bi8vpmX4.js:4839 [App] useEffect triggered - processId: null lastProcessId: null
+index-Bi8vpmX4.js:4839 [App] No process loaded
+index-Bi8vpmX4.js:4839 WebSocket connected
+index-Bi8vpmX4.js:4839 Received welcome: user-1762433963142-n42xg6f98 User 1
+index-Bi8vpmX4.js:4839 Received users update: 1 users
+index-Bi8vpmX4.js:4360 Setting BPMN process: Loan Application Process
+index-Bi8vpmX4.js:4839 [XRButton] Render - xrMode: null isInXR: false
+index-Bi8vpmX4.js:4839 [XRButton] Not rendering button - xrMode: null isInXR: false
+index-Bi8vpmX4.js:4839 [XRButton] Component mounted, checking XR support...
+index-Bi8vpmX4.js:4839 [XRButton] isInXR: false
+index-Bi8vpmX4.js:4839 [XRButton] navigator.xr available: true
+index-Bi8vpmX4.js:4839 [XRButton] navigator.xr detected, checking session support...
+index-Bi8vpmX4.js:4839 [XRButton] Testing immersive-ar support...
+index-Bi8vpmX4.js:4839 Broadcasting local process update
+index-Bi8vpmX4.js:4839 [App] useEffect triggered - processId: Process_5 lastProcessId: null
+index-Bi8vpmX4.js:4839 [App] NEW process loaded, attempting auto-enter XR...
+index-Bi8vpmX4.js:4839 [XRButton] immersive-ar supported: true
+index-Bi8vpmX4.js:4839 [XRButton] ✓ AR Mode detected (Meta Quest 3)
+index-Bi8vpmX4.js:4839 [App] AR supported: true
+index-Bi8vpmX4.js:4839 [App] Auto-entering AR mode...
+index-Bi8vpmX4.js:4839 [App] Entering XR mode: ar with hand tracking enabled...
+index-Bi8vpmX4.js:3909 [App] Failed to enter XR: Error: not connected to three.js. You either might be missing the <XR> component or the canvas is not yet loaded?
+    at Bm (index-Bi8vpmX4.js:4360:39300)
+    at Object.enterAR (index-Bi8vpmX4.js:4360:37432)
+    at u (index-Bi8vpmX4.js:4839:16098)
+    at index-Bi8vpmX4.js:4839:17114
+console.error @ index-Bi8vpmX4.js:3909
+u @ index-Bi8vpmX4.js:4839
+await in u
+(anonymous) @ index-Bi8vpmX4.js:4839
+await in (anonymous)
+(anonymous) @ index-Bi8vpmX4.js:4839
+N0 @ index-Bi8vpmX4.js:40
+mu @ index-Bi8vpmX4.js:40
+RF @ index-Bi8vpmX4.js:40
+vl @ index-Bi8vpmX4.js:40
+AT @ index-Bi8vpmX4.js:40
+Ra @ index-Bi8vpmX4.js:38
+(anonymous) @ index-Bi8vpmX4.js:40Understand this error
+index-Bi8vpmX4.js:4839 [App] Auto-enter AR failed, staying in desktop mode
+index-Bi8vpmX4.js:4839 [XRButton] Render - xrMode: ar isInXR: false
+index-Bi8vpmX4.js:4839 [XRButton] Rendering button: Enter Mixed Reality
+index-Bi8vpmX4.js:4360 Feature 'dom-overlay' is not supported for mode: immersive-ar
+Om @ index-Bi8vpmX4.js:4360
+await in Om
+setWebXRManager @ index-Bi8vpmX4.js:4360
+qj @ index-Bi8vpmX4.js:4360
+Zv @ index-Bi8vpmX4.js:3895
+vE @ index-Bi8vpmX4.js:3897
+hE @ index-Bi8vpmX4.js:3897
+tk @ index-Bi8vpmX4.js:3897
+yp @ index-Bi8vpmX4.js:3897
+lE @ index-Bi8vpmX4.js:3897
+R @ index-Bi8vpmX4.js:3883
+O @ index-Bi8vpmX4.js:3883Understand this warning
+index-Bi8vpmX4.js:4839 [App] XR state changed: In XR
+index-Bi8vpmX4.js:4839 [XRButton] Render - xrMode: ar isInXR: true
+index-Bi8vpmX4.js:4839 [XRButton] Not rendering button - xrMode: ar isInXR: true
+index-Bi8vpmX4.js:4839 [XRButton] Component mounted, checking XR support...
+index-Bi8vpmX4.js:4839 [XRButton] isInXR: true
+index-Bi8vpmX4.js:4839 [XRButton] navigator.xr available: true
+index-Bi8vpmX4.js:4839 [XRButton] navigator.xr detected, checking session support...
+index-Bi8vpmX4.js:4839 [XRButton] Testing immersive-ar support...
+index-Bi8vpmX4.js:4839 [XRButton] immersive-ar supported: true
+index-Bi8vpmX4.js:4839 [XRButton] ✓ AR Mode detected (Meta Quest 3)
+9f3bb683-dbe4-4b81-a3a6-67644c45f670:5 Failure loading font https://arismr.replit.app/fonts/inter-bold.woff RangeError: Offset is outside the bounds of the DataView
+    at DataView.prototype.getUint32 (<anonymous>)
+    at Object.readUint (412eea99-503a-4c83-9dea-f8346fd4c1d5:5:1660)
+    at Object._readFont (412eea99-503a-4c83-9dea-f8346fd4c1d5:5:712)
+    at Object.parse (412eea99-503a-4c83-9dea-f8346fd4c1d5:5:338)
+    at 2958a561-0050-41d5-82cf-d7711dc62699:5:6148
+    at c.onload (9f3bb683-dbe4-4b81-a3a6-67644c45f670:5:316)
+l @ 9f3bb683-dbe4-4b81-a3a6-67644c45f670:5
+c.onload @ 9f3bb683-dbe4-4b81-a3a6-67644c45f670:5
+XMLHttpRequest.send
+i @ 9f3bb683-dbe4-4b81-a3a6-67644c45f670:5
+s @ 9f3bb683-dbe4-4b81-a3a6-67644c45f670:5
+I @ 9f3bb683-dbe4-4b81-a3a6-67644c45f670:5
+(anonymous) @ 9f3bb683-dbe4-4b81-a3a6-67644c45f670:5
+o @ 2754d066-1a42-4732-a667-48b84daf9c79:5
+a @ 2754d066-1a42-4732-a667-48b84daf9c79:7
+(anonymous) @ 697fdc06-7b60-45de-930b-c9a6396b37bb:4
+(anonymous) @ 697fdc06-7b60-45de-930b-c9a6396b37bb:4
+t @ bf8d79de-4a5f-492a-ac4b-7bc6bf20b064:3
+(anonymous) @ bf8d79de-4a5f-492a-ac4b-7bc6bf20b064:7Understand this error
+index-Bi8vpmX4.js:4839 Received users update: 1 users
+index-Bi8vpmX4.js:4839 [XRButton] Render - xrMode: ar isInXR: true
+index-Bi8vpmX4.js:4839 [XRButton] Not rendering button - xrMode: ar isInXR: true
+index-Bi8vpmX4.js:4839 [XRButton] Render - xrMode: ar isInXR: true
+index-Bi8vpmX4.js:4839 [XRButton] Not rendering button - xrMode: ar isInXR: true
+index-Bi8vpmX4.js:4839 [App] XR state changed: In XR
+3index-Bi8vpmX4.js:4839 [App] XR state changed: In XR
+index-Bi8vpmX4.js:4839 [App] XR state changed: In XR
+2index-Bi8vpmX4.js:4839 [App] XR state changed: In XR
+index-Bi8vpmX4.js:4839 [App] XR state changed: In XR
+index-Bi8vpmX4.js:3867 THREE.WebGLRenderer: Can't change size while VR device is presenting.
+setSize @ index-Bi8vpmX4.js:3867
+setPixelRatio @ index-Bi8vpmX4.js:3867
+(anonymous) @ index-Bi8vpmX4.js:3909
+(anonymous) @ index-Bi8vpmX4.js:3875
+r @ index-Bi8vpmX4.js:3875
+setSize @ index-Bi8vpmX4.js:3909
+configure @ index-Bi8vpmX4.js:3909
+(anonymous) @ index-Bi8vpmX4.js:3909
+N0 @ index-Bi8vpmX4.js:40
+ET @ index-Bi8vpmX4.js:40
+KC @ index-Bi8vpmX4.js:40
+MF @ index-Bi8vpmX4.js:40
+RF @ index-Bi8vpmX4.js:40
+vl @ index-Bi8vpmX4.js:40
+AT @ index-Bi8vpmX4.js:40
+Ra @ index-Bi8vpmX4.js:38
+(anonymous) @ index-Bi8vpmX4.js:40Understand this warning
+index-Bi8vpmX4.js:3867 THREE.WebGLRenderer: Can't change size while VR device is presenting.
+setSize @ index-Bi8vpmX4.js:3867
+(anonymous) @ index-Bi8vpmX4.js:3909
+(anonymous) @ index-Bi8vpmX4.js:3875
+r @ index-Bi8vpmX4.js:3875
+setSize @ index-Bi8vpmX4.js:3909
+configure @ index-Bi8vpmX4.js:3909
+(anonymous) @ index-Bi8vpmX4.js:3909
+N0 @ index-Bi8vpmX4.js:40
+ET @ index-Bi8vpmX4.js:40
+KC @ index-Bi8vpmX4.js:40
+MF @ index-Bi8vpmX4.js:40
+RF @ index-Bi8vpmX4.js:40
+vl @ index-Bi8vpmX4.js:40
+AT @ index-Bi8vpmX4.js:40
+Ra @ index-Bi8vpmX4.js:38
+(anonymous) @ index-Bi8vpmX4.js:40Understand this warning
+index-Bi8vpmX4.js:4839 [App] XR state changed: In XR

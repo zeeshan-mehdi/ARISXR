@@ -252,6 +252,35 @@ export function VoiceAssistant({ isXR = false }: VoiceAssistantProps) {
     };
   }, []);
 
+  // Separate effect to handle the onresult callback with latest dependencies
+  useEffect(() => {
+    console.log('[VoiceAssistant] Updating onresult callback with latest process data');
+    console.log('[VoiceAssistant] Process:', process?.name || 'No process');
+    console.log('[VoiceAssistant] Elements count:', elements.length);
+
+    if (recognitionRef.current) {
+      recognitionRef.current.onresult = (event: any) => {
+        console.log('[VoiceAssistant] Recognition result event:', event);
+        const current = event.resultIndex;
+        const transcript = event.results[current][0].transcript;
+        const isFinal = event.results[current].isFinal;
+
+        console.log('[VoiceAssistant] Transcript:', transcript);
+        console.log('[VoiceAssistant] Is final:', isFinal);
+
+        setTranscript(transcript);
+
+        if (isFinal) {
+          console.log('[VoiceAssistant] Final transcript received, processing command...');
+          handleVoiceCommand(transcript);
+        }
+      };
+      console.log('[VoiceAssistant] onresult callback updated successfully');
+    } else {
+      console.warn('[VoiceAssistant] recognitionRef.current is null, cannot update callback');
+    }
+  }, [process, elements]);
+
   const handleVoiceCommand = async (text: string) => {
     console.log('[VoiceAssistant] Processing voice command:', text);
     
@@ -265,6 +294,7 @@ Total Elements: ${elements.length}
     console.log('[VoiceAssistant] Sending to API:', { processContext, question: text });
 
     try {
+      console.log('[VoiceAssistant] Sending request to /api/chat...');
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -286,19 +316,22 @@ Total Elements: ${elements.length}
         console.error('[VoiceAssistant] API error:', data.error);
         setResponse(`Error: ${data.error}`);
         speak(`Sorry, I encountered an error: ${data.error}`);
+      } else {
+        console.warn('[VoiceAssistant] Unexpected response format:', data);
       }
     } catch (error) {
       console.error('[VoiceAssistant] Error sending voice command:', error);
       setResponse('Failed to get response from AI');
       speak('Sorry, I could not process your request.');
     }
+    console.log('[VoiceAssistant] ========== END PROCESSING ==========');
   };
 
   const speak = (text: string) => {
     console.log('[VoiceAssistant] Speaking:', text);
     if ('speechSynthesis' in window) {
       window.speechSynthesis.cancel();
-      
+
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.rate = 1.0;
       utterance.pitch = 1.0;
@@ -318,6 +351,8 @@ Total Elements: ${elements.length}
       };
       
       window.speechSynthesis.speak(utterance);
+    } else {
+      console.warn('[VoiceAssistant] Speech synthesis not supported');
     }
   };
 

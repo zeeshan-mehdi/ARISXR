@@ -7,12 +7,15 @@ This is a collaborative 3D BPMN (Business Process Model and Notation) visualizat
 ## Recent Changes (November 2025)
 
 **WebXR Mixed Reality Support Added:**
-- Full Meta Quest 3 support for immersive AR/MR experiences
-- WebXR integration using @react-three/xr for AR session management
-- Passthrough mode enables BPMN processes to overlay on real environment
-- Controller and hand tracking support for XR interactions
-- Dual-mode architecture: works on desktop browsers and XR headsets
-- XR button appears only on XR-capable devices
+- Full Meta Quest 3 support for immersive AR/MR experiences (immersive-ar mode)
+- Full Apple Vision Pro support for immersive VR experiences (immersive-vr mode)
+- WebXR integration using @react-three/xr for XR session management
+- Automatic detection of device capabilities (AR vs VR mode)
+- Passthrough mode on Quest 3 enables BPMN processes to overlay on real environment
+- Fully immersive VR mode on Vision Pro for spatial process visualization
+- Controller and hand tracking support for XR interactions on both devices
+- Multi-mode architecture: works on desktop browsers, Meta Quest 3 (AR), and Apple Vision Pro (VR)
+- XR button appears only on XR-capable devices with appropriate label per mode
 
 **Editing Features Added:**
 - Double-click any BPMN element to rename it
@@ -45,7 +48,7 @@ Preferred communication style: Simple, everyday language.
 
 1. **3D Rendering Approach**: Uses React Three Fiber to integrate Three.js declaratively with React, allowing component-based 3D scene composition. This provides better integration with React's lifecycle and state management compared to imperative Three.js.
 
-2. **WebXR Integration**: Implements @react-three/xr v6+ for immersive AR experiences on Meta Quest 3. Uses XR store-based architecture for session management. Supports `immersive-ar` sessions with passthrough mode for true mixed reality overlay. Desktop and XR modes share the same BPMN visualization components through a unified BPMNWorld component.
+2. **WebXR Integration**: Implements @react-three/xr v6+ for immersive XR experiences on Meta Quest 3 and Apple Vision Pro. Uses XR store-based architecture for session management. Supports both `immersive-ar` sessions (Meta Quest 3 with passthrough mode) and `immersive-vr` sessions (Apple Vision Pro). Automatically detects device capabilities and uses the appropriate session type. Desktop and XR modes share the same BPMN visualization components through a unified BPMNWorld component.
 
 3. **BPMN Visualization**: Different BPMN element types (start events, end events, tasks, gateways) are rendered as distinct 3D shapes (spheres, boxes, octahedrons) with color coding for quick visual identification. Flow connections are rendered as lines with intermediate waypoints for better visual clarity.
 

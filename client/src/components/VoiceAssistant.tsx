@@ -36,8 +36,8 @@ const VoiceAssistantVR = memo(function VoiceAssistantVR({
 
   // Version marker for VR component
   useEffect(() => {
-    console.log('🎮🎮🎮 VoiceAssistantVR (XR) LOADED - VERSION: 2025-11-06-FIX-v3 🎮🎮🎮');
-    console.log('✅ Using HOLD-TO-SPEAK pattern with registerButtonHold');
+    console.log('🎮🎮🎮 VoiceAssistantVR (XR) LOADED - VERSION: 2025-11-06-FIX-v5-PROCESS 🎮🎮🎮');
+    console.log('✅ HOLD-TO-SPEAK + timeout will PROCESS transcript and send to AI');
   }, []);
 
   // Log state changes for debugging
@@ -232,31 +232,49 @@ export function VoiceAssistant({ isXR = false }: VoiceAssistantProps) {
   const recognitionRef = useRef<any>(null);
   const isActiveRef = useRef(false);
   const isStoppingRef = useRef(false); // NEW: track if we're waiting for onend
+  const onendTimeoutRef = useRef<NodeJS.Timeout | null>(null); // Fallback timeout
   const { process } = useBPMN();
   const elements = process?.elements || [];
 
   // Version marker to verify code updates
   useEffect(() => {
-    console.log('🚀🚀🚀 VoiceAssistant LOADED - VERSION: 2025-11-06-FIX-v3 🚀🚀🚀');
-    console.log('✅ isStoppingRef race condition fix is ACTIVE');
+    console.log('🚀🚀🚀 VoiceAssistant LOADED - VERSION: 2025-11-06-FIX-v5-PROCESS 🚀🚀🚀');
+    console.log('✅ Timeout will PROCESS transcript if available, not just reset!');
+  }, []);
+
+  // Helper function to reset all recognition state
+  const resetRecognitionState = useCallback((reason: string) => {
+    console.log(`[VoiceAssistantVR] 🔄 RESETTING STATE - Reason: ${reason}`);
+
+    // Clear timeout if exists
+    if (onendTimeoutRef.current) {
+      clearTimeout(onendTimeoutRef.current);
+      onendTimeoutRef.current = null;
+      console.log('[VoiceAssistantVR] ⏰ Cleared onend timeout');
+    }
+
+    isActiveRef.current = false;
+    isStoppingRef.current = false;
+    setIsListening(false);
+    console.log('[VoiceAssistantVR] ✅ State reset complete - ready for next activation');
   }, []);
 
   useEffect(() => {
     const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-    
+
     if (!SpeechRecognition) {
-      console.error('[VoiceAssistant] SpeechRecognition not supported');
+      console.error('[VoiceAssistantVR] SpeechRecognition not supported');
       return;
     }
 
-    console.log('[VoiceAssistant] Creating SINGLE recognition instance');
+    console.log('[VoiceAssistantVR] Creating SINGLE recognition instance');
     const recognition = new SpeechRecognition();
     recognition.continuous = false;
     recognition.interimResults = true;
     recognition.lang = 'en-US';
 
     recognition.onstart = () => {
-      console.log('[VoiceAssistant] onstart - recognition started');
+      console.log('[VoiceAssistantVR] 🎤 onstart - recognition started');
       isActiveRef.current = true;
       setIsListening(true);
     };
@@ -264,80 +282,83 @@ export function VoiceAssistant({ isXR = false }: VoiceAssistantProps) {
     recognition.onresult = (event: any) => {
       const current = event.resultIndex;
       const transcript = event.results[current][0].transcript;
-      console.log('[VoiceAssistant] onresult:', { transcript, isFinal: event.results[current].isFinal });
+      console.log('[VoiceAssistantVR] onresult:', { transcript, isFinal: event.results[current].isFinal });
       setTranscript(transcript);
 
       if (event.results[current].isFinal) {
-        console.log('[VoiceAssistant] 🗣️ Final transcript received');
-        console.log('[VoiceAssistant] 📝 User said:', transcript);
+        console.log('[VoiceAssistantVR] 🗣️ Final transcript received');
+        console.log('[VoiceAssistantVR] 📝 User said:', transcript);
         handleVoiceCommand(transcript);
       }
     };
 
     recognition.onerror = (event: any) => {
-      console.error('[VoiceAssistant] onerror:', event.error);
-      if (event.error !== 'aborted') {
-        isActiveRef.current = false;
-        setIsListening(false);
+      console.error('[VoiceAssistantVR] ❌ onerror:', event.error);
+
+      // Handle no-speech or other errors by resetting state
+      if (event.error === 'no-speech' || event.error === 'audio-capture') {
+        console.log('[VoiceAssistantVR] 🔇 No speech detected or audio issue - resetting state');
+        resetRecognitionState('onerror: ' + event.error);
+      } else if (event.error !== 'aborted') {
+        resetRecognitionState('onerror: ' + event.error);
       }
     };
 
     recognition.onend = () => {
-      console.log('[VoiceAssistant] 💚 onend - recognition ended');
-      console.log('[VoiceAssistant] 🔄 Resetting ALL state in onend');
-      isActiveRef.current = false;
-      isStoppingRef.current = false; // Clear stopping flag
-      setIsListening(false);
-      console.log('[VoiceAssistant] ✅ State reset complete - ready for next activation');
+      console.log('[VoiceAssistantVR] 💚 onend - recognition ended');
+      resetRecognitionState('onend fired');
     };
 
     recognitionRef.current = recognition;
 
     return () => {
-      console.log('[VoiceAssistant] Component cleanup');
+      console.log('[VoiceAssistantVR] Component cleanup');
+      if (onendTimeoutRef.current) {
+        clearTimeout(onendTimeoutRef.current);
+      }
       if (recognitionRef.current) {
         try {
           recognitionRef.current.abort();
           isActiveRef.current = false;
         } catch (e) {
-          console.warn('[VoiceAssistant] Cleanup abort failed:', e);
+          console.warn('[VoiceAssistantVR] Cleanup abort failed:', e);
         }
       }
     };
-  }, []);
+  }, [resetRecognitionState]);
 
   // Separate effect to handle the onresult callback with latest dependencies
   useEffect(() => {
-    console.log('[VoiceAssistant] Updating onresult callback with latest process data');
-    console.log('[VoiceAssistant] Process:', process?.name || 'No process');
-    console.log('[VoiceAssistant] Elements count:', elements.length);
+    console.log('[VoiceAssistantVR] 🔄 Updating onresult callback with latest process data');
+    console.log('[VoiceAssistantVR] Process:', process?.name || 'No process');
+    console.log('[VoiceAssistantVR] Elements count:', elements.length);
 
     if (recognitionRef.current) {
       recognitionRef.current.onresult = (event: any) => {
-        console.log('[VoiceAssistant] Recognition result event:', event);
+        console.log('[VoiceAssistantVR] 📝 Recognition result event:', event);
         const current = event.resultIndex;
         const transcript = event.results[current][0].transcript;
         const isFinal = event.results[current].isFinal;
 
-        console.log('[VoiceAssistant] Transcript:', transcript);
-        console.log('[VoiceAssistant] Is final:', isFinal);
+        console.log('[VoiceAssistantVR] Transcript:', transcript);
+        console.log('[VoiceAssistantVR] Is final:', isFinal);
 
         setTranscript(transcript);
 
         if (isFinal) {
-          console.log('[VoiceAssistant] Final transcript received, processing command...');
+          console.log('[VoiceAssistantVR] ✅ Final transcript received, processing command...');
           handleVoiceCommand(transcript);
         }
       };
-      console.log('[VoiceAssistant] onresult callback updated successfully');
+      console.log('[VoiceAssistantVR] ✅ onresult callback updated successfully');
     } else {
-      console.warn('[VoiceAssistant] recognitionRef.current is null, cannot update callback');
+      console.warn('[VoiceAssistantVR] ⚠️ recognitionRef.current is null, cannot update callback');
     }
   }, [process, elements]);
 
   const handleVoiceCommand = async (text: string) => {
-    console.log('[VoiceAssistant] Processing voice command:', text);
-    
+    console.log('[VoiceAssistantVR] 💬 Processing voice command:', text);
+
     // Build process context
     const processContext = `
 Process: ${process?.name || 'Unnamed Process'}
@@ -345,10 +366,10 @@ Elements: ${elements.map((el: BPMNElement) => `${el.type}: ${el.name}${el.descri
 Total Elements: ${elements.length}
     `.trim();
 
-    console.log('[VoiceAssistant] Sending to API:', { processContext, question: text });
+    console.log('[VoiceAssistantVR] 📤 Sending to API:', { processContext, question: text });
 
     try {
-      console.log('[VoiceAssistant] Sending request to /api/chat...');
+      console.log('[VoiceAssistantVR] 🌐 Sending request to /api/chat...');
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -358,31 +379,31 @@ Total Elements: ${elements.length}
         })
       });
 
-      console.log('[VoiceAssistant] API response status:', res.status);
+      console.log('[VoiceAssistantVR] 📥 API response status:', res.status);
       const data = await res.json();
-      console.log('[VoiceAssistant] API response data:', data);
-      
+      console.log('[VoiceAssistantVR] 📦 API response data:', data);
+
       if (data.answer) {
-        console.log('[VoiceAssistant] AI Answer:', data.answer);
+        console.log('[VoiceAssistantVR] 🤖 AI Answer:', data.answer);
         setResponse(data.answer);
         speak(data.answer);
       } else if (data.error) {
-        console.error('[VoiceAssistant] API error:', data.error);
+        console.error('[VoiceAssistantVR] ❌ API error:', data.error);
         setResponse(`Error: ${data.error}`);
         speak(`Sorry, I encountered an error: ${data.error}`);
       } else {
-        console.warn('[VoiceAssistant] Unexpected response format:', data);
+        console.warn('[VoiceAssistantVR] ⚠️ Unexpected response format:', data);
       }
     } catch (error) {
-      console.error('[VoiceAssistant] Error sending voice command:', error);
+      console.error('[VoiceAssistantVR] ❌ Error sending voice command:', error);
       setResponse('Failed to get response from AI');
       speak('Sorry, I could not process your request.');
     }
-    console.log('[VoiceAssistant] ========== END PROCESSING ==========');
+    console.log('[VoiceAssistantVR] ========== END PROCESSING ==========');
   };
 
   const speak = (text: string) => {
-    console.log('[VoiceAssistant] Speaking:', text);
+    console.log('[VoiceAssistantVR] 🔊 Speaking:', text);
     if ('speechSynthesis' in window) {
       window.speechSynthesis.cancel();
 
@@ -390,93 +411,111 @@ Total Elements: ${elements.length}
       utterance.rate = 1.0;
       utterance.pitch = 1.0;
       utterance.volume = 1.0;
-      
+
       utterance.onstart = () => {
-        console.log('[VoiceAssistant] Speech synthesis STARTED');
+        console.log('[VoiceAssistantVR] 🗣️ Speech synthesis STARTED');
         setIsSpeaking(true);
       };
       utterance.onend = () => {
-        console.log('[VoiceAssistant] Speech synthesis ENDED');
+        console.log('[VoiceAssistantVR] ✅ Speech synthesis ENDED');
         setIsSpeaking(false);
       };
       utterance.onerror = (e) => {
-        console.error('[VoiceAssistant] Speech synthesis ERROR:', e);
+        console.error('[VoiceAssistantVR] ❌ Speech synthesis ERROR:', e);
         setIsSpeaking(false);
       };
-      
+
       window.speechSynthesis.speak(utterance);
     } else {
-      console.warn('[VoiceAssistant] Speech synthesis not supported');
+      console.warn('[VoiceAssistantVR] ⚠️ Speech synthesis not supported');
     }
   };
 
   const startListening = useCallback(() => {
     if (!recognitionRef.current) {
-      console.error('[VoiceAssistant] ❌ No recognition instance available');
+      console.error('[VoiceAssistantVR] ❌ No recognition instance available');
       return;
     }
 
     // Check if we're still stopping from previous session
     if (isStoppingRef.current) {
-      console.warn('[VoiceAssistant] 🔄 Still stopping from previous session - wait for onend');
+      console.warn('[VoiceAssistantVR] 🔄 Still stopping from previous session - wait for reset');
       return;
     }
 
     if (isActiveRef.current) {
-      console.warn('[VoiceAssistant] ⚠️ Already listening, ignoring start request');
+      console.warn('[VoiceAssistantVR] ⚠️ Already listening, ignoring start request');
       return;
     }
 
-    console.log('[VoiceAssistant] 💙 STARTING recognition (hold-to-speak)...');
-    console.log('[VoiceAssistant] 🔄 Clearing previous transcript and response');
+    console.log('[VoiceAssistantVR] 💙 STARTING recognition (hold-to-speak)...');
+    console.log('[VoiceAssistantVR] 🔄 Clearing previous transcript and response');
     setTranscript('');
     setResponse('');
 
     try {
       recognitionRef.current.start();
-      console.log('[VoiceAssistant] ✅ Recognition start() called successfully');
+      console.log('[VoiceAssistantVR] ✅ Recognition start() called successfully');
     } catch (error: any) {
-      console.error('[VoiceAssistant] ❌ Start failed:', error);
-      // Just log it - don't try to recover
+      console.error('[VoiceAssistantVR] ❌ Start failed:', error);
+      // Reset state on error
+      resetRecognitionState('start() error');
     }
-  }, []);
+  }, [resetRecognitionState]);
 
   const stopListening = useCallback(() => {
     if (!recognitionRef.current) {
-      console.error('[VoiceAssistant] ❌ No recognition instance available');
+      console.error('[VoiceAssistantVR] ❌ No recognition instance available');
       return;
     }
 
     if (!isActiveRef.current) {
-      console.log('[VoiceAssistant] ⚠️ Not listening, ignoring stop request');
+      console.log('[VoiceAssistantVR] ⚠️ Not listening, ignoring stop request');
       return;
     }
 
-    console.log('[VoiceAssistant] 💛 STOPPING recognition (hold-to-speak released)');
+    console.log('[VoiceAssistantVR] 💛 STOPPING recognition (hold-to-speak released)');
     try {
       // Set stopping flag BEFORE calling stop()
       isStoppingRef.current = true;
-      console.log('[VoiceAssistant] 🚫 Set isStoppingRef = true (blocks new starts until onend)');
+      console.log('[VoiceAssistantVR] 🚫 Set isStoppingRef = true (blocks new starts until onend)');
 
       // Use stop() to process audio - onend will fire later
       recognitionRef.current.stop();
-      console.log('[VoiceAssistant] ✅ Recognition stop() called - waiting for onend to process audio...');
+      console.log('[VoiceAssistantVR] ✅ Recognition stop() called - waiting for onresult + onend...');
+
+      // CRITICAL FIX: Set timeout fallback in case onend never fires
+      // If we have a transcript when timeout fires, PROCESS IT!
+      onendTimeoutRef.current = setTimeout(() => {
+        console.warn('[VoiceAssistantVR] ⏰ TIMEOUT - onend did not fire after 3 seconds');
+
+        // Check if we have any transcript (even interim)
+        const currentTranscript = transcript.trim();
+        if (currentTranscript) {
+          console.log('[VoiceAssistantVR] 💬 Found transcript during timeout, processing it:', currentTranscript);
+          handleVoiceCommand(currentTranscript);
+        } else {
+          console.log('[VoiceAssistantVR] 🔇 No transcript captured, skipping AI request');
+        }
+
+        // Reset state after processing (or if no transcript)
+        resetRecognitionState('timeout - forced completion');
+      }, 3000);
+      console.log('[VoiceAssistantVR] ⏰ Set 3-second timeout fallback (will process transcript if available)');
     } catch (error) {
-      console.error('[VoiceAssistant] ❌ Stop failed:', error);
-      isActiveRef.current = false;
-      isStoppingRef.current = false;
-      setIsListening(false);
+      console.error('[VoiceAssistantVR] ❌ Stop failed:', error);
+      resetRecognitionState('stop() error');
     }
-  }, []);
+  }, [resetRecognitionState, transcript, handleVoiceCommand]);
 
   const toggleListening = useCallback(() => {
     if (!recognitionRef.current) {
-      console.error('[VoiceAssistant] ❌ No recognition instance available');
+      console.error('[VoiceAssistantVR] ❌ No recognition instance available');
       alert('Voice recognition is not supported in your browser');
       return;
     }
 
-    console.log('[VoiceAssistant] 🎤 toggleListening called', {
+    console.log('[VoiceAssistantVR] 🎤 toggleListening called', {
       isActive: isActiveRef.current,
       isListening
     });

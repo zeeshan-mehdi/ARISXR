@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, memo } from 'react';
 import { Html, Text } from '@react-three/drei';
 import { useBPMN } from '../lib/stores/useBPMN';
 import { Mic, MicOff, Volume2 } from 'lucide-react';
@@ -11,7 +11,7 @@ interface VoiceAssistantProps {
   isXR?: boolean;
 }
 
-function VoiceAssistantVR({
+const VoiceAssistantVR = memo(function VoiceAssistantVR({
   isListening,
   isSpeaking,
   transcript,
@@ -201,7 +201,7 @@ function VoiceAssistantVR({
       )}
     </group>
   );
-}
+});
 
 export function VoiceAssistant({ isXR = false }: VoiceAssistantProps) {
   const [isListening, setIsListening] = useState(false);

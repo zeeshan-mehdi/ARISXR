@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 
 export interface XRControllerState {
   leftController: XRInputSource | null;
@@ -124,9 +124,9 @@ export function useXRInput() {
     }
   }, []);
 
-  return {
+  return useMemo(() => ({
     getState: () => controllerState,
     registerButtonPress,
     unregisterButtonPress,
-  };
+  }), [registerButtonPress, unregisterButtonPress]);
 }

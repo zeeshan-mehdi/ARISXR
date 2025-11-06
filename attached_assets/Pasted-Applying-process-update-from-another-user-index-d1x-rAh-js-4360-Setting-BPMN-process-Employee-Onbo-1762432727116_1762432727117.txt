@@ -1,0 +1,143 @@
+Applying process update from another user
+index--d1x_rAh.js:4360 Setting BPMN process: Employee Onboarding
+index--d1x_rAh.js:4839 [XRButton] Render - xrMode: null isInXR: false
+index--d1x_rAh.js:4839 [XRButton] Not rendering button - xrMode: null isInXR: false
+index--d1x_rAh.js:4839 [XRButton] Component mounted, checking XR support...
+index--d1x_rAh.js:4839 [XRButton] isInXR: false
+index--d1x_rAh.js:4839 [XRButton] navigator.xr available: true
+index--d1x_rAh.js:4839 [XRButton] navigator.xr detected, checking session support...
+index--d1x_rAh.js:4839 [XRButton] Testing immersive-ar support...
+index--d1x_rAh.js:4839 Skipping broadcast for remote process update
+index--d1x_rAh.js:4839 [App] useEffect triggered - processId: Process_2 lastProcessId: null
+index--d1x_rAh.js:4839 [App] NEW process loaded, attempting auto-enter XR...
+index--d1x_rAh.js:4839 [XRButton] immersive-ar supported: true
+index--d1x_rAh.js:4839 [XRButton] ✓ AR Mode detected (Meta Quest 3)
+index--d1x_rAh.js:4839 [App] AR supported: true
+index--d1x_rAh.js:4839 [App] Auto-entering AR mode...
+index--d1x_rAh.js:4839 [App] Entering XR mode: ar with hand tracking enabled...
+index--d1x_rAh.js:3909 [App] Failed to enter XR: Error: not connected to three.js. You either might be missing the <XR> component or the canvas is not yet loaded?
+    at Bm (index--d1x_rAh.js:4360:39300)
+    at Object.enterAR (index--d1x_rAh.js:4360:37432)
+    at u (index--d1x_rAh.js:4839:16098)
+    at index--d1x_rAh.js:4839:17114
+console.error @ index--d1x_rAh.js:3909
+u @ index--d1x_rAh.js:4839
+await in u
+(anonymous) @ index--d1x_rAh.js:4839
+await in (anonymous)
+(anonymous) @ index--d1x_rAh.js:4839
+N0 @ index--d1x_rAh.js:40
+pu @ index--d1x_rAh.js:40
+RF @ index--d1x_rAh.js:40
+vl @ index--d1x_rAh.js:40
+AT @ index--d1x_rAh.js:40
+Ra @ index--d1x_rAh.js:38
+(anonymous) @ index--d1x_rAh.js:40Understand this error
+index--d1x_rAh.js:4839 [App] Auto-enter AR failed, staying in desktop mode
+index--d1x_rAh.js:4839 [XRButton] Render - xrMode: ar isInXR: false
+index--d1x_rAh.js:4839 [XRButton] Rendering button: Enter Mixed Reality
+index--d1x_rAh.js:4360 Feature 'dom-overlay' is not supported for mode: immersive-ar
+Om @ index--d1x_rAh.js:4360
+await in Om
+setWebXRManager @ index--d1x_rAh.js:4360
+qj @ index--d1x_rAh.js:4360
+Zv @ index--d1x_rAh.js:3895
+vE @ index--d1x_rAh.js:3897
+hE @ index--d1x_rAh.js:3897
+tk @ index--d1x_rAh.js:3897
+yp @ index--d1x_rAh.js:3897
+lE @ index--d1x_rAh.js:3897
+R @ index--d1x_rAh.js:3883
+O @ index--d1x_rAh.js:3883Understand this warning
+index--d1x_rAh.js:4839 [App] XR state changed: In XR
+index--d1x_rAh.js:4839 [XRButton] Render - xrMode: ar isInXR: true
+index--d1x_rAh.js:4839 [XRButton] Not rendering button - xrMode: ar isInXR: true
+index--d1x_rAh.js:4839 [XRButton] Component mounted, checking XR support...
+index--d1x_rAh.js:4839 [XRButton] isInXR: true
+index--d1x_rAh.js:4839 [XRButton] navigator.xr available: true
+index--d1x_rAh.js:4839 [XRButton] navigator.xr detected, checking session support...
+index--d1x_rAh.js:4839 [XRButton] Testing immersive-ar support...
+index--d1x_rAh.js:4839 [XRButton] immersive-ar supported: true
+index--d1x_rAh.js:4839 [XRButton] ✓ AR Mode detected (Meta Quest 3)
+index--d1x_rAh.js:4839 Received users update: 1 users
+index--d1x_rAh.js:4839 [XRButton] Render - xrMode: ar isInXR: true
+index--d1x_rAh.js:4839 [XRButton] Not rendering button - xrMode: ar isInXR: true
+index--d1x_rAh.js:4839 [XRButton] Render - xrMode: ar isInXR: true
+index--d1x_rAh.js:4839 [XRButton] Not rendering button - xrMode: ar isInXR: true
+index--d1x_rAh.js:4839 Received users update: 2 users
+index--d1x_rAh.js:4839 [XRButton] Render - xrMode: ar isInXR: true
+index--d1x_rAh.js:4839 [XRButton] Not rendering button - xrMode: ar isInXR: true
+index--d1x_rAh.js:4839 Applying process update from another user
+index--d1x_rAh.js:4360 Setting BPMN process: E-Commerce Order Fulfillment
+index--d1x_rAh.js:4839 [XRButton] Render - xrMode: ar isInXR: true
+index--d1x_rAh.js:4839 [XRButton] Not rendering button - xrMode: ar isInXR: true
+index--d1x_rAh.js:4839 Skipping broadcast for remote process update
+index--d1x_rAh.js:4839 [App] useEffect triggered - processId: Process_6 lastProcessId: Process_2
+index--d1x_rAh.js:4839 [App] NEW process loaded, attempting auto-enter XR...
+index--d1x_rAh.js:4839 [App] AR supported: true
+index--d1x_rAh.js:4839 [App] Auto-entering AR mode...
+index--d1x_rAh.js:4839 [App] Entering XR mode: ar with hand tracking enabled...
+index--d1x_rAh.js:4360 Feature 'dom-overlay' is not supported for mode: immersive-ar
+Bm @ index--d1x_rAh.js:4360
+enterAR @ index--d1x_rAh.js:4360
+u @ index--d1x_rAh.js:4839
+(anonymous) @ index--d1x_rAh.js:4839
+await in (anonymous)
+(anonymous) @ index--d1x_rAh.js:4839
+N0 @ index--d1x_rAh.js:40
+pu @ index--d1x_rAh.js:40
+RF @ index--d1x_rAh.js:40
+vl @ index--d1x_rAh.js:40
+AT @ index--d1x_rAh.js:40
+Ra @ index--d1x_rAh.js:38
+(anonymous) @ index--d1x_rAh.js:40Understand this warning
+index--d1x_rAh.js:3909 [App] Failed to enter XR: SecurityError: Failed to execute 'requestSession' on 'XRSystem': The requested session requires user activation.
+    at Bm (index--d1x_rAh.js:4360:39448)
+    at Object.enterAR (index--d1x_rAh.js:4360:37432)
+    at u (index--d1x_rAh.js:4839:16098)
+    at index--d1x_rAh.js:4839:17114
+console.error @ index--d1x_rAh.js:3909
+u @ index--d1x_rAh.js:4839
+await in u
+(anonymous) @ index--d1x_rAh.js:4839
+await in (anonymous)
+(anonymous) @ index--d1x_rAh.js:4839
+N0 @ index--d1x_rAh.js:40
+pu @ index--d1x_rAh.js:40
+RF @ index--d1x_rAh.js:40
+vl @ index--d1x_rAh.js:40
+AT @ index--d1x_rAh.js:40
+Ra @ index--d1x_rAh.js:38
+(anonymous) @ index--d1x_rAh.js:40Understand this error
+index--d1x_rAh.js:4839 [App] Auto-enter AR failed, staying in desktop mode
+index--d1x_rAh.js:4839 Received users update: 1 users
+index--d1x_rAh.js:4839 [XRButton] Render - xrMode: ar isInXR: true
+index--d1x_rAh.js:4839 [XRButton] Not rendering button - xrMode: ar isInXR: true
+index--d1x_rAh.js:4839 Received users update: 2 users
+index--d1x_rAh.js:4839 [XRButton] Render - xrMode: ar isInXR: true
+index--d1x_rAh.js:4839 [XRButton] Not rendering button - xrMode: ar isInXR: true
+index--d1x_rAh.js:4839 Received users update: 1 users
+index--d1x_rAh.js:4839 [XRButton] Render - xrMode: ar isInXR: true
+index--d1x_rAh.js:4839 [XRButton] Not rendering button - xrMode: ar isInXR: true
+index--d1x_rAh.js:4839 Received users update: 2 users
+index--d1x_rAh.js:4839 [XRButton] Render - xrMode: ar isInXR: true
+index--d1x_rAh.js:4839 [XRButton] Not rendering button - xrMode: ar isInXR: true
+index--d1x_rAh.js:4839 Applying process update from another user
+index--d1x_rAh.js:4360 Setting BPMN process: E-Commerce Order Fulfillment
+index--d1x_rAh.js:4839 [XRButton] Render - xrMode: ar isInXR: true
+index--d1x_rAh.js:4839 [XRButton] Not rendering button - xrMode: ar isInXR: true
+index--d1x_rAh.js:4839 Skipping broadcast for remote process update
+index--d1x_rAh.js:4839 [App] useEffect triggered - processId: Process_6 lastProcessId: Process_6
+index--d1x_rAh.js:4839 [App] Same process, skipping auto-enter
+index--d1x_rAh.js:4839 Received users update: 1 users
+index--d1x_rAh.js:4839 [XRButton] Render - xrMode: ar isInXR: true
+index--d1x_rAh.js:4839 [XRButton] Not rendering button - xrMode: ar isInXR: true
+index--d1x_rAh.js:4839 Received users update: 2 users
+index--d1x_rAh.js:4839 [XRButton] Render - xrMode: ar isInXR: true
+index--d1x_rAh.js:4839 [XRButton] Not rendering button - xrMode: ar isInXR: true
+index--d1x_rAh.js:4839 Received users update: 1 users
+index--d1x_rAh.js:4839 [XRButton] Render - xrMode: ar isInXR: true
+index--d1x_rAh.js:4839 [XRButton] Not rendering button - xrMode: ar isInXR: true
+index--d1x_rAh.js:4839 Received users update: 2 users
+index--d1x_rAh.js:4839 [XRButton] Render - xrMode: ar isInXR: true
+index--d1x_rAh.js:4839 [XRButton] Not rendering button - xrMode: ar isInXR: true

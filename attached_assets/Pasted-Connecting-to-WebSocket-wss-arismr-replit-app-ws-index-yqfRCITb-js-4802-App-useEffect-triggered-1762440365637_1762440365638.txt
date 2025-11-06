@@ -1,0 +1,566 @@
+Connecting to WebSocket: wss://arismr.replit.app/ws
+index-yqfRCITb.js:4802 [App] useEffect triggered - processId: null lastProcessId: null
+index-yqfRCITb.js:4802 [App] No process loaded
+index-yqfRCITb.js:4802 WebSocket connected
+index-yqfRCITb.js:4802 Received welcome: user-1762440202913-fe0wheq4w User 3
+index-yqfRCITb.js:4802 Received users update: 3 users
+index-yqfRCITb.js:4323 Setting BPMN process: Loan Application Process
+index-yqfRCITb.js:4802 [XRButton] Render - xrMode: null isInXR: false
+index-yqfRCITb.js:4802 [XRButton] Not rendering button - xrMode: null isInXR: false
+index-yqfRCITb.js:4383 [VoiceAssistant] Initializing recognition system
+index-yqfRCITb.js:4383 [VoiceAssistant] Creating recognition instance v1
+index-yqfRCITb.js:4802 [XRButton] Component mounted, checking XR support...
+index-yqfRCITb.js:4802 [XRButton] isInXR: false
+index-yqfRCITb.js:4802 [XRButton] navigator.xr available: true
+index-yqfRCITb.js:4802 [XRButton] navigator.xr detected, checking session support...
+index-yqfRCITb.js:4802 [XRButton] Testing immersive-ar support...
+index-yqfRCITb.js:4802 Broadcasting local process update
+index-yqfRCITb.js:4802 [App] useEffect triggered - processId: Process_5 lastProcessId: null
+index-yqfRCITb.js:4802 [App] NEW process loaded, attempting auto-enter XR...
+index-yqfRCITb.js:4802 [XRButton] immersive-ar supported: true
+index-yqfRCITb.js:4802 [XRButton] ✓ AR Mode detected (Meta Quest 3)
+index-yqfRCITb.js:4802 [App] AR supported: true
+index-yqfRCITb.js:4802 [App] Auto-entering AR mode...
+index-yqfRCITb.js:4802 [App] Entering XR mode: ar with hand tracking enabled...
+index-yqfRCITb.js:3909 [App] Failed to enter XR: Error: not connected to three.js. You either might be missing the <XR> component or the canvas is not yet loaded?
+    at Gm (index-yqfRCITb.js:4323:39300)
+    at Object.enterAR (index-yqfRCITb.js:4323:37432)
+    at u (index-yqfRCITb.js:4802:16098)
+    at index-yqfRCITb.js:4802:17114
+console.error @ index-yqfRCITb.js:3909
+u @ index-yqfRCITb.js:4802
+await in u
+(anonymous) @ index-yqfRCITb.js:4802
+await in (anonymous)
+(anonymous) @ index-yqfRCITb.js:4802
+U0 @ index-yqfRCITb.js:40
+vu @ index-yqfRCITb.js:40
+AF @ index-yqfRCITb.js:40
+_l @ index-yqfRCITb.js:40
+AT @ index-yqfRCITb.js:40
+Pa @ index-yqfRCITb.js:38
+(anonymous) @ index-yqfRCITb.js:40Understand this error
+index-yqfRCITb.js:4802 [App] Auto-enter AR failed, staying in desktop mode
+index-yqfRCITb.js:4802 [XRButton] Render - xrMode: ar isInXR: false
+index-yqfRCITb.js:4802 [XRButton] Rendering button: Enter Mixed Reality
+index-yqfRCITb.js:4323 Feature 'dom-overlay' is not supported for mode: immersive-ar
+zm @ index-yqfRCITb.js:4323
+await in zm
+setWebXRManager @ index-yqfRCITb.js:4323
+Uj @ index-yqfRCITb.js:4323
+Qv @ index-yqfRCITb.js:3895
+vE @ index-yqfRCITb.js:3897
+hE @ index-yqfRCITb.js:3897
+ek @ index-yqfRCITb.js:3897
+xp @ index-yqfRCITb.js:3897
+lE @ index-yqfRCITb.js:3897
+R @ index-yqfRCITb.js:3883
+O @ index-yqfRCITb.js:3883Understand this warning
+index-yqfRCITb.js:4802 [App] XR state changed: In XR
+index-yqfRCITb.js:4802 [XRButton] Render - xrMode: ar isInXR: true
+index-yqfRCITb.js:4802 [XRButton] Not rendering button - xrMode: ar isInXR: true
+index-yqfRCITb.js:4383 [VoiceAssistant] Cleanup - destroying recognition
+index-yqfRCITb.js:4802 [XRButton] Component mounted, checking XR support...
+index-yqfRCITb.js:4802 [XRButton] isInXR: true
+index-yqfRCITb.js:4802 [XRButton] navigator.xr available: true
+index-yqfRCITb.js:4802 [XRButton] navigator.xr detected, checking session support...
+index-yqfRCITb.js:4802 [XRButton] Testing immersive-ar support...
+index-yqfRCITb.js:4802 [XRButton] immersive-ar supported: true
+index-yqfRCITb.js:4802 [XRButton] ✓ AR Mode detected (Meta Quest 3)
+index-yqfRCITb.js:4383 [VoiceAssistantVR] Registering button handlers
+index-yqfRCITb.js:4323 Registered leftTrigger handler: leftTrigger-1762440223184-0.4670478654121447
+index-yqfRCITb.js:4323 Registered rightTrigger handler: rightTrigger-1762440223184-0.2377850602650038
+index-yqfRCITb.js:4383 [VoiceAssistant] Initializing recognition system
+index-yqfRCITb.js:4383 [VoiceAssistant] Creating recognition instance v1
+index-yqfRCITb.js:4802 [App] XR state changed: In XR
+index-yqfRCITb.js:4802 [App] XR state changed: In XR
+index-yqfRCITb.js:4802 [App] XR state changed: In XR
+index-yqfRCITb.js:4802 [App] XR state changed: In XR
+2index-yqfRCITb.js:4802 [App] XR state changed: In XR
+index-yqfRCITb.js:4802 [App] XR state changed: In XR
+index-yqfRCITb.js:4323 Pointer over: Standard Approval isXR: true
+index-yqfRCITb.js:4323 Pointer out: Standard Approval
+index-yqfRCITb.js:4802 Received users update: 4 users
+index-yqfRCITb.js:4802 [XRButton] Render - xrMode: ar isInXR: true
+index-yqfRCITb.js:4802 [XRButton] Not rendering button - xrMode: ar isInXR: true
+index-yqfRCITb.js:4802 [XRButton] Render - xrMode: ar isInXR: true
+index-yqfRCITb.js:4802 [XRButton] Not rendering button - xrMode: ar isInXR: true
+index-yqfRCITb.js:4802 [App] XR state changed: In XR
+index-yqfRCITb.js:4802 Received users update: 3 users
+index-yqfRCITb.js:4802 [XRButton] Render - xrMode: ar isInXR: true
+index-yqfRCITb.js:4802 [XRButton] Not rendering button - xrMode: ar isInXR: true
+index-yqfRCITb.js:4323 [XRInput] LEFT GRIP pressed, firing 0 handlers
+index-yqfRCITb.js:4802 [App] XR state changed: In XR
+index-yqfRCITb.js:4323 [XRInput] RIGHT TRIGGER pressed, firing 1 handlers
+index-yqfRCITb.js:4383 Right trigger pressed - toggling voice assistant
+index-yqfRCITb.js:4387 [VoiceAssistant] toggleListening called {stateRef: 'idle', isListening: false, hasRecognition: true, version: 1}
+index-yqfRCITb.js:4387 [VoiceAssistant] Starting recognition...
+index-yqfRCITb.js:4387 [VoiceAssistant] start() called
+index-yqfRCITb.js:4383 [VoiceAssistant v1] onstart fired - state: starting
+index-yqfRCITb.js:4383 Voice Assistant sphere clicked in VR
+index-yqfRCITb.js:4387 [VoiceAssistant] toggleListening called {stateRef: 'active', isListening: true, hasRecognition: true, version: 1}
+index-yqfRCITb.js:4387 [VoiceAssistant] Stopping recognition...
+index-yqfRCITb.js:4387 [VoiceAssistant] stop() called
+index-yqfRCITb.js:4387 [VoiceAssistant] onend never fired after stop(), using abort()
+(anonymous) @ index-yqfRCITb.js:4387
+setTimeout
+(anonymous) @ index-yqfRCITb.js:4387
+onClick @ index-yqfRCITb.js:4383
+ZI @ index-yqfRCITb.js:4323
+ci @ index-yqfRCITb.js:4323
+up @ index-yqfRCITb.js:4323
+a @ index-yqfRCITb.js:4323Understand this warning
+index-yqfRCITb.js:4387 [VoiceAssistant] abort() called
+index-yqfRCITb.js:3909 [VoiceAssistant] Still not idle after abort(), forcing hard reset
+console.error @ index-yqfRCITb.js:3909
+(anonymous) @ index-yqfRCITb.js:4387
+setTimeout
+(anonymous) @ index-yqfRCITb.js:4387
+setTimeout
+(anonymous) @ index-yqfRCITb.js:4387
+onClick @ index-yqfRCITb.js:4383
+ZI @ index-yqfRCITb.js:4323
+ci @ index-yqfRCITb.js:4323
+up @ index-yqfRCITb.js:4323
+a @ index-yqfRCITb.js:4323Understand this error
+index-yqfRCITb.js:4387 [VoiceAssistant] HARD RESET - destroying and recreating instance
+index-yqfRCITb.js:4387 [VoiceAssistant] Aborted old instance
+index-yqfRCITb.js:4383 [VoiceAssistant] Creating recognition instance v2
+index-yqfRCITb.js:4387 [VoiceAssistant] Hard reset complete, new instance ready
+index-yqfRCITb.js:4323 [XRInput] RIGHT TRIGGER pressed, firing 1 handlers
+index-yqfRCITb.js:4383 Right trigger pressed - toggling voice assistant
+index-yqfRCITb.js:4387 [VoiceAssistant] toggleListening called {stateRef: 'idle', isListening: false, hasRecognition: true, version: 2}
+index-yqfRCITb.js:4387 [VoiceAssistant] Starting recognition...
+index-yqfRCITb.js:4387 [VoiceAssistant] start() called
+index-yqfRCITb.js:3909 [VoiceAssistant v1] onerror: aborted
+console.error @ index-yqfRCITb.js:3909
+I.onerror @ index-yqfRCITb.js:4383Understand this error
+index-yqfRCITb.js:4383 [VoiceAssistant v2] onstart fired - state: idle
+index-yqfRCITb.js:4383 [VoiceAssistant v1] onend fired - state: active
+index-yqfRCITb.js:4323 [XRInput] RIGHT TRIGGER pressed, firing 1 handlers
+index-yqfRCITb.js:4383 Right trigger pressed - toggling voice assistant
+index-yqfRCITb.js:4387 [VoiceAssistant] toggleListening called {stateRef: 'idle', isListening: false, hasRecognition: true, version: 2}
+index-yqfRCITb.js:4387 [VoiceAssistant] Starting recognition...
+index-yqfRCITb.js:3909 [VoiceAssistant] start() failed: InvalidStateError: Failed to execute 'start' on 'SpeechRecognition': recognition has already started.
+    at index-yqfRCITb.js:4387:2716
+    at Object.onPress (index-yqfRCITb.js:4383:560)
+    at index-yqfRCITb.js:4323:80200
+    at Array.forEach (<anonymous>)
+    at Zj (index-yqfRCITb.js:4323:80187)
+    at Object.current (index-yqfRCITb.js:4323:81302)
+    at $_ (index-yqfRCITb.js:3909:23176)
+    at l (index-yqfRCITb.js:3909:24059)
+    at G (index-yqfRCITb.js:3909:27162)
+    at Z (index-yqfRCITb.js:3867:8396)
+console.error @ index-yqfRCITb.js:3909
+(anonymous) @ index-yqfRCITb.js:4387
+(anonymous) @ index-yqfRCITb.js:4383
+(anonymous) @ index-yqfRCITb.js:4323
+Zj @ index-yqfRCITb.js:4323
+(anonymous) @ index-yqfRCITb.js:4323
+$_ @ index-yqfRCITb.js:3909
+l @ index-yqfRCITb.js:3909
+G @ index-yqfRCITb.js:3909
+Z @ index-yqfRCITb.js:3867
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83Understand this error
+index-yqfRCITb.js:3909 [VoiceAssistant] Instance stuck in started state, forcing hard reset
+console.error @ index-yqfRCITb.js:3909
+(anonymous) @ index-yqfRCITb.js:4387
+(anonymous) @ index-yqfRCITb.js:4383
+(anonymous) @ index-yqfRCITb.js:4323
+Zj @ index-yqfRCITb.js:4323
+(anonymous) @ index-yqfRCITb.js:4323
+$_ @ index-yqfRCITb.js:3909
+l @ index-yqfRCITb.js:3909
+G @ index-yqfRCITb.js:3909
+Z @ index-yqfRCITb.js:3867
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83Understand this error
+index-yqfRCITb.js:4387 [VoiceAssistant] HARD RESET - destroying and recreating instance
+index-yqfRCITb.js:4387 [VoiceAssistant] Aborted old instance
+index-yqfRCITb.js:4383 [VoiceAssistant] Creating recognition instance v3
+index-yqfRCITb.js:4387 [VoiceAssistant] Hard reset complete, new instance ready
+index-yqfRCITb.js:3909 [VoiceAssistant v2] onerror: aborted
+console.error @ index-yqfRCITb.js:3909
+I.onerror @ index-yqfRCITb.js:4383Understand this error
+index-yqfRCITb.js:4383 [VoiceAssistant v2] onend fired - state: idle
+index-yqfRCITb.js:4387 [VoiceAssistant] Retrying start after hard reset
+index-yqfRCITb.js:4383 [VoiceAssistant v3] onstart fired - state: idle
+index-yqfRCITb.js:4323 [XRInput] RIGHT TRIGGER pressed, firing 1 handlers
+index-yqfRCITb.js:4383 Right trigger pressed - toggling voice assistant
+index-yqfRCITb.js:4387 [VoiceAssistant] toggleListening called {stateRef: 'active', isListening: true, hasRecognition: true, version: 3}
+index-yqfRCITb.js:4387 [VoiceAssistant] Stopping recognition...
+index-yqfRCITb.js:4387 [VoiceAssistant] stop() called
+index-yqfRCITb.js:4323 [XRInput] LEFT TRIGGER pressed, firing 1 handlers
+index-yqfRCITb.js:4383 Left trigger pressed - toggling voice assistant
+index-yqfRCITb.js:4387 [VoiceAssistant] toggleListening called {stateRef: 'stopping', isListening: true, hasRecognition: true, version: 3}
+index-yqfRCITb.js:4387 [VoiceAssistant] In transition state: stopping - ignoring toggle
+(anonymous) @ index-yqfRCITb.js:4387
+(anonymous) @ index-yqfRCITb.js:4383
+(anonymous) @ index-yqfRCITb.js:4323
+Zj @ index-yqfRCITb.js:4323
+(anonymous) @ index-yqfRCITb.js:4323
+$_ @ index-yqfRCITb.js:3909
+l @ index-yqfRCITb.js:3909
+G @ index-yqfRCITb.js:3909
+Z @ index-yqfRCITb.js:3867
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83Understand this warning
+index-yqfRCITb.js:4387 [VoiceAssistant] onend never fired after stop(), using abort()
+(anonymous) @ index-yqfRCITb.js:4387
+setTimeout
+(anonymous) @ index-yqfRCITb.js:4387
+(anonymous) @ index-yqfRCITb.js:4383
+(anonymous) @ index-yqfRCITb.js:4323
+Zj @ index-yqfRCITb.js:4323
+(anonymous) @ index-yqfRCITb.js:4323
+$_ @ index-yqfRCITb.js:3909
+l @ index-yqfRCITb.js:3909
+G @ index-yqfRCITb.js:3909
+Z @ index-yqfRCITb.js:3867
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83Understand this warning
+index-yqfRCITb.js:4387 [VoiceAssistant] abort() called
+index-yqfRCITb.js:3909 [VoiceAssistant] Still not idle after abort(), forcing hard reset
+console.error @ index-yqfRCITb.js:3909
+(anonymous) @ index-yqfRCITb.js:4387
+setTimeout
+(anonymous) @ index-yqfRCITb.js:4387
+setTimeout
+(anonymous) @ index-yqfRCITb.js:4387
+(anonymous) @ index-yqfRCITb.js:4383
+(anonymous) @ index-yqfRCITb.js:4323
+Zj @ index-yqfRCITb.js:4323
+(anonymous) @ index-yqfRCITb.js:4323
+$_ @ index-yqfRCITb.js:3909
+l @ index-yqfRCITb.js:3909
+G @ index-yqfRCITb.js:3909
+Z @ index-yqfRCITb.js:3867
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83
+XRRequestFrame
+i @ index-yqfRCITb.js:83Understand this error
+index-yqfRCITb.js:4387 [VoiceAssistant] HARD RESET - destroying and recreating instance
+index-yqfRCITb.js:4387 [VoiceAssistant] Aborted old instance
+index-yqfRCITb.js:4383 [VoiceAssistant] Creating recognition instance v4
+index-yqfRCITb.js:4387 [VoiceAssistant] Hard reset complete, new instance ready
+index-yqfRCITb.js:4802 [App] XR state changed: In XR
+index-yqfRCITb.js:4323 [XRInput] LEFT TRIGGER pressed, firing 1 handlers
+index-yqfRCITb.js:4383 Left trigger pressed - toggling voice assistant
+index-yqfRCITb.js:4387 [VoiceAssistant] toggleListening called {stateRef: 'idle', isListening: false, hasRecognition: true, version: 4}
+index-yqfRCITb.js:4387 [VoiceAssistant] Starting recognition...
+index-yqfRCITb.js:4387 [VoiceAssistant] start() called
+index-yqfRCITb.js:3909 [VoiceAssistant v3] onerror: aborted
+console.error @ index-yqfRCITb.js:3909
+I.onerror @ index-yqfRCITb.js:4383Understand this error
+index-yqfRCITb.js:4383 [VoiceAssistant v4] onstart fired - state: idle
+index-yqfRCITb.js:4383 [VoiceAssistant v3] onend fired - state: active
+3

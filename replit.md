@@ -6,6 +6,16 @@ This is a collaborative 3D BPMN (Business Process Model and Notation) visualizat
 
 ## Recent Changes (November 2025)
 
+**Voice Assistant - Single Instance Pattern (CRITICAL FIX):**
+- Completely rewrote voice assistant to use ONE SpeechRecognition instance for component lifetime
+- Web Speech API limitation: Multiple instances share the same underlying browser service
+- Fixed "already started" errors by never recreating instances
+- Uses abort() for immediate stop instead of unreliable stop() method
+- Simple state tracking with isActiveRef flag instead of complex state machines
+- Auto-retry mechanism: if start() fails with "already started", aborts then retries after 300ms
+- Handles Quest browser quirks where onend event doesn't fire reliably
+- Comprehensive logging for debugging voice recognition lifecycle
+
 **WebXR Mixed Reality Support Added:**
 - Full Meta Quest 3 support for immersive AR/MR experiences (immersive-ar mode)
 - Full Apple Vision Pro support for immersive VR experiences (immersive-vr mode)

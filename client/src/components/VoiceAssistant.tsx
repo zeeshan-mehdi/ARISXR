@@ -36,8 +36,8 @@ const VoiceAssistantVR = memo(function VoiceAssistantVR({
 
   // Version marker for VR component
   useEffect(() => {
-    console.log('🎮🎮🎮 VoiceAssistantVR (XR) LOADED - VERSION: 2025-11-06-FIX-v6-ABORT 🎮🎮🎮');
-    console.log('✅ resetRecognitionState now ABORTS browser recognition instance');
+    console.log('🎮🎮🎮 VoiceAssistantVR (XR) LOADED - VERSION: 2025-11-06-FIX-v8-DIAGNOSTIC 🎮🎮🎮');
+    console.log('✅ Added ALL audio event handlers to diagnose WHY transcript is empty');
   }, []);
 
   // Log state changes for debugging
@@ -238,8 +238,8 @@ export function VoiceAssistant({ isXR = false }: VoiceAssistantProps) {
 
   // Version marker to verify code updates
   useEffect(() => {
-    console.log('🚀🚀🚀 VoiceAssistant LOADED - VERSION: 2025-11-06-FIX-v6-ABORT 🚀🚀🚀');
-    console.log('✅ resetRecognitionState ABORTS browser recognition to fix "already started" error');
+    console.log('🚀🚀🚀 VoiceAssistant LOADED - VERSION: 2025-11-06-FIX-v8-DIAGNOSTIC 🚀🚀🚀');
+    console.log('✅ Added audio/sound/speech event handlers to diagnose mic issue');
   }, []);
 
   // Helper function to reset all recognition state
@@ -254,15 +254,29 @@ export function VoiceAssistant({ isXR = false }: VoiceAssistantProps) {
     }
 
     // CRITICAL: Abort the recognition instance to truly stop the browser's speech recognition
-    if (recognitionRef.current && (isActiveRef.current || isStoppingRef.current)) {
+    const needsAbort = isActiveRef.current || isStoppingRef.current;
+    if (recognitionRef.current && needsAbort) {
       try {
         console.log('[VoiceAssistantVR] 🛑 Aborting recognition instance in browser');
         recognitionRef.current.abort();
+
+        // Keep isStoppingRef true for a brief moment after abort to let browser process it
+        // The browser's onend will eventually fire and clear it properly
+        console.log('[VoiceAssistantVR] ⏱️ Keeping isStoppingRef=true for 200ms to let browser process abort');
+        setTimeout(() => {
+          console.log('[VoiceAssistantVR] ⏱️ 200ms elapsed, NOW clearing flags');
+          isActiveRef.current = false;
+          isStoppingRef.current = false;
+          setIsListening(false);
+          console.log('[VoiceAssistantVR] ✅ State reset complete - ready for next activation');
+        }, 200);
+        return; // Exit early, timeout will handle the rest
       } catch (e) {
         console.warn('[VoiceAssistantVR] ⚠️ Abort failed (may already be stopped):', e);
       }
     }
 
+    // If no abort needed, clear immediately
     isActiveRef.current = false;
     isStoppingRef.current = false;
     setIsListening(false);
@@ -285,29 +299,68 @@ export function VoiceAssistant({ isXR = false }: VoiceAssistantProps) {
 
     recognition.onstart = () => {
       console.log('[VoiceAssistantVR] 🎤 onstart - recognition started');
+      console.log('[VoiceAssistantVR] 🎙️ Browser should now be capturing audio from microphone...');
+      console.log('[VoiceAssistantVR] 🗣️ SPEAK NOW! Say something and I will log interim results');
       isActiveRef.current = true;
       setIsListening(true);
     };
 
     recognition.onresult = (event: any) => {
+      console.log('[VoiceAssistantVR] 🎉 onresult FIRED! Audio was captured!');
       const current = event.resultIndex;
       const transcript = event.results[current][0].transcript;
-      console.log('[VoiceAssistantVR] onresult:', { transcript, isFinal: event.results[current].isFinal });
+      const isFinal = event.results[current].isFinal;
+      const confidence = event.results[current][0].confidence;
+
+      console.log('[VoiceAssistantVR] 📝 Transcript:', transcript);
+      console.log('[VoiceAssistantVR] 🎯 isFinal:', isFinal, 'confidence:', confidence);
       setTranscript(transcript);
 
-      if (event.results[current].isFinal) {
-        console.log('[VoiceAssistantVR] 🗣️ Final transcript received');
-        console.log('[VoiceAssistantVR] 📝 User said:', transcript);
+      if (isFinal) {
+        console.log('[VoiceAssistantVR] ✅ FINAL transcript received');
+        console.log('[VoiceAssistantVR] 🗣️ User said:', transcript);
         handleVoiceCommand(transcript);
+      } else {
+        console.log('[VoiceAssistantVR] ⏳ Interim result (not final yet)');
       }
+    };
+
+    recognition.onaudiostart = () => {
+      console.log('[VoiceAssistantVR] 🔊 onaudiostart - Browser started capturing audio from mic!');
+    };
+
+    recognition.onaudioend = () => {
+      console.log('[VoiceAssistantVR] 🔇 onaudioend - Browser stopped capturing audio');
+    };
+
+    recognition.onsoundstart = () => {
+      console.log('[VoiceAssistantVR] 🎵 onsoundstart - Browser detected sound!');
+    };
+
+    recognition.onsoundend = () => {
+      console.log('[VoiceAssistantVR] 🎵 onsoundend - No more sound detected');
+    };
+
+    recognition.onspeechstart = () => {
+      console.log('[VoiceAssistantVR] 🗣️ onspeechstart - Browser detected SPEECH!');
+    };
+
+    recognition.onspeechend = () => {
+      console.log('[VoiceAssistantVR] 🗣️ onspeechend - Speech ended');
     };
 
     recognition.onerror = (event: any) => {
       console.error('[VoiceAssistantVR] ❌ onerror:', event.error);
+      console.error('[VoiceAssistantVR] ❌ Full error object:', event);
 
       // Handle no-speech or other errors by resetting state
-      if (event.error === 'no-speech' || event.error === 'audio-capture') {
-        console.log('[VoiceAssistantVR] 🔇 No speech detected or audio issue - resetting state');
+      if (event.error === 'no-speech') {
+        console.log('[VoiceAssistantVR] 🔇 ERROR: no-speech - browser did not detect any speech');
+        console.log('[VoiceAssistantVR] 💡 This means either: 1) mic not working, 2) you didnt speak, or 3) too quiet');
+        resetRecognitionState('onerror: ' + event.error);
+      } else if (event.error === 'audio-capture') {
+        console.log('[VoiceAssistantVR] 🎤 ERROR: audio-capture - microphone access problem');
+        console.log('[VoiceAssistantVR] 💡 Check: 1) Mic permissions, 2) Hardware mic working');
         resetRecognitionState('onerror: ' + event.error);
       } else if (event.error !== 'aborted') {
         resetRecognitionState('onerror: ' + event.error);

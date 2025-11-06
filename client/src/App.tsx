@@ -36,19 +36,38 @@ function App() {
 
   const handleEnterXR = async (mode: 'ar' | 'vr', silent = false) => {
     try {
+      console.log(`[App] 🎤 REQUESTING MICROPHONE PERMISSION BEFORE XR...`);
+
+      // CRITICAL: Request microphone permission BEFORE entering XR
+      // Meta Quest browser may block mic access in immersive mode if not pre-granted
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        console.log('[App] ✅ Microphone permission GRANTED');
+        console.log('[App] 🎙️ Got audio stream:', stream);
+        console.log('[App] 🎙️ Audio tracks:', stream.getAudioTracks());
+
+        // Keep stream alive - don't stop it yet, Speech Recognition will use it
+        // Store in a ref so we can stop it later if needed
+        console.log('[App] ✅ Keeping microphone stream alive for Speech Recognition');
+      } catch (micError) {
+        console.error('[App] ❌ Microphone permission DENIED:', micError);
+        alert('Microphone permission is required for voice assistant. Please allow microphone access and try again.');
+        return false;
+      }
+
       console.log(`[App] Entering XR mode: ${mode} with hand tracking enabled...`);
-      
+
       const sessionInit = {
         optionalFeatures: ['hand-tracking', 'local-floor', 'bounded-floor'],
         requiredFeatures: [] as string[]
       };
-      
+
       console.log('[App] Session init options:', sessionInit);
-      
-      const session = mode === 'ar' 
+
+      const session = mode === 'ar'
         ? await (xrStore.enterAR as any)(sessionInit)
         : await (xrStore.enterVR as any)(sessionInit);
-      
+
       console.log('[App] XR session started:', session);
       setIsInXR(true);
       return true;

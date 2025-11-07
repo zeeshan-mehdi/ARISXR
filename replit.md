@@ -38,8 +38,10 @@ This is a collaborative 3D BPMN (Business Process Model and Notation) visualizat
 **Seamless AR/VR Mode Toggle for Quest 3 (November 2025):**
 - Quest 3 users can now switch between AR and VR modes seamlessly during a session
 - XRModeToggle: 3D button component appears in XR when device supports both modes
-- Interactive floating button at position [0, 1.5, -1.5] with animated hover effects
+- Interactive floating button positioned to the right at [2.5, 1.2, -1] for optimal viewing
+- Positioned to not block BPMN process view and discoverable in both AR and VR modes
 - Color-coded: Cyan for AR mode, Magenta for VR mode
+- Animated hover effects with glow and scale changes
 - Click to toggle: ends current session, switches preference, re-enters with new mode
 - Fast 150ms transition delay for responsive mode switching
 - Waits for proper session end event before re-entering for stability
@@ -62,6 +64,7 @@ This is a collaborative 3D BPMN (Business Process Model and Notation) visualizat
   - Distant rock formations for depth and realism (5 strategically placed rocks)
   - Warm orange/red lighting matching Mars environment
   - Natural landscape that doesn't distract from BPMN visualization
+  - ARIS branded flag with metallic pole and blue flag featuring white ARIS text
 - BPMN positioning optimized for VR: positioned at 0.8m height (close to ground) and 3m distance
 - AR positioning: positioned at 1.0m (waist level) and 8m distance
 - Lighting management: Both VR environment and BPMN components provide complementary lighting

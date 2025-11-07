@@ -35,6 +35,23 @@ This is a collaborative 3D BPMN (Business Process Model and Notation) visualizat
 - Multi-mode architecture: works on desktop browsers, Meta Quest 3 (AR), and Apple Vision Pro (VR)
 - XR button appears only on XR-capable devices with appropriate label per mode
 
+**VR Mode with Futuristic World Environment (November 2025):**
+- Dedicated immersive VR Mode with cyberpunk-themed futuristic world environment
+- FuturisticWorld component provides complete 3D environment for Vision Pro VR sessions
+- Session type tracking in Zustand store (ar/vr/null) enables mode-specific rendering
+- Conditional environment rendering: AR Mode (passthrough), VR Mode (futuristic world), Desktop Mode (grid)
+- Futuristic environment features:
+  - Gradient skybox with deep purple/blue cosmic atmosphere
+  - Hexagonal platform with glowing neon edges for BPMN placement
+  - Floating holographic rings with animated rotation
+  - Geometric floating panels for ambient depth
+  - Cyberpunk lighting: cyan rim lights, purple/pink accent lights, ambient atmosphere
+  - Floating particle system for atmospheric effects (100 particles, performance-optimized)
+- BPMN positioning adjusted for VR: elevated 2.5 units on platform vs 1.2 for AR
+- Lighting management: VR environment provides all lights, AR/Desktop use component lights
+- Maintains full BPMN interaction capabilities across all modes
+- Shared BPMNWorld component with mode-aware positioning and lighting
+
 **Editing Features Added:**
 - Double-click any BPMN element to rename it
 - Changes sync automatically to all connected users via WebSocket

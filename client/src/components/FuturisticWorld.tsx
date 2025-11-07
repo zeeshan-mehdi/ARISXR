@@ -30,16 +30,28 @@ export function FuturisticWorld() {
     }
   });
   
-  // Create hexagonal grid pattern for platform
+  // Create hexagonal grid pattern for platform - optimized material
   const hexGridMaterial = useMemo(() => {
     return new THREE.MeshStandardMaterial({
       color: '#1a1a3e',
       emissive: '#4a3aff',
-      emissiveIntensity: 0.3,
-      metalness: 0.8,
-      roughness: 0.2,
+      emissiveIntensity: 0.4,
+      metalness: 0.9,
+      roughness: 0.1,
       wireframe: false,
     });
+  }, []);
+  
+  // Particle positions for ambient effects (optimized count)
+  const particleCount = 100;
+  const particlePositions = useMemo(() => {
+    const positions = new Float32Array(particleCount * 3);
+    for (let i = 0; i < particleCount; i++) {
+      positions[i * 3] = (Math.random() - 0.5) * 40;
+      positions[i * 3 + 1] = Math.random() * 20 + 2;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 40 - 5;
+    }
+    return positions;
   }, []);
 
   return (
@@ -206,6 +218,25 @@ export function FuturisticWorld() {
         color="#4400ff"
         distance={25}
       />
+      
+      {/* Floating particles for atmosphere */}
+      <points>
+        <bufferGeometry>
+          <bufferAttribute
+            attach="attributes-position"
+            count={particleCount}
+            array={particlePositions}
+            itemSize={3}
+          />
+        </bufferGeometry>
+        <pointsMaterial
+          size={0.05}
+          color="#00ffff"
+          transparent
+          opacity={0.6}
+          sizeAttenuation
+        />
+      </points>
     </group>
   );
 }

@@ -4,6 +4,7 @@ import { FlowConnection } from "./FlowConnection";
 import { UserPresence } from "./UserPresence";
 import { XRProcessController } from "./XRProcessController";
 import { VoiceAssistant } from "./VoiceAssistant";
+import { XRModeToggle } from "./XRModeToggle";
 import { layoutBPMNElements } from "../lib/bpmnLayout";
 import { useMemo, useState } from "react";
 import { ElementEditor } from "./ElementEditor";
@@ -13,9 +14,10 @@ interface BPMNWorldProps {
   wsRef: React.RefObject<WebSocket | null>;
   isXR?: boolean;
   xrSessionType?: XRSessionType;
+  onToggleXRMode?: () => void;
 }
 
-export function BPMNWorld({ wsRef, isXR = false, xrSessionType = null }: BPMNWorldProps) {
+export function BPMNWorld({ wsRef, isXR = false, xrSessionType = null, onToggleXRMode }: BPMNWorldProps) {
   const { process, selectedElement, selectElement, editingElement, setEditingElement, updateElementName, users, currentUserId } = useBPMN();
   const [editorPosition, setEditorPosition] = useState<{ x: number; y: number } | null>(null);
 
@@ -147,6 +149,7 @@ export function BPMNWorld({ wsRef, isXR = false, xrSessionType = null }: BPMNWor
           <ProcessContent />
         </group>
         <VoiceAssistant isXR={true} />
+        {onToggleXRMode && <XRModeToggle onToggle={onToggleXRMode} />}
       </XRProcessController>
     );
   }

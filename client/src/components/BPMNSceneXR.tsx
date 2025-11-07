@@ -11,9 +11,10 @@ interface BPMNSceneXRProps {
   xrStore: ReturnType<typeof createXRStore>;
   isInXR: boolean;
   xrSessionType: XRSessionType;
+  onToggleXRMode: () => void;
 }
 
-export function BPMNSceneXR({ wsRef, xrStore, isInXR, xrSessionType }: BPMNSceneXRProps) {
+export function BPMNSceneXR({ wsRef, xrStore, isInXR, xrSessionType, onToggleXRMode }: BPMNSceneXRProps) {
   console.log('[BPMNSceneXR] Rendering - isInXR:', isInXR, 'xrSessionType:', xrSessionType);
   
   const isARMode = xrSessionType === 'ar';
@@ -84,7 +85,7 @@ export function BPMNSceneXR({ wsRef, xrStore, isInXR, xrSessionType }: BPMNScene
         {/* VR Mode: Futuristic World Environment */}
         {isVRMode && <FuturisticWorld />}
 
-        <BPMNWorld wsRef={wsRef} isXR={isInXR} xrSessionType={xrSessionType} />
+        <BPMNWorld wsRef={wsRef} isXR={isInXR} xrSessionType={xrSessionType} onToggleXRMode={onToggleXRMode} />
 
         {isDesktopMode && <CameraTracker wsRef={wsRef} />}
       </XR>

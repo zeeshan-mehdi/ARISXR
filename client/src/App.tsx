@@ -16,7 +16,7 @@ import { createXRStore } from "@react-three/xr";
 function App() {
   const wsRef = useWebSocket();
   const { process, setProcess } = useBPMN();
-  const { xrSessionType, setXRSessionType } = useGame();
+  const { xrSessionType, setXRSessionType, xrModePreference, setXRModePreference, supportsAR, supportsVR } = useGame();
   const [showLanding, setShowLanding] = useState(true);
   const [showLibrary, setShowLibrary] = useState(false);
   const [isInXR, setIsInXR] = useState(false);
@@ -65,6 +65,36 @@ function App() {
     }
   };
 
+  const handleToggleXRMode = async () => {
+    console.log('[App] Toggling XR mode - current:', xrSessionType);
+    
+    try {
+      // Determine new mode
+      const newMode: 'ar' | 'vr' = xrSessionType === 'ar' ? 'vr' : 'ar';
+      console.log('[App] Switching to mode:', newMode);
+      
+      // Update preference first
+      setXRModePreference(newMode);
+      
+      // Get current XR state
+      const currentState = xrStore.getState();
+      if (currentState?.session) {
+        console.log('[App] Ending current XR session...');
+        await currentState.session.end();
+        console.log('[App] Session ended');
+      }
+      
+      // Small delay for smooth transition
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      // Re-enter XR with new mode
+      console.log('[App] Re-entering XR with mode:', newMode);
+      await handleEnterXR(newMode, true);
+    } catch (error) {
+      console.error('[App] Error toggling XR mode:', error);
+    }
+  };
+
   // Auto-enter XR mode when a process is loaded
   useEffect(() => {
     const autoEnterXR = async () => {
@@ -75,54 +105,84 @@ function App() {
       console.log('[App] Process loaded, attempting auto-enter XR...');
       xrAttemptedRef.current = true;
 
+      // Wait for capabilities to be detected (give XRButton time to run)
+      await new Promise(resolve => setTimeout(resolve, 100));
+
+      // Use stored capabilities if available
+      if (supportsAR || supportsVR) {
+        console.log('[App] Using stored capabilities - AR:', supportsAR, 'VR:', supportsVR);
+        
+        if (supportsAR && supportsVR) {
+          // Both supported (Quest 3) - use preference
+          console.log('[App] Both AR and VR supported - using preference:', xrModePreference);
+          const success = await handleEnterXR(xrModePreference, true);
+          setAutoXRAttempted(true);
+          if (success) {
+            console.log(`[App] Successfully auto-entered ${xrModePreference.toUpperCase()} mode`);
+          }
+          return;
+        } else if (supportsAR) {
+          console.log('[App] Auto-entering AR mode (only mode supported)');
+          const success = await handleEnterXR('ar', true);
+          setAutoXRAttempted(true);
+          if (success) {
+            console.log('[App] Successfully auto-entered AR mode');
+          }
+          return;
+        } else if (supportsVR) {
+          console.log('[App] Auto-entering VR mode (only mode supported)');
+          const success = await handleEnterXR('vr', true);
+          setAutoXRAttempted(true);
+          if (success) {
+            console.log('[App] Successfully auto-entered VR mode');
+          }
+          return;
+        }
+      }
+
+      // Fallback: check manually if capabilities not yet stored
       if ('xr' in navigator && navigator.xr) {
         try {
-          // Check AR support first (Meta Quest 3)
           const arSupported = await navigator.xr.isSessionSupported('immersive-ar');
-          console.log('[App] AR supported:', arSupported);
+          const vrSupported = await navigator.xr.isSessionSupported('immersive-vr');
+          console.log('[App] Manual check - AR:', arSupported, 'VR:', vrSupported);
 
-          if (arSupported) {
-            console.log('[App] Auto-entering AR mode...');
+          if (arSupported && vrSupported) {
+            // Both supported - use preference
+            console.log('[App] Both modes supported - using preference:', xrModePreference);
+            const success = await handleEnterXR(xrModePreference, true);
+            setAutoXRAttempted(true);
+            if (success) {
+              console.log(`[App] Successfully auto-entered ${xrModePreference.toUpperCase()} mode`);
+            }
+          } else if (arSupported) {
             const success = await handleEnterXR('ar', true);
             setAutoXRAttempted(true);
             if (success) {
               console.log('[App] Successfully auto-entered AR mode');
-            } else {
-              console.log('[App] Auto-enter AR failed, staying in desktop mode');
             }
-            return;
-          }
-
-          // Check VR support (Apple Vision Pro)
-          const vrSupported = await navigator.xr.isSessionSupported('immersive-vr');
-          console.log('[App] VR supported:', vrSupported);
-
-          if (vrSupported) {
-            console.log('[App] Auto-entering VR mode...');
+          } else if (vrSupported) {
             const success = await handleEnterXR('vr', true);
             setAutoXRAttempted(true);
             if (success) {
               console.log('[App] Successfully auto-entered VR mode');
-            } else {
-              console.log('[App] Auto-enter VR failed, staying in desktop mode');
             }
-            return;
+          } else {
+            console.log('[App] No XR support detected');
+            setAutoXRAttempted(true);
           }
-
-          console.log('[App] No XR support detected, staying in desktop mode');
-          setAutoXRAttempted(true);
         } catch (error) {
           console.error('[App] Auto-enter XR failed:', error);
           setAutoXRAttempted(true);
         }
       } else {
-        console.log('[App] navigator.xr not available, staying in desktop mode');
+        console.log('[App] navigator.xr not available');
         setAutoXRAttempted(true);
       }
     };
 
     autoEnterXR();
-  }, [process]);
+  }, [process, supportsAR, supportsVR, xrModePreference]);
 
   // Subscribe to XR store to track session state
   useEffect(() => {
@@ -151,7 +211,13 @@ function App() {
       {!showLanding && !process && !showLibrary && <UploadPanel />}
       {!showLanding && process && (
         <>
-          <BPMNSceneXR wsRef={wsRef} xrStore={xrStore} isInXR={isInXR} xrSessionType={xrSessionType} />
+          <BPMNSceneXR 
+            wsRef={wsRef} 
+            xrStore={xrStore} 
+            isInXR={isInXR} 
+            xrSessionType={xrSessionType}
+            onToggleXRMode={handleToggleXRMode}
+          />
           {!isInXR && (
             <>
               <InfoPanel />

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useGame } from '../lib/stores/useGame';
 
 interface XRButtonProps {
   onEnterXR: (mode: 'ar' | 'vr') => void;
@@ -6,6 +7,7 @@ interface XRButtonProps {
 }
 
 export function XRButton({ onEnterXR, isInXR }: XRButtonProps) {
+  const { xrModePreference, supportsAR, supportsVR, setXRSupport } = useGame();
   const [xrMode, setXrMode] = useState<'ar' | 'vr' | null>(null);
 
   useEffect(() => {
@@ -17,30 +19,33 @@ export function XRButton({ onEnterXR, isInXR }: XRButtonProps) {
       if ('xr' in navigator && navigator.xr) {
         console.log('[XRButton] navigator.xr detected, checking session support...');
         try {
-          // Check AR support first (Meta Quest 3)
+          // Check both AR and VR support
           console.log('[XRButton] Testing immersive-ar support...');
           const arSupported = await navigator.xr.isSessionSupported('immersive-ar');
           console.log('[XRButton] immersive-ar supported:', arSupported);
           
-          if (arSupported) {
-            console.log('[XRButton] ✓ AR Mode detected (Meta Quest 3)');
-            setXrMode('ar');
-            return;
-          }
-          
-          // Check VR support (Apple Vision Pro)
           console.log('[XRButton] Testing immersive-vr support...');
           const vrSupported = await navigator.xr.isSessionSupported('immersive-vr');
           console.log('[XRButton] immersive-vr supported:', vrSupported);
           
-          if (vrSupported) {
-            console.log('[XRButton] ✓ VR Mode detected (Apple Vision Pro)');
-            setXrMode('vr');
-            return;
-          }
+          // Store capabilities
+          setXRSupport(arSupported, vrSupported);
           
-          console.log('[XRButton] ✗ No XR support detected (neither AR nor VR)');
-          setXrMode(null);
+          // Determine which mode to use based on support and preference
+          if (arSupported && vrSupported) {
+            // Device supports both (Quest 3) - use preference
+            console.log('[XRButton] ✓ Both AR and VR supported - using preference:', xrModePreference);
+            setXrMode(xrModePreference);
+          } else if (arSupported) {
+            console.log('[XRButton] ✓ AR Mode only');
+            setXrMode('ar');
+          } else if (vrSupported) {
+            console.log('[XRButton] ✓ VR Mode only');
+            setXrMode('vr');
+          } else {
+            console.log('[XRButton] ✗ No XR support detected');
+            setXrMode(null);
+          }
         } catch (error) {
           console.error('[XRButton] ✗ XR support check failed:', error);
           setXrMode(null);
@@ -51,7 +56,7 @@ export function XRButton({ onEnterXR, isInXR }: XRButtonProps) {
       }
     };
     checkSupport();
-  }, [isInXR]);
+  }, [isInXR, xrModePreference, setXRSupport]);
 
   console.log('[XRButton] Render - xrMode:', xrMode, 'isInXR:', isInXR);
   
@@ -60,7 +65,11 @@ export function XRButton({ onEnterXR, isInXR }: XRButtonProps) {
     return null;
   }
 
-  const buttonText = xrMode === 'ar' ? 'Enter Mixed Reality' : 'Enter Virtual Reality';
+  // Show capability if both modes are supported
+  const bothModesSupported = supportsAR && supportsVR;
+  const buttonText = xrMode === 'ar' 
+    ? (bothModesSupported ? 'Enter AR Mode' : 'Enter Mixed Reality')
+    : (bothModesSupported ? 'Enter VR Mode' : 'Enter Virtual Reality');
   console.log('[XRButton] Rendering button:', buttonText);
 
   return (

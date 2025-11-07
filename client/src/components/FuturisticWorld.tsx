@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { Text } from '@react-three/drei';
 import * as THREE from 'three';
 
 export function FuturisticWorld() {
@@ -81,6 +82,40 @@ export function FuturisticWorld() {
         color="#ff8855"
         distance={25}
       />
+      
+      {/* ARIS Flag - decorative element */}
+      <group position={[-6, 0, -8]} rotation={[0, 0.3, 0]}>
+        {/* Flag pole */}
+        <mesh position={[0, 1.5, 0]}>
+          <cylinderGeometry args={[0.05, 0.05, 3, 8]} />
+          <meshStandardMaterial color="#888888" metalness={0.8} roughness={0.2} />
+        </mesh>
+        
+        {/* Flag */}
+        <mesh position={[0.3, 2.5, 0]} rotation={[0, 0, 0]}>
+          <planeGeometry args={[0.8, 0.5]} />
+          <meshStandardMaterial 
+            color="#0066cc" 
+            side={THREE.DoubleSide}
+            emissive="#0044aa"
+            emissiveIntensity={0.3}
+          />
+        </mesh>
+        
+        {/* ARIS Text on flag */}
+        <Text
+          position={[0.3, 2.5, 0.01]}
+          fontSize={0.2}
+          color="#ffffff"
+          anchorX="center"
+          anchorY="middle"
+          fontWeight="bold"
+          outlineWidth={0.01}
+          outlineColor="#003366"
+        >
+          ARIS
+        </Text>
+      </group>
     </group>
   );
 }

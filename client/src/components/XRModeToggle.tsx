@@ -38,7 +38,7 @@ export function XRModeToggle({ onToggle }: XRModeToggleProps) {
   const buttonColor = xrSessionType === 'ar' ? '#00ffff' : '#ff00ff';
   
   return (
-    <group position={[0, 1.5, -1.5]}>
+    <group position={[2.5, 1.2, -1]}>
       {/* Interactive button */}
       <Interactive
         onSelect={() => {

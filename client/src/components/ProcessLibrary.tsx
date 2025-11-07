@@ -21,11 +21,11 @@ export function ProcessLibrary({ onProcessSelected }: ProcessLibraryProps) {
 
   const getComplexityColor = (complexity: number) => {
     const colors = [
-      'bg-green-500',
-      'bg-blue-500',
-      'bg-yellow-500',
-      'bg-orange-500',
-      'bg-red-500'
+      'bg-purple-400',   // Very Simple - light purple
+      'bg-purple-500',   // Simple - medium-light purple
+      'bg-purple-600',   // Medium - medium purple
+      'bg-purple-700',   // Complex - medium-dark purple
+      'bg-purple-900'    // Very Complex - dark purple
     ];
     return colors[complexity - 1];
   };
@@ -36,55 +36,36 @@ export function ProcessLibrary({ onProcessSelected }: ProcessLibraryProps) {
   };
 
   return (
-    <div className="w-full h-full min-h-screen min-w-screen flex items-center justify-center relative overflow-hidden p-2 sm:p-4 lg:p-8"
+    <div className="w-full min-h-screen flex items-start justify-center relative overflow-y-auto overflow-x-hidden p-2 sm:p-4 lg:p-8 pt-4 sm:pt-6 lg:pt-8"
       style={{ boxSizing: 'border-box' }}>
-      <div 
-        className="absolute inset-0 bg-gradient-to-br from-blue-950 via-indigo-950 to-purple-950"
+      {/* Background with light points */}
+      <div
+        className="absolute inset-0"
         style={{
-          backgroundImage: `
-            radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
-            radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
-            radial-gradient(circle at 40% 20%, rgba(99, 102, 241, 0.1) 0%, transparent 40%),
-            linear-gradient(to bottom, #0f172a 0%, #1e1b4b 100%)
+          background: `
+            radial-gradient(circle at 20% 30%, rgba(142, 60, 247, 0.4) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(142, 60, 247, 0.35) 0%, transparent 40%),
+            radial-gradient(circle at 40% 70%, rgba(142, 60, 247, 0.38) 0%, transparent 45%),
+            radial-gradient(circle at 90% 80%, rgba(142, 60, 247, 0.3) 0%, transparent 35%),
+            radial-gradient(circle at 60% 50%, rgba(142, 60, 247, 0.25) 0%, transparent 55%),
+            #1a0b2e
           `,
         }}
       />
-      
-      <div className="absolute inset-0 opacity-20" 
-        style={{
-          backgroundImage: `repeating-linear-gradient(
-            0deg,
-            transparent,
-            transparent 2px,
-            rgba(59, 130, 246, 0.03) 2px,
-            rgba(59, 130, 246, 0.03) 4px
-          ),
-          repeating-linear-gradient(
-            90deg,
-            transparent,
-            transparent 2px,
-            rgba(59, 130, 246, 0.03) 2px,
-            rgba(59, 130, 246, 0.03) 4px
-          )`,
-          WebkitBackdropFilter: 'blur(4px)', // fallback for Safari
-          backdropFilter: 'blur(4px)', // modern browsers
-          backgroundColor: 'rgba(30,27,75,0.1)', // fallback for browsers without blur
-        }}
-      />
-      
-      <div className="max-w-6xl w-full relative z-10 py-2 sm:py-4 lg:py-8">
-        <div className="text-center mb-6 sm:mb-8 lg:mb-12">
-          <div className="mb-3 sm:mb-4 lg:mb-6 flex items-center justify-center gap-2 sm:gap-3">
-            <div className="text-3xl sm:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+
+      <div className="max-w-6xl w-full relative z-10 py-0 sm:py-2 lg:py-4">
+        <div className="text-center mb-4 sm:mb-6 lg:mb-8">
+          <div className="mb-4 sm:mb-6 lg:mb-8 flex items-center justify-center gap-2 sm:gap-3">
+            <div className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white">
               ARIS
             </div>
-            <div className="h-8 sm:h-10 lg:h-12 w-1 bg-gradient-to-b from-blue-400 to-cyan-400"></div>
-            <div className="text-sm sm:text-xl lg:text-2xl font-light text-blue-300">Process Intelligence</div>
+            <div className="h-8 sm:h-10 lg:h-12 w-1 bg-white"></div>
+            <div className="text-sm sm:text-xl lg:text-2xl font-light text-white">Process Intelligence</div>
           </div>
-          <h1 className="text-xl sm:text-3xl lg:text-4xl font-bold text-white mb-2 sm:mb-3 tracking-tight">
+          <h1 className="text-lg sm:text-2xl lg:text-3xl font-bold text-white mb-2 sm:mb-3 tracking-tight">
             Mixed Reality Experience
           </h1>
-          <p className="text-sm sm:text-lg lg:text-xl text-blue-200 mb-1 sm:mb-2">Explore BPMN Processes in Immersive 3D</p>
+          <p className="text-xs sm:text-base lg:text-lg text-blue-200 mb-1 sm:mb-2">Explore BPMN Processes in Immersive 3D</p>
           <p className="text-xs sm:text-sm text-blue-300/60 flex items-center justify-center gap-2">
             <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 20 20">
               <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
@@ -99,9 +80,9 @@ export function ProcessLibrary({ onProcessSelected }: ProcessLibraryProps) {
             <button
               key={process.id}
               onClick={() => handleSelectProcess(process.xml)}
-              className="relative group bg-gradient-to-br from-blue-900/40 to-indigo-900/40 hover:from-blue-800/60 hover:to-indigo-800/60 border border-blue-500/30 hover:border-blue-400/50 rounded-lg sm:rounded-xl p-3 sm:p-4 lg:p-6 text-left transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/20 backdrop-blur-sm"
+              className="relative group bg-[#1a0b2e]/90 hover:bg-[#1a0b2e]/90 border border-purple-700/40 hover:border-purple-500/60 rounded-lg sm:rounded-xl p-3 sm:p-4 lg:p-6 text-left transition-all duration-300 transform hover:scale-105 shadow-2xl shadow-black/60 hover:shadow-2xl hover:shadow-black/80 backdrop-blur-sm"
             >
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity rounded-t-xl"></div>
+              <div className="absolute top-0 left-0 w-full h-1 bg-[#8E3CF7] opacity-0 group-hover:opacity-100 transition-opacity rounded-t-xl"></div>
               
               <div className="flex items-start justify-between mb-2 sm:mb-3">
                 <h3 className="text-base sm:text-lg lg:text-xl font-semibold text-white group-hover:text-blue-200 transition-colors">{process.name}</h3>

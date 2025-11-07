@@ -1,5 +1,6 @@
 import "@fontsource/inter";
 import { useState, useMemo, useEffect, useRef } from "react";
+import { LandingPage } from "./components/LandingPage";
 import { BPMNSceneXR } from "./components/BPMNSceneXR";
 import { ProcessLibrary } from "./components/ProcessLibrary";
 import { UploadPanel } from "./components/ui/UploadPanel";
@@ -14,9 +15,11 @@ import { createXRStore } from "@react-three/xr";
 function App() {
   const wsRef = useWebSocket();
   const { process, setProcess } = useBPMN();
-  const [showLibrary, setShowLibrary] = useState(true);
+  const [showLanding, setShowLanding] = useState(true);
+  const [showLibrary, setShowLibrary] = useState(false);
   const [isInXR, setIsInXR] = useState(false);
-  const lastProcessIdRef = useRef<string | null>(null);
+  const [autoXRAttempted, setAutoXRAttempted] = useState(false);
+  const xrAttemptedRef = useRef(false);
   
   const xrStore = useMemo(() => createXRStore({
     hand: {
@@ -28,46 +31,24 @@ function App() {
     }
   }), []);
 
+  const handleEnterFromLanding = () => {
+    setShowLanding(false);
+    setShowLibrary(true);
+  };
+
   const handleBackToLibrary = () => {
     setProcess(null);
     setShowLibrary(true);
-    lastProcessIdRef.current = null;
+    setAutoXRAttempted(false);
+    xrAttemptedRef.current = false;
   };
 
   const handleEnterXR = async (mode: 'ar' | 'vr', silent = false) => {
     try {
-      console.log(`[App] 🎤 REQUESTING MICROPHONE PERMISSION BEFORE XR...`);
-
-      // CRITICAL: Request microphone permission BEFORE entering XR
-      // Meta Quest browser may block mic access in immersive mode if not pre-granted
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-        console.log('[App] ✅ Microphone permission GRANTED');
-        console.log('[App] 🎙️ Got audio stream:', stream);
-        console.log('[App] 🎙️ Audio tracks:', stream.getAudioTracks());
-
-        // Keep stream alive - don't stop it yet, Speech Recognition will use it
-        // Store in a ref so we can stop it later if needed
-        console.log('[App] ✅ Keeping microphone stream alive for Speech Recognition');
-      } catch (micError) {
-        console.error('[App] ❌ Microphone permission DENIED:', micError);
-        alert('Microphone permission is required for voice assistant. Please allow microphone access and try again.');
-        return false;
-      }
-
       console.log(`[App] Entering XR mode: ${mode} with hand tracking enabled...`);
-
-      const sessionInit = {
-        optionalFeatures: ['hand-tracking', 'local-floor', 'bounded-floor'],
-        requiredFeatures: [] as string[]
-      };
-
-      console.log('[App] Session init options:', sessionInit);
-
       const session = mode === 'ar'
-        ? await (xrStore.enterAR as any)(sessionInit)
-        : await (xrStore.enterVR as any)(sessionInit);
-
+        ? await xrStore.enterAR()
+        : await xrStore.enterVR();
       console.log('[App] XR session started:', session);
       setIsInXR(true);
       return true;
@@ -81,28 +62,79 @@ function App() {
     }
   };
 
-  // Subscribe to XR state changes
+  // Auto-enter XR mode when a process is loaded
   useEffect(() => {
-    const unsubscribe = xrStore.subscribe((state) => {
-      console.log('[App] XR state changed:', state !== null ? 'In XR' : 'Desktop');
-      setIsInXR(state !== null);
-    });
-    return unsubscribe;
-  }, [xrStore]);
+    const autoEnterXR = async () => {
+      if (!process || xrAttemptedRef.current) {
+        return;
+      }
 
-  // Log process changes
-  useEffect(() => {
-    const processId = process?.id || null;
-    console.log('[App] Process changed - processId:', processId);
+      console.log('[App] Process loaded, attempting auto-enter XR...');
+      xrAttemptedRef.current = true;
+
+      if ('xr' in navigator && navigator.xr) {
+        try {
+          // Check AR support first (Meta Quest 3)
+          const arSupported = await navigator.xr.isSessionSupported('immersive-ar');
+          console.log('[App] AR supported:', arSupported);
+
+          if (arSupported) {
+            console.log('[App] Auto-entering AR mode...');
+            const success = await handleEnterXR('ar', true);
+            setAutoXRAttempted(true);
+            if (success) {
+              console.log('[App] Successfully auto-entered AR mode');
+            } else {
+              console.log('[App] Auto-enter AR failed, staying in desktop mode');
+            }
+            return;
+          }
+
+          // Check VR support (Apple Vision Pro)
+          const vrSupported = await navigator.xr.isSessionSupported('immersive-vr');
+          console.log('[App] VR supported:', vrSupported);
+
+          if (vrSupported) {
+            console.log('[App] Auto-entering VR mode...');
+            const success = await handleEnterXR('vr', true);
+            setAutoXRAttempted(true);
+            if (success) {
+              console.log('[App] Successfully auto-entered VR mode');
+            } else {
+              console.log('[App] Auto-enter VR failed, staying in desktop mode');
+            }
+            return;
+          }
+
+          console.log('[App] No XR support detected, staying in desktop mode');
+          setAutoXRAttempted(true);
+        } catch (error) {
+          console.error('[App] Auto-enter XR failed:', error);
+          setAutoXRAttempted(true);
+        }
+      } else {
+        console.log('[App] navigator.xr not available, staying in desktop mode');
+        setAutoXRAttempted(true);
+      }
+    };
+
+    autoEnterXR();
   }, [process]);
 
+  xrStore.subscribe((state) => {
+    setIsInXR(state !== null);
+  });
+
   return (
-    <div style={{ width: '100vw', height: '100vh', position: 'relative', overflow: 'hidden' }}>
-      {!process && showLibrary && (
+    <div style={{ width: '100vw', height: '100vh', position: 'relative', overflow: showLibrary ? 'auto' : 'hidden' }}>
+      {showLanding && (
+        <LandingPage onEnter={handleEnterFromLanding} />
+      )}
+      {!showLanding && !process && showLibrary && (
         <ProcessLibrary onProcessSelected={() => setShowLibrary(false)} />
       )}
-      {!process && !showLibrary && <UploadPanel />}
-      {process && (
+      {!showLanding && !process && !showLibrary && <UploadPanel />}
+      {!showLanding && process && (
         <>
           <BPMNSceneXR wsRef={wsRef} xrStore={xrStore} isInXR={isInXR} />
           {!isInXR && (
@@ -132,11 +164,9 @@ function App() {
               </button>
             </>
           )}
+          <XRButton onEnterXR={handleEnterXR} isInXR={isInXR} />
         </>
       )}
-      
-      {/* XR Button - always show when not in XR (before or after process load) */}
-      <XRButton onEnterXR={handleEnterXR} isInXR={isInXR} />
     </div>
   );
 }

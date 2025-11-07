@@ -29,21 +29,23 @@ export const sampleProcesses: SampleProcess[] = [
     description: 'Sequential onboarding tasks for new employees',
     complexity: 2,
     xml: `<?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">
-  <process id="Process_2" name="Employee Onboarding">
-    <startEvent id="StartEvent_1" name="New Employee"/>
-    <task id="Task_1" name="Submit Documents"/>
-    <task id="Task_2" name="Setup Email Account"/>
-    <task id="Task_3" name="Assign Workspace"/>
-    <task id="Task_4" name="Schedule Training"/>
-    <endEvent id="EndEvent_1" name="Onboarding Complete"/>
-    <sequenceFlow id="Flow_1" sourceRef="StartEvent_1" targetRef="Task_1"/>
-    <sequenceFlow id="Flow_2" sourceRef="Task_1" targetRef="Task_2"/>
-    <sequenceFlow id="Flow_3" sourceRef="Task_2" targetRef="Task_3"/>
-    <sequenceFlow id="Flow_4" sourceRef="Task_3" targetRef="Task_4"/>
-    <sequenceFlow id="Flow_5" sourceRef="Task_4" targetRef="EndEvent_1"/>
-  </process>
-</definitions>`
+    <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">
+      <process id="Process_2" name="Employee Onboarding">
+        <startEvent id="StartEvent_1" name="New employee arrived"/>
+        <task id="Task_1" name="Office tour"/>
+        <task id="Task_2" name="Set up workstation"/>
+        <task id="Task_3" name="Introduce to Confluence"/>
+        <task id="Task_4" name="Introduce to Jira"/>
+        <task id="Task_5" name="Introduction to processes"/>
+        <endEvent id="EndEvent_1" name="Onboarding completed"/>
+        <sequenceFlow id="Flow_1" sourceRef="StartEvent_1" targetRef="Task_1"/>
+        <sequenceFlow id="Flow_2" sourceRef="Task_1" targetRef="Task_2"/>
+        <sequenceFlow id="Flow_3" sourceRef="Task_2" targetRef="Task_3"/>
+        <sequenceFlow id="Flow_4" sourceRef="Task_3" targetRef="Task_4"/>
+        <sequenceFlow id="Flow_5" sourceRef="Task_4" targetRef="Task_5"/>
+        <sequenceFlow id="Flow_6" sourceRef="Task_5" targetRef="EndEvent_1"/>
+      </process>
+    </definitions>`
   },
   {
     id: 'purchase-order',
@@ -279,6 +281,57 @@ export const sampleProcesses: SampleProcess[] = [
     <sequenceFlow id="Flow_54" sourceRef="Task_28" targetRef="Gateway_13"/>
     <sequenceFlow id="Flow_55" sourceRef="Task_29" targetRef="Gateway_13"/>
     <sequenceFlow id="Flow_56" sourceRef="Gateway_13" targetRef="EndEvent_2"/>
+  </process>
+</definitions>`
+  },
+  {
+    id: 'sales-order-processing',
+    name: 'Sales Order Processing',
+    description: 'Car vendor sales workflow with document verification, customer data management, and inventory handling',
+    complexity: 4,
+    xml: `<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">
+  <process id="Process_8" name="Sales Order Processing">
+    <startEvent id="StartEvent_1" name="Contract Finalized"/>
+    <task id="Task_1" name="Check Sales Contract and Documents"/>
+    <exclusiveGateway id="Gateway_1" name="Documentation Complete?"/>
+    <task id="Task_2" name="Correct Documentation"/>
+    <exclusiveGateway id="Gateway_2" name="Join"/>
+    <task id="Task_3" name="Check Customer Master Data"/>
+    <exclusiveGateway id="Gateway_3" name="Customer Data Exists?"/>
+    <task id="Task_4" name="Create Customer Master Data"/>
+    <exclusiveGateway id="Gateway_4" name="Join"/>
+    <task id="Task_5" name="Enter Vehicle Data and Details"/>
+    <task id="Task_6" name="Check if Vehicle is in Stock"/>
+    <exclusiveGateway id="Gateway_5" name="Vehicle in Stock?"/>
+    <task id="Task_7" name="Allocate Vehicle"/>
+    <task id="Task_8" name="Send Vehicle Reservation Copy"/>
+    <task id="Task_9" name="Create Sales Order"/>
+    <task id="Task_10" name="Send Order Copy"/>
+    <exclusiveGateway id="Gateway_6" name="Join"/>
+    <task id="Task_11" name="Inform Client About Order Status"/>
+    <endEvent id="EndEvent_1" name="Customer Informed"/>
+    <sequenceFlow id="Flow_1" sourceRef="StartEvent_1" targetRef="Task_1"/>
+    <sequenceFlow id="Flow_2" sourceRef="Task_1" targetRef="Gateway_1"/>
+    <sequenceFlow id="Flow_3" sourceRef="Gateway_1" targetRef="Task_2" name="Deficient"/>
+    <sequenceFlow id="Flow_4" sourceRef="Task_2" targetRef="Gateway_2"/>
+    <sequenceFlow id="Flow_5" sourceRef="Gateway_1" targetRef="Gateway_2" name="Complete"/>
+    <sequenceFlow id="Flow_6" sourceRef="Gateway_2" targetRef="Task_3"/>
+    <sequenceFlow id="Flow_7" sourceRef="Task_3" targetRef="Gateway_3"/>
+    <sequenceFlow id="Flow_8" sourceRef="Gateway_3" targetRef="Task_4" name="No"/>
+    <sequenceFlow id="Flow_9" sourceRef="Task_4" targetRef="Gateway_4"/>
+    <sequenceFlow id="Flow_10" sourceRef="Gateway_3" targetRef="Gateway_4" name="Yes"/>
+    <sequenceFlow id="Flow_11" sourceRef="Gateway_4" targetRef="Task_5"/>
+    <sequenceFlow id="Flow_12" sourceRef="Task_5" targetRef="Task_6"/>
+    <sequenceFlow id="Flow_13" sourceRef="Task_6" targetRef="Gateway_5"/>
+    <sequenceFlow id="Flow_14" sourceRef="Gateway_5" targetRef="Task_7" name="Yes"/>
+    <sequenceFlow id="Flow_15" sourceRef="Task_7" targetRef="Task_8"/>
+    <sequenceFlow id="Flow_16" sourceRef="Task_8" targetRef="Gateway_6"/>
+    <sequenceFlow id="Flow_17" sourceRef="Gateway_5" targetRef="Task_9" name="No"/>
+    <sequenceFlow id="Flow_18" sourceRef="Task_9" targetRef="Task_10"/>
+    <sequenceFlow id="Flow_19" sourceRef="Task_10" targetRef="Gateway_6"/>
+    <sequenceFlow id="Flow_20" sourceRef="Gateway_6" targetRef="Task_11"/>
+    <sequenceFlow id="Flow_21" sourceRef="Task_11" targetRef="EndEvent_1"/>
   </process>
 </definitions>`
   },

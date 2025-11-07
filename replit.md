@@ -35,6 +35,21 @@ This is a collaborative 3D BPMN (Business Process Model and Notation) visualizat
 - Multi-mode architecture: works on desktop browsers, Meta Quest 3 (AR), and Apple Vision Pro (VR)
 - XR button appears only on XR-capable devices with appropriate label per mode
 
+**Seamless AR/VR Mode Toggle for Quest 3 (November 2025):**
+- Quest 3 users can now switch between AR and VR modes seamlessly during a session
+- XRModeToggle: 3D button component appears in XR when device supports both modes
+- Interactive floating button at position [0, 1.5, -1.5] with animated hover effects
+- Color-coded: Cyan for AR mode, Magenta for VR mode
+- Click to toggle: ends current session, switches preference, re-enters with new mode
+- Smooth 500ms transition delay for clean mode switching
+- Mode preference persists: auto-entry respects user's last choice
+- Enhanced auto-enter logic checks stored capabilities (supportsAR/supportsVR)
+- When both modes supported (Quest 3): uses xrModePreference (defaults to 'ar')
+- When only one mode supported: uses that mode automatically
+- Fallback manual detection if capabilities not yet stored
+- Mode preference stored in useGame Zustand store
+- Single-mode devices (Vision Pro) unaffected by toggle feature
+
 **VR Mode with Futuristic World Environment (November 2025):**
 - Dedicated immersive VR Mode with cyberpunk-themed futuristic world environment
 - FuturisticWorld component provides complete 3D environment for Vision Pro VR sessions

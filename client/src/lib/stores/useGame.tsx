@@ -2,19 +2,23 @@ import { create } from "zustand";
 import { subscribeWithSelector } from "zustand/middleware";
 
 export type GamePhase = "ready" | "playing" | "ended";
+export type XRSessionType = "ar" | "vr" | null;
 
 interface GameState {
   phase: GamePhase;
+  xrSessionType: XRSessionType;
   
   // Actions
   start: () => void;
   restart: () => void;
   end: () => void;
+  setXRSessionType: (type: XRSessionType) => void;
 }
 
 export const useGame = create<GameState>()(
   subscribeWithSelector((set) => ({
     phase: "ready",
+    xrSessionType: null,
     
     start: () => {
       set((state) => {
@@ -38,6 +42,11 @@ export const useGame = create<GameState>()(
         }
         return {};
       });
+    },
+    
+    setXRSessionType: (type) => {
+      console.log('[useGame] Setting XR session type:', type);
+      set({ xrSessionType: type });
     }
   }))
 );

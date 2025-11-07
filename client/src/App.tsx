@@ -10,11 +10,13 @@ import { XRInstructions } from "./components/XRInstructions";
 import { VoiceAssistant } from "./components/VoiceAssistant";
 import { useWebSocket } from "./hooks/useWebSocket";
 import { useBPMN } from "./lib/stores/useBPMN";
+import { useGame } from "./lib/stores/useGame";
 import { createXRStore } from "@react-three/xr";
 
 function App() {
   const wsRef = useWebSocket();
   const { process, setProcess } = useBPMN();
+  const { setXRSessionType } = useGame();
   const [showLanding, setShowLanding] = useState(true);
   const [showLibrary, setShowLibrary] = useState(false);
   const [isInXR, setIsInXR] = useState(false);
@@ -51,6 +53,7 @@ function App() {
         : await xrStore.enterVR();
       console.log('[App] XR session started:', session);
       setIsInXR(true);
+      setXRSessionType(mode);
       return true;
     } catch (error) {
       console.error('[App] Failed to enter XR:', error);
@@ -121,9 +124,21 @@ function App() {
     autoEnterXR();
   }, [process]);
 
-  xrStore.subscribe((state) => {
-    setIsInXR(state !== null);
-  });
+  // Subscribe to XR store to track session state
+  useEffect(() => {
+    const unsubscribe = xrStore.subscribe((state) => {
+      const inXR = state !== null;
+      setIsInXR(inXR);
+      
+      // Clear session type when exiting XR
+      if (!inXR) {
+        console.log('[App] Exited XR, clearing session type');
+        setXRSessionType(null);
+      }
+    });
+    
+    return unsubscribe;
+  }, [xrStore, setXRSessionType]);
 
   return (
     <div style={{ width: '100vw', height: '100vh', position: 'relative', overflow: showLibrary ? 'auto' : 'hidden' }}>

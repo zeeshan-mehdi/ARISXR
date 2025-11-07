@@ -1,81 +1,85 @@
-import { useRef } from 'react';
-import { useFrame } from '@react-three/fiber';
+import { useMemo } from 'react';
 import * as THREE from 'three';
 
 export function FuturisticWorld() {
-  const ringRef = useRef<THREE.Mesh>(null);
-  
-  // Gentle rotation for the accent ring
-  useFrame((state) => {
-    if (ringRef.current) {
-      ringRef.current.rotation.y = state.clock.elapsedTime * 0.2;
-      ringRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.1) * 0.1;
-    }
-  });
+  // Pre-calculate rock positions for consistent rendering
+  const rockPositions = useMemo(() => [
+    { pos: [-8, 0.3, -12], scale: [1.5, 0.8, 1.2], rotation: 0.3 },
+    { pos: [10, 0.5, -15], scale: [2, 1.2, 1.8], rotation: -0.5 },
+    { pos: [-12, 0.4, -8], scale: [1.2, 0.6, 1], rotation: 0.8 },
+    { pos: [6, 0.3, -10], scale: [1, 0.5, 0.8], rotation: -0.2 },
+    { pos: [0, 0.6, -18], scale: [2.5, 1.5, 2], rotation: 0 },
+  ], []);
 
   return (
     <group>
-      {/* Simple gradient sky dome */}
+      {/* Mars Sky - Reddish atmosphere */}
       <mesh>
-        <sphereGeometry args={[80, 32, 32]} />
+        <sphereGeometry args={[100, 32, 32]} />
         <meshBasicMaterial 
-          color="#0a0a1a" 
+          color="#d4704a" 
           side={THREE.BackSide}
         />
       </mesh>
+      
+      {/* Atmospheric glow layer */}
+      <mesh>
+        <sphereGeometry args={[95, 32, 32]} />
+        <meshBasicMaterial 
+          color="#e88860" 
+          side={THREE.BackSide}
+          transparent
+          opacity={0.3}
+        />
+      </mesh>
 
-      {/* Circular platform */}
+      {/* Martian desert ground */}
       <mesh 
         rotation={[-Math.PI / 2, 0, 0]} 
         position={[0, 0, 0]}
         receiveShadow
       >
-        <circleGeometry args={[15, 64]} />
+        <planeGeometry args={[80, 80]} />
         <meshStandardMaterial 
-          color="#0d0d20"
-          metalness={0.8}
-          roughness={0.2}
+          color="#b85c3a"
+          roughness={0.9}
+          metalness={0.1}
         />
       </mesh>
+
+      {/* Rocky formations in the distance */}
+      {rockPositions.map((rock, i) => (
+        <mesh 
+          key={i}
+          position={rock.pos as [number, number, number]}
+          rotation={[0, rock.rotation, 0]}
+          castShadow
+        >
+          <boxGeometry args={rock.scale as [number, number, number]} />
+          <meshStandardMaterial 
+            color="#8b4513"
+            roughness={0.95}
+          />
+        </mesh>
+      ))}
+
+      {/* Mars lighting - warm and dusty */}
+      <ambientLight intensity={0.5} color="#ffaa77" />
       
-      {/* Platform edge glow */}
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.01, 0]}>
-        <ringGeometry args={[14.5, 15, 64]} />
-        <meshBasicMaterial 
-          color="#4a6aff" 
-          transparent 
-          opacity={0.5}
-        />
-      </mesh>
-
-      {/* Single floating accent ring */}
-      <mesh 
-        ref={ringRef}
-        position={[0, 3, -6]}
-      >
-        <torusGeometry args={[2, 0.08, 16, 32]} />
-        <meshStandardMaterial 
-          color="#6a8aff"
-          emissive="#6a8aff"
-          emissiveIntensity={0.6}
-          transparent
-          opacity={0.7}
-        />
-      </mesh>
-
-      {/* Minimal lighting */}
-      <ambientLight intensity={0.4} color="#2a3a5a" />
+      {/* Sun directional light */}
       <directionalLight 
-        position={[5, 8, 3]} 
-        intensity={0.6} 
-        color="#ffffff"
+        position={[20, 25, 10]} 
+        intensity={0.8} 
+        color="#ffbb88"
         castShadow
       />
+      
+      {/* Soft fill light for visibility */}
       <pointLight 
-        position={[0, 2, 0]} 
-        intensity={0.4} 
-        color="#4a6aff"
-        distance={20}
+        position={[0, 3, 0]} 
+        intensity={0.3} 
+        color="#ff8855"
+        distance={25}
       />
     </group>
   );

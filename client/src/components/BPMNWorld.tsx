@@ -3,7 +3,6 @@ import { BPMNElement3D } from "./BPMNElement3D";
 import { FlowConnection } from "./FlowConnection";
 import { UserPresence } from "./UserPresence";
 import { XRProcessController } from "./XRProcessController";
-import { VoiceAssistant } from "./VoiceAssistant";
 import { XRModeToggle } from "./XRModeToggle";
 import { layoutBPMNElements } from "../lib/bpmnLayout";
 import { useMemo, useState } from "react";
@@ -79,9 +78,9 @@ export function BPMNWorld({ wsRef, isXR = false, xrSessionType = null, onToggleX
 
   // Different positioning for different modes
   const processOffset = xrSessionType === 'vr'
-    ? [-processBounds.center[0], 1.5 - processBounds.center[1], -3 - processBounds.center[2]]  // VR: Eye level, closer to user
+    ? [-processBounds.center[0], 0.8 - processBounds.center[1], -3 - processBounds.center[2]]  // VR: Lower, closer to ground
     : xrSessionType === 'ar'
-    ? [-processBounds.center[0], 1.2 - processBounds.center[1], -8 - processBounds.center[2]]  // AR: Original XR position
+    ? [-processBounds.center[0], 1.0 - processBounds.center[1], -8 - processBounds.center[2]]  // AR: Waist level
     : [0, 0, 0];  // Desktop: Origin
 
   // Add ambient light in VR mode too (FuturisticWorld might be too dark)
@@ -148,7 +147,6 @@ export function BPMNWorld({ wsRef, isXR = false, xrSessionType = null, onToggleX
         <group position={processOffset as [number, number, number]}>
           <ProcessContent />
         </group>
-        <VoiceAssistant isXR={true} />
         {onToggleXRMode && <XRModeToggle onToggle={onToggleXRMode} />}
       </XRProcessController>
     );

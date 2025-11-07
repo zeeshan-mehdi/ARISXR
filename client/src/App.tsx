@@ -114,7 +114,7 @@ function App() {
         });
         
         console.log('[App] Session fully ended, waiting for cleanup...');
-        await new Promise(resolve => setTimeout(resolve, 300));
+        await new Promise(resolve => setTimeout(resolve, 150));
       }
       
       // Re-enter XR with new mode

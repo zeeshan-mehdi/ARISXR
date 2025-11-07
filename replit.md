@@ -50,20 +50,19 @@ This is a collaborative 3D BPMN (Business Process Model and Notation) visualizat
 - Mode preference stored in useGame Zustand store
 - Single-mode devices (Vision Pro) unaffected by toggle feature
 
-**VR Mode with Futuristic World Environment (November 2025):**
-- Dedicated immersive VR Mode with cyberpunk-themed futuristic world environment
-- FuturisticWorld component provides complete 3D environment for Vision Pro VR sessions
+**VR Mode with Mars Environment (November 2025):**
+- Dedicated immersive VR Mode with natural Mars-themed environment
+- FuturisticWorld component provides complete 3D Martian landscape for VR sessions
 - Session type tracking in Zustand store (ar/vr/null) enables mode-specific rendering
-- Conditional environment rendering: AR Mode (passthrough), VR Mode (futuristic world), Desktop Mode (grid)
-- Futuristic environment features:
-  - Gradient skybox with deep purple/blue cosmic atmosphere
-  - Hexagonal platform with glowing neon edges for BPMN placement
-  - Floating holographic rings with animated rotation
-  - Geometric floating panels for ambient depth
-  - Cyberpunk lighting: cyan rim lights, purple/pink accent lights, ambient atmosphere
-  - Floating particle system for atmospheric effects (100 particles, performance-optimized)
-- BPMN positioning adjusted for VR: elevated 2.5 units on platform vs 1.2 for AR
-- Lighting management: VR environment provides all lights, AR/Desktop use component lights
+- Conditional environment rendering: AR Mode (passthrough), VR Mode (Mars world), Desktop Mode (grid)
+- Mars environment features:
+  - Reddish atmospheric sky dome simulating Mars atmosphere
+  - Large desert ground plane with rocky Martian surface texture
+  - Distant rock formations for depth and realism (5 strategically placed rocks)
+  - Warm orange/red lighting matching Mars environment
+  - Natural landscape that doesn't distract from BPMN visualization
+- BPMN positioning optimized for VR: positioned at eye level (1.5m) and 3m distance for comfortable viewing
+- Lighting management: Both VR environment and BPMN components provide complementary lighting
 - Maintains full BPMN interaction capabilities across all modes
 - Shared BPMNWorld component with mode-aware positioning and lighting
 

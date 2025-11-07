@@ -41,7 +41,8 @@ This is a collaborative 3D BPMN (Business Process Model and Notation) visualizat
 - Interactive floating button at position [0, 1.5, -1.5] with animated hover effects
 - Color-coded: Cyan for AR mode, Magenta for VR mode
 - Click to toggle: ends current session, switches preference, re-enters with new mode
-- Smooth 500ms transition delay for clean mode switching
+- Fast 150ms transition delay for responsive mode switching
+- Waits for proper session end event before re-entering for stability
 - Mode preference persists: auto-entry respects user's last choice
 - Enhanced auto-enter logic checks stored capabilities (supportsAR/supportsVR)
 - When both modes supported (Quest 3): uses xrModePreference (defaults to 'ar')
@@ -61,8 +62,10 @@ This is a collaborative 3D BPMN (Business Process Model and Notation) visualizat
   - Distant rock formations for depth and realism (5 strategically placed rocks)
   - Warm orange/red lighting matching Mars environment
   - Natural landscape that doesn't distract from BPMN visualization
-- BPMN positioning optimized for VR: positioned at eye level (1.5m) and 3m distance for comfortable viewing
+- BPMN positioning optimized for VR: positioned at 0.8m height (close to ground) and 3m distance
+- AR positioning: positioned at 1.0m (waist level) and 8m distance
 - Lighting management: Both VR environment and BPMN components provide complementary lighting
+- Voice assistant removed from XR modes for cleaner experience
 - Maintains full BPMN interaction capabilities across all modes
 - Shared BPMNWorld component with mode-aware positioning and lighting
 

@@ -7,13 +7,15 @@ import { VoiceAssistant } from "./VoiceAssistant";
 import { layoutBPMNElements } from "../lib/bpmnLayout";
 import { useMemo, useState } from "react";
 import { ElementEditor } from "./ElementEditor";
+import type { XRSessionType } from "../lib/stores/useGame";
 
 interface BPMNWorldProps {
   wsRef: React.RefObject<WebSocket | null>;
   isXR?: boolean;
+  xrSessionType?: XRSessionType;
 }
 
-export function BPMNWorld({ wsRef, isXR = false }: BPMNWorldProps) {
+export function BPMNWorld({ wsRef, isXR = false, xrSessionType = null }: BPMNWorldProps) {
   const { process, selectedElement, selectElement, editingElement, setEditingElement, updateElementName, users, currentUserId } = useBPMN();
   const [editorPosition, setEditorPosition] = useState<{ x: number; y: number } | null>(null);
 
@@ -73,15 +75,25 @@ export function BPMNWorld({ wsRef, isXR = false }: BPMNWorldProps) {
     return null;
   }
 
-  const processOffset = isXR 
-    ? [-processBounds.center[0], 1.2 - processBounds.center[1], -8 - processBounds.center[2]] 
-    : [0, 0, 0];
+  // Different positioning for different modes
+  const processOffset = xrSessionType === 'vr'
+    ? [-processBounds.center[0], 2.5 - processBounds.center[1], -8 - processBounds.center[2]]  // VR: Higher up on platform
+    : xrSessionType === 'ar'
+    ? [-processBounds.center[0], 1.2 - processBounds.center[1], -8 - processBounds.center[2]]  // AR: Original XR position
+    : [0, 0, 0];  // Desktop: Origin
+
+  // Don't add lights in VR mode (FuturisticWorld provides them)
+  const shouldAddLights = xrSessionType !== 'vr';
 
   const ProcessContent = () => (
     <>
-      <ambientLight intensity={0.5} />
-      <directionalLight position={[10, 10, 5]} intensity={1} castShadow />
-      <pointLight position={[-10, -10, -5]} intensity={0.3} />
+      {shouldAddLights && (
+        <>
+          <ambientLight intensity={0.5} />
+          <directionalLight position={[10, 10, 5]} intensity={1} castShadow />
+          <pointLight position={[-10, -10, -5]} intensity={0.3} />
+        </>
+      )}
 
       {process.elements.map((element) => {
         const node = layoutNodes.get(element.id);

@@ -3,14 +3,23 @@ import { Grid, PerspectiveCamera, OrbitControls } from "@react-three/drei";
 import { XR, createXRStore } from "@react-three/xr";
 import { BPMNWorld } from "./BPMNWorld";
 import { CameraTracker } from "./CameraTracker";
+import { FuturisticWorld } from "./FuturisticWorld";
+import type { XRSessionType } from "../lib/stores/useGame";
 
 interface BPMNSceneXRProps {
   wsRef: React.RefObject<WebSocket | null>;
   xrStore: ReturnType<typeof createXRStore>;
   isInXR: boolean;
+  xrSessionType: XRSessionType;
 }
 
-export function BPMNSceneXR({ wsRef, xrStore, isInXR }: BPMNSceneXRProps) {
+export function BPMNSceneXR({ wsRef, xrStore, isInXR, xrSessionType }: BPMNSceneXRProps) {
+  console.log('[BPMNSceneXR] Rendering - isInXR:', isInXR, 'xrSessionType:', xrSessionType);
+  
+  const isARMode = xrSessionType === 'ar';
+  const isVRMode = xrSessionType === 'vr';
+  const isDesktopMode = !isInXR;
+  
   return (
     <Canvas
       shadows
@@ -19,7 +28,7 @@ export function BPMNSceneXR({ wsRef, xrStore, isInXR }: BPMNSceneXRProps) {
         antialias: true,
       }}
       style={{
-        background: isInXR ? "transparent" : undefined,
+        background: isARMode ? "transparent" : undefined,
         position: "absolute",
         top: 0,
         left: 0,
@@ -29,11 +38,16 @@ export function BPMNSceneXR({ wsRef, xrStore, isInXR }: BPMNSceneXRProps) {
       }}
     >
       <XR store={xrStore}>
-        {isInXR ? null : <color attach="background" args={["#1a1a2e"]} />}
+        {/* Desktop Mode: Dark background */}
+        {isDesktopMode && <color attach="background" args={["#1a1a2e"]} />}
+        
+        {/* AR Mode: Transparent background for passthrough */}
+        {/* VR Mode: Handled by FuturisticWorld skybox */}
 
         <PerspectiveCamera makeDefault position={[15, 10, 15]} fov={60} />
 
-        {!isInXR && (
+        {/* Desktop Mode: Orbit controls */}
+        {isDesktopMode && (
           <OrbitControls
             enableDamping
             dampingFactor={0.05}
@@ -43,7 +57,8 @@ export function BPMNSceneXR({ wsRef, xrStore, isInXR }: BPMNSceneXRProps) {
           />
         )}
 
-        {!isInXR && (
+        {/* Desktop Mode: Grid */}
+        {isDesktopMode && (
           <Grid
             args={[100, 100]}
             cellSize={2}
@@ -58,16 +73,20 @@ export function BPMNSceneXR({ wsRef, xrStore, isInXR }: BPMNSceneXRProps) {
           />
         )}
 
-        {isInXR && (
+        {/* AR Mode: Minimal ground plane */}
+        {isARMode && (
           <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, -5]}>
             <planeGeometry args={[30, 30]} />
             <meshBasicMaterial color="#1a1a2e" opacity={0.3} transparent />
           </mesh>
         )}
+        
+        {/* VR Mode: Futuristic World Environment */}
+        {isVRMode && <FuturisticWorld />}
 
-        <BPMNWorld wsRef={wsRef} isXR={isInXR} />
+        <BPMNWorld wsRef={wsRef} isXR={isInXR} xrSessionType={xrSessionType} />
 
-        {!isInXR && <CameraTracker wsRef={wsRef} />}
+        {isDesktopMode && <CameraTracker wsRef={wsRef} />}
       </XR>
     </Canvas>
   );

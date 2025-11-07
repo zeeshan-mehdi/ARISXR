@@ -16,7 +16,7 @@ import { createXRStore } from "@react-three/xr";
 function App() {
   const wsRef = useWebSocket();
   const { process, setProcess } = useBPMN();
-  const { setXRSessionType } = useGame();
+  const { xrSessionType, setXRSessionType } = useGame();
   const [showLanding, setShowLanding] = useState(true);
   const [showLibrary, setShowLibrary] = useState(false);
   const [isInXR, setIsInXR] = useState(false);
@@ -151,7 +151,7 @@ function App() {
       {!showLanding && !process && !showLibrary && <UploadPanel />}
       {!showLanding && process && (
         <>
-          <BPMNSceneXR wsRef={wsRef} xrStore={xrStore} isInXR={isInXR} />
+          <BPMNSceneXR wsRef={wsRef} xrStore={xrStore} isInXR={isInXR} xrSessionType={xrSessionType} />
           {!isInXR && (
             <>
               <InfoPanel />

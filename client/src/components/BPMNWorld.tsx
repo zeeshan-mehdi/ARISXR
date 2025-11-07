@@ -79,13 +79,13 @@ export function BPMNWorld({ wsRef, isXR = false, xrSessionType = null, onToggleX
 
   // Different positioning for different modes
   const processOffset = xrSessionType === 'vr'
-    ? [-processBounds.center[0], 2.5 - processBounds.center[1], -8 - processBounds.center[2]]  // VR: Higher up on platform
+    ? [-processBounds.center[0], 1.5 - processBounds.center[1], -3 - processBounds.center[2]]  // VR: Eye level, closer to user
     : xrSessionType === 'ar'
     ? [-processBounds.center[0], 1.2 - processBounds.center[1], -8 - processBounds.center[2]]  // AR: Original XR position
     : [0, 0, 0];  // Desktop: Origin
 
-  // Don't add lights in VR mode (FuturisticWorld provides them)
-  const shouldAddLights = xrSessionType !== 'vr';
+  // Add ambient light in VR mode too (FuturisticWorld might be too dark)
+  const shouldAddLights = true;
 
   const ProcessContent = () => (
     <>

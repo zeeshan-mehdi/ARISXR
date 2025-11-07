@@ -80,12 +80,42 @@ function App() {
       const currentState = xrStore.getState();
       if (currentState?.session) {
         console.log('[App] Ending current XR session...');
-        await currentState.session.end();
-        console.log('[App] Session ended');
+        
+        // Wait for session to fully end
+        await new Promise<void>((resolve) => {
+          const session = currentState.session;
+          if (!session) {
+            resolve();
+            return;
+          }
+          
+          // Listen for session end event
+          const onEnd = () => {
+            console.log('[App] Session end event fired');
+            resolve();
+          };
+          
+          session.addEventListener('end', onEnd, { once: true });
+          
+          // Also check store state changes as fallback
+          const unsubscribe = xrStore.subscribe((state) => {
+            if (!state.session) {
+              console.log('[App] Session cleared from store');
+              unsubscribe();
+              resolve();
+            }
+          });
+          
+          // Initiate session end
+          session.end().catch((err) => {
+            console.warn('[App] Session end error:', err);
+            resolve(); // Continue anyway
+          });
+        });
+        
+        console.log('[App] Session fully ended, waiting for cleanup...');
+        await new Promise(resolve => setTimeout(resolve, 300));
       }
-      
-      // Small delay for smooth transition
-      await new Promise(resolve => setTimeout(resolve, 500));
       
       // Re-enter XR with new mode
       console.log('[App] Re-entering XR with mode:', newMode);
